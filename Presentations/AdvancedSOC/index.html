@@ -836,7 +836,7 @@
             <li>ProcFS: Provides access to process information and system statistics from user space</li><li>SysFS: Exposes kernel objects and hardware info for monitoring and configuration</li><li>Netlink: Kernel-to-user communication for networking events and monitoring</li><li>eBPF: Executes custom programs safely in the kernel for event tracing, monitoring, and security enforcement</li>
           </ul><p>Linux system interfaces enable deep visibility into processes, hardware, and kernel events, forming the foundation for advanced detection tools without modifying the kernel.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="LinuxKernelInterfaces.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-54" class="content-slide">
@@ -850,7 +850,7 @@
             <li>ETW (Event Tracing for Windows): Kernel and application-level event logging for detailed system activity</li><li>ETW-TI: Threat Intelligence integration with ETW events for enriched detection</li><li>WMI (Windows Management Instrumentation): <ul><li>Queries system and application data; relies on ETW underneath</li><li>Very simple to attach callbacks</li><li>Deeply integrated with Windows, .NET, and PowerShell</li></ul></li><li>Key Usage: Collects detailed telemetry for monitoring processes, user actions, and system changes</li>
           </ul><p>Windows event monitoring provides SOC teams with granular visibility into system and application behavior, forming the backbone of detection and correlation in EDR and SIEM solutions.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="etw_architecture.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-55" class="content-slide">
@@ -864,7 +864,7 @@
             <li>What is AMSI: Windows API that allows applications and scripts to request malware scanning from the system's antivirus engine</li><li>Language Agnostic: Any language can call AMSI (PowerShell, VBScript, .NET, etc.), its userland API (bypass by memory patching)</li><li>How to use: <ol><li>The runtime tokenizes, parses, builds AST, and resolves aliases</li><li>After preprocessing, the language requests a scan from AMSI</li><li>Scans can occur on execution, on new block definitions, or on-demand</li></ol></li><li>Integration: Provides runtime protection without modifying the underlying antivirus engine</li>
           </ul><p>AMSI enables runtime malware scanning by allowing languages to submit preprocessed code for detection, bridging scripts and antivirus engines for enhanced SOC visibility.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="amsi7archi.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-56" class="content-slide">
@@ -878,7 +878,7 @@
             <li>Linux Logging (/var/log): <ul><li>Most logs are line-by-line text files, read incrementally by process</li><li>Binary logs exist (journalctl, wtmp/utmp/btmp) and are harder to parse</li><li>Tools like auditd provide structured, configurable logging for security monitoring</li></ul></li><li>Windows Logging (ETW): <ul><li>Event Tracing for Windows enables real-time event registration, more reliable than parsing .evtx files</li><li>Allows detection of system, application, and security events</li><li>Sysmon enhances ETW with detailed process, network, and file activity logs, easier to parse and configure than raw ETW</li></ul></li><li>Sysmon (Windows): Extended system monitoring, logs process creation, network connections, and file changes</li>
           </ul><p>These logging mechanisms provide the raw event streams that detection tools consume; understanding their format, access method, and incremental update behavior is essential to implement detection at the system level.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="log_forwarding.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-57" class="content-slide">
@@ -892,7 +892,7 @@
             <li>Core Idea: Standardized, human-readable detection rules across platforms</li><li>Purpose: Translate detection logic into a universal format usable on multiple SIEMs and log sources</li><li>Mechanism: <ul><li>Convert log events into structured patterns</li><li>Translate platform-specific log fields into a normalized schema</li><li>Rules can be shared and reused across environments</li></ul></li><li>Limitations: <ul><li>Requires mapping log fields to a standardized schema</li><li>Effectiveness limited by the quality and richness of log data available</li></ul></li>
           </ul><p>Sigma enables structured detection across diverse log sources, but mapping and log completeness are critical for accurate detection.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="sigma.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-58" class="content-slide">
@@ -908,7 +908,7 @@
             <li>Kernel faults &#x2192; system crashes</li><li>Requires correct signing (Windows)</li>
           </ul><p>Kernel-level monitoring (Linux modules, Windows ELAM) provides the strongest and earliest detection capability, resistant to userland bypass techniques, but comes with high complexity and strict signing requirements.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="syscall_hooking.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-59" class="content-slide">
@@ -924,7 +924,7 @@
             <li>A well-designed honeypot should generate <strong>zero false positives</strong>-any interaction is suspicious.</li><li><strong>Do not disclose</strong> honeypots internally; exposure invalidates their detection value.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="monkey_honeypots.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-60" class="content-slide">
@@ -938,7 +938,7 @@
             <li>Role: Structured representation of IOCs, TTPs, relationships, campaigns, and infrastructures; seamless integration into TIP/SIEM/EDR/SOAR/CTI workflows.</li><li>MISP: Object-based model (Events/Attributes), optimized for high-volume IOC ingestion, normalization, scoring, and operational distribution.</li><li>STIX 2.x: JSON cyber-object model, optimized for graph-based context, linking indicators, behaviors, and threat activity, preferred by hunters for relational visibility.</li><li>Limits: Highly perishable IOCs (hash/IP/domain churn), limited coverage of unknown/emerging threats, and significant maintenance effort (cleaning, deduplication, validation).</li>
           </ul><p>MISP optimizes IOC ingestion, while STIX provides a relationship-driven graph model ideal for hunting and contextual analysis.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="STIX_TAXII.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-61" class="content-slide">
@@ -952,7 +952,7 @@
             <li>SPF: DNS-based validation of authorized sending IPs; prevents basic envelope spoofing but fragile with forwarding.</li><li>DKIM: Cryptographic signing of headers/body; ensures integrity and domain-level authenticity, unaffected by relays.</li><li>DMARC: Alignment check (SPF/DKIM &#x2194; From header) + policy enforcement (none/quarantine/reject) + feedback loops.</li><li>Limits: No protection against internal phishing, compromised accounts, or malicious content (attachments/links) bypassing authentication controls.</li>
           </ul><p>SPF and DKIM provide authentication signals, while DMARC enforces policy and alignment, but none mitigate internal phishing or payload-based attacks.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="mail_security.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-62" class="subtitle-slide">
@@ -991,7 +991,7 @@
             <li>Many SOC teams choose a method by habit or urgency rather than by suitability.</li><li>This leads to choosing approaches that are misaligned with the scenario, resulting in reduced visibility, lower trustworthiness from a security standpoint, degraded efficiency, and unnecessary losses in time and budget during implementation.</li>
           </ul><p><strong>Methodology:</strong> Choose the detection method that makes the most sense for the scenario: the one that offers the right visibility, the best long-term efficiency, and the lowest operational cost.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="monkey_tool_choices.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-65" class="content-slide">
@@ -1007,7 +1007,7 @@
             <li>Many SOC teams write rules without a clear scenario, leading to noisy, incomplete, or irrelevant detections.</li><li>Others copy existing rules without understanding their assumptions, creating misaligned or fragile detections.</li>
           </ul><p><strong>Methodology:</strong> Start with a simple, scenario-based rule to capture the core behavior you aim to detect. As a first step, you can rely on public rules or AI-generated rules to identify key elements and outline the scenario before writing the final detection rule.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="monkey_writing_rule.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-66" class="content-slide">
@@ -1023,7 +1023,7 @@
             <li>Lack of business context leads SOC teams to misinterpret normal behaviors as malicious.</li><li>Time pressure often prevents analysts from deeply understanding how a TTP works at a low level, and from imagining potential false positives before creating or testing the rule.</li>
           </ul><p><strong>Methodology:</strong> Understand the draft rule thoroughly to identify all known, legitimate system behaviors that could match it. Avoid "tuning" or adjusting a rule that is still conceptually flawed, the draft stage is meant to challenge assumptions, not to prematurely optimize.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="monkey_false_positives.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-67" class="content-slide">
@@ -1039,7 +1039,7 @@
             <li>SOC teams often observe matches without fully understanding the execution logic behind them.</li><li>Analysts may assume "it matches = it's good detection"</li>
           </ul><p><strong>Methodology:</strong> Break down the malicious scenario into its fundamental behaviors and conditions. Break down the legitimate behaviors that also trigger the draft rule. Compare both sides to extract clear discriminators.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="monkey_true_and_false_positives.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-68" class="content-slide">
@@ -1057,7 +1057,7 @@
             
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="bypass_true_negative.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-69" class="content-slide">
@@ -1075,7 +1075,7 @@
             
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="missing_scenario_true_negative.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-70" class="content-slide">
@@ -1093,7 +1093,7 @@
             <li>Start a new detection design, based on the discriminators identified earlier (true vs. false positives).</li><li>Integrate all insights from the bypass analysis: ensure the rule covers attacker behaviors that cannot be easily altered.</li><li>Incorporate missing scenarios or create a rule for all valid paths leading to the malicious outcome.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="clean_rule_true_positive.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-71" class="content-slide">
@@ -1109,7 +1109,7 @@
             <li>Many SOC teams deploy rules without proper testing, leading to silent failures.</li><li>Manual testing is incomplete, non-repeatable, and quickly abandoned.</li><li>Changes in the infrastructure often break rules without anyone noticing.</li>
           </ul><p><strong>Methodology:</strong> Create unit tests for every part of the logic: test each condition individually (each AND, each OR, and all combinations) with intentionally crafted logs. Create functional tests to validate the full scenario: replay or simulate the malicious behavior in the real SI, verify end-to-end detection, from log ingestion to alert generation, run these functional tests every 3 months to ensure the rule still works.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="test_optimized_rule.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-72" class="content-slide">
@@ -1125,7 +1125,7 @@
 <strong>7. Identifying Missing Scenarios:</strong> Document all alternative paths leading to the same malicious outcome to ensures the final rule covers all relevant variants and avoids blind spots.<br>
 <strong>9. Testing the Rule</strong> Document unit tests, functional tests, and validation results to ensures repeatability, long-term reliability, and operational trust in the rule.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="writing_documentation.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-73" class="content-slide">
@@ -1139,7 +1139,7 @@
             <li>Understand the Attack Scenario: Build a clear picture of the attacker's goal, context, and behavior.</li><li>Select the Appropriate Detection Method: Choose the approach that offers the right visibility and long-term efficiency.</li><li>Write the Initial Draft Rule: Create a hypothesis-based rule to explore the scenario.</li><li>Identify Potential False Positives: Map all legitimate behaviors that may incorrectly trigger detection.</li><li>Distinguish True vs. False Positives: Extract the discriminators that differentiate malicious from legitimate activity.</li><li>Identify Bypass Techniques: Analyze how attackers could alter their behavior to avoid detection.</li><li>Identify Missing Scenarios: Explore all possible paths leading to the same malicious outcome.</li><li>Rewrite the Optimized Rule: Rebuild a clean, accurate rule using all insights gathered.</li><li>Test and Validate the Rule: Use automated unit and functional tests to ensure reliability over time.</li>
           </ol>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="from_scratch_to_incredible_rule.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-74" class="subtitle-slide">

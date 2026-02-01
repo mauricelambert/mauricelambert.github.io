@@ -1449,7 +1449,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Linux System Interfaces: ProcFS, SysFS, Netlink, and eBPF for Kernel-Level Monitoring",
-            "image": "",
+            "image": "LinuxKernelInterfaces.png",
             "texts": [
                 {
                     "type": "ul",
@@ -1471,7 +1471,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Windows Event Monitoring: ETW, ETW-TI, and WMI for SOC Visibility",
-            "image": "",
+            "image": "etw_architecture.png",
             "texts": [
                 {
                     "type": "ul",
@@ -1493,7 +1493,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "AMSI: Antimalware Scan Interface for Runtime Malware Detection",
-            "image": "",
+            "image": "amsi7archi.jpg",
             "texts": [
                 {
                     "type": "ul",
@@ -1515,7 +1515,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Logging Techniques for Detection: /var/log, ETW, Sysmon, and auditd",
-            "image": "",
+            "image": "log_forwarding.png",
             "texts": [
                 {
                     "type": "ul",
@@ -1536,7 +1536,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Sigma & Rule Languages for Detection",
-            "image": "",
+            "image": "sigma.png",
             "texts": [
                 {
                     "type": "ul",
@@ -1558,7 +1558,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Kernel Modules & Syscall Tracing (Linux) & ELAM (Windows)",
-            "image": "",
+            "image": "syscall_hooking.png",
             "texts": [
                 {
                     "type": "ul",
@@ -1587,7 +1587,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Honeypots: Core Principles & Best Practices",
-            "image": "",
+            "image": "monkey_honeypots.png",
             "texts": [
                 {
                     "type": "p",
@@ -1621,7 +1621,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Advanced Threat Intelligence Formats (MISP / STIX) for SOC Automation",
-            "image": "",
+            "image": "STIX_TAXII.png",
             "texts": [
                 {
                     "type": "ul",
@@ -1643,7 +1643,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Advanced Email Authentication Mechanisms (SPF / DKIM / DMARC)",
-            "image": "",
+            "image": "mail_security.png",
             "texts": [
                 {
                     "type": "ul",
@@ -1707,7 +1707,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Selecting the Right Detection Tool",
-            "image": "",
+            "image": "monkey_tool_choices.png",
             "texts": [
                 {
                     "type": "p",
@@ -1745,7 +1745,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Writing the Initial Detection Rule",
-            "image": "",
+            "image": "monkey_writing_rule.png",
             "texts": [
                 {
                     "type": "p",
@@ -1780,7 +1780,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Identifying Potential False Positives",
-            "image": "",
+            "image": "monkey_false_positives.png",
             "texts": [
                 {
                     "type": "p",
@@ -1815,7 +1815,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Distinguishing True Positives from False Positives",
-            "image": "",
+            "image": "monkey_true_and_false_positives.png",
             "texts": [
                 {
                     "type": "p",
@@ -1850,7 +1850,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Identifying Bypass Techniques",
-            "image": "",
+            "image": "bypass_true_negative.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -1889,7 +1889,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Identifying Missing Scenarios",
-            "image": "",
+            "image": "missing_scenario_true_negative.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -1929,7 +1929,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Rewriting the Optimized Rule",
-            "image": "",
+            "image": "clean_rule_true_positive.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -1973,7 +1973,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Testing and Validating the Detection Rule",
-            "image": "",
+            "image": "test_optimized_rule.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2009,7 +2009,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Documentation Requirements for High-Quality Detection Rules",
-            "image": "",
+            "image": "writing_documentation.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2022,7 +2022,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Summary of the Detection Engineering Methodology",
-            "image": "",
+            "image": "from_scratch_to_incredible_rule.jpg",
             "texts": [
                 {
                     "type": "ol",
