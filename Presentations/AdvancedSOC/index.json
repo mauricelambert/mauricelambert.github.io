@@ -2050,7 +2050,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "From Attack Scenario to a Faulty Draft Rule (Typical SOC Mistake)",
-            "image": "",
+            "image": "powershell_false_postive.png",
             "texts": [
                 {
                     "type": "p",
@@ -2079,7 +2079,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Why This Detection Rule Completely Fails (FP, Bypass, Missing Scenarios)",
-            "image": "",
+            "image": "powershell_false_postive2.png",
             "texts": [
                 {
                     "type": "p",
@@ -2117,7 +2117,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Core Evaluation",
-            "image": "",
+            "image": "choose_right_tool.png",
             "texts": [
                 {
                     "type": "p",
@@ -2159,7 +2159,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Advanced Evaluation",
-            "image": "",
+            "image": "basket_alert_triage.png",
             "texts": [
                 {
                     "type": "p",
@@ -2187,7 +2187,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Optional / Bonus Points",
-            "image": "",
+            "image": "sandwich_bugs.png",
             "texts": [
                 {
                     "type": "p",
@@ -2223,7 +2223,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Exam Workflow Overview",
-            "image": "",
+            "image": "exam_preparation.png",
             "texts": [
                 {
                     "type": "p",
@@ -2255,7 +2255,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Evaluation & Oral Defense",
-            "image": "",
+            "image": "pass_the_test.png",
             "texts": [
                 {
                     "type": "p",
@@ -2287,7 +2287,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Exam Workflow: Organization & Best Practices",
-            "image": "",
+            "image": "oral_exam.png",
             "texts": [
                 {
                     "type": "p",
@@ -2334,7 +2334,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Windows Startup Payload Execution - Attack Scenario",
-            "image": "",
+            "image": "waiting_sleeping_bug.jpg",
             "texts": [
                 {
                     "type": "ul",
@@ -2350,7 +2350,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Tools, Telemetry, and Initial Draft Rule",
-            "image": "",
+            "image": "wolf_grab_malicious_bug.jpg",
             "texts": [
                 {
                     "type": "ul",
@@ -2367,7 +2367,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "False Positives, Bypass Paths & Missing Cases",
-            "image": "",
+            "image": "bugs_attack_wolf.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2392,7 +2392,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Optimized Rule Implementation",
-            "image": "",
+            "image": "aggressive_wolf_attack_bugs.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2405,7 +2405,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Credential Theft Techniques - Attack Scenario",
-            "image": "",
+            "image": "pickpocket_steal_key.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2418,7 +2418,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Tools, Telemetry, and Initial Draft Rule",
-            "image": "",
+            "image": "police_stop_pickpocket.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2431,7 +2431,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "False Positives, Evasion Techniques, and Coverage Gaps",
-            "image": "",
+            "image": "pickpocket_steal_police.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2454,7 +2454,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "IAT Hooking on Windows - Attack Scenario",
-            "image": "",
+            "image": "pickpocket_using_magnet.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2467,7 +2467,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Tools, Telemetry, and Initial Draft Rule",
-            "image": "",
+            "image": "pickpocket_fail_stealing_key_using_magnet.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2480,7 +2480,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "False Positives, Evasion Techniques, and Coverage Gaps",
-            "image": "",
+            "image": "pickpocket_using_magnet_and_fishing_rop.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2493,7 +2493,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Refined Detection Logic and Validation Strategy",
-            "image": "",
+            "image": "victim_grap_fishing_rod.jpg",
             "texts": [
 			    {
 					"type": "p",
@@ -2506,7 +2506,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "DCSync Attack - Scenario Overview",
-            "image": "",
+            "image": "vacuum_cleaner_steal_valuables.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2519,7 +2519,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Tools, Telemetry, and Initial Draft Rule",
-            "image": "",
+            "image": "terriefied_thielf_huge_policeman.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2532,7 +2532,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "False Positives, Evasion Techniques, and Coverage Gaps",
-            "image": "",
+            "image": "thief_policeman.jpg",
             "texts": [
                 {
                     "type": "p",
@@ -2545,7 +2545,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Refined Detection Logic and Validation Strategy",
-            "image": "",
+            "image": "proudly_policeman_sad_thief.jpg",
             "texts": [
 			    {
 					"type": "ol",
@@ -2565,7 +2565,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Payload Execution via EXCEL.EXE - Attack Scenario",
-            "image": "",
+            "image": "malicious_sheet_excel.png",
             "texts": [
                 {
                     "type": "p",
@@ -2578,7 +2578,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Tools, Telemetry, and Initial Draft Rule",
-            "image": "",
+            "image": "detect_malicious_excel_sheet.png",
             "texts": [
                 {
                     "type": "p",
@@ -2591,7 +2591,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "False Positives, Evasion Techniques, and Coverage Gaps",
-            "image": "",
+            "image": "bypass_using_excel_module.png",
             "texts": [
                 {
                     "type": "p",
@@ -2613,7 +2613,7 @@
             "icon": "https://mauricelambert.github.io/MauriceLambert.png",
             "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
             "title": "Refined Detection Logic and Validation Strategy",
-            "image": "",
+            "image": "Gandalf_magic_bugs_extractor_excel_sheet.png",
             "texts": [
 			    {
 					"type": "p",

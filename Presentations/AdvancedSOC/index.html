@@ -1164,7 +1164,7 @@
    -EncodedCommand
 )</pre></code></p><p>Many SOCs produce weak rules because they rush into writing them without understanding the scenario or its technical diversity.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="powershell_false_postive.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-76" class="content-slide">
@@ -1181,7 +1181,7 @@
             <li>Malware format without file written: Shellcode (execution in memory), PowerShell (IEX), C# (Add-Type)</li><li>Using another protocol such as an SMB mount.</li><li>Injecting the payload through PowerShell STDIN, leaving no command-line trace.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="powershell_false_postive2.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-77" class="subtitle-slide">
@@ -1206,7 +1206,7 @@
             <li>Detect legitimate activities that trigger the rule.</li><li>Explain reasoning and provide examples.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="choose_right_tool.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-79" class="content-slide">
@@ -1220,7 +1220,7 @@
             <li>Rule minimizes or eliminates false positives and false negatives.</li><li>Consider coverage of all identified scenarios and correct design logic.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="basket_alert_triage.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-80" class="content-slide">
@@ -1236,7 +1236,7 @@
             <li>How to block this type of attack in a SOC context.</li><li>How to perform an incident response for the detected attack.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="sandwich_bugs.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-81" class="subtitle-slide">
@@ -1259,7 +1259,7 @@
             <li>Morning: each group receives its attack scenario.</li><li>All day: <ul><li>Deploy and configure their detection tool.</li><li>Write the initial detection rule.</li><li>Identify false positives and false negatives.</li><li>Produce the final corrected rule.</li></ul></li><li>Evening: submit the report (one per group) with final rule and bullet-point reasoning for each methodological step</li>
           </ol>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="exam_preparation.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-83" class="content-slide">
@@ -1275,7 +1275,7 @@
             <li>Each student is examined individually, even though rule creation was done in groups.</li><li>Objectives of the oral evaluation: <ul><li>Verify understanding of every step of the 9-stage methodology.</li><li>Assess ability to justify decisions: why this tool ? why this logic ? why this improvement ?</li><li>Confirm that each member contributed and understood the final rule.</li></ul></li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="pass_the_test.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-84" class="content-slide">
@@ -1293,7 +1293,7 @@
             <li>Merge findings into a single optimized rule combining strengths and reducing limitations.</li><li>Submit the final report and take a <strong>system snapshot</strong> to preserve a stable state for the exam.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="oral_exam.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-85" class="subtitle-slide">
@@ -1314,7 +1314,7 @@
             <li><strong>Attacker Goal</strong>: Establish a persistent foothold by ensuring malicious code automatically executes after system reboot or user logon.</li><li><strong>Context</strong>: Startup locations in Windows are frequently abused because they allow silent, recurring execution without requiring elevated privileges.</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="waiting_sleeping_bug.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-87" class="content-slide">
@@ -1337,7 +1337,7 @@
     condition: files_in_startup OR registry_autorun</pre></code></li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="wolf_grab_malicious_bug.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-88" class="content-slide">
@@ -1353,7 +1353,7 @@
             <li>Task scheduler</li><li>Services (new service, modification or Hijacking)</li><li>DLL Hijacking on startup program (and COM Hijacking)</li><li>PE injection on startup program</li><li>AppInit registry key (HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows[AppInit_DLLs])</li><li>WMI using persistent Filter/Consumer</li><li>Kernel driver</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="bugs_attack_wolf.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-89" class="content-slide">
@@ -1394,7 +1394,7 @@
 			- "Win32_LogonSession"
     condition: files_in_startup OR registry_autorun OR wmi_persistence_boot</pre></code></p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="aggressive_wolf_attack_bugs.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-90" class="content-slide">
@@ -1406,7 +1406,7 @@
         <div class="text">
           <p><strong>Attacker Goal</strong>: Obtain valid user or administrator credentials to expand access, escalate privileges, or move laterally within the environment.<br><strong>Context</strong>: Credential theft is a common phase in modern intrusions, as attackers rely heavily on harvesting authentication material instead of brute-forcing passwords. Tools and techniques target memory, authentication tokens, password stores, or API-based credential interfaces.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="pickpocket_steal_key.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-91" class="content-slide">
@@ -1447,7 +1447,7 @@
 
     condition: lsass_access OR sensitive_handle_request OR token_duplication</pre></code></p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="police_stop_pickpocket.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-92" class="content-slide">
@@ -1463,7 +1463,7 @@
             <li>Keylogger</li><li>Credentials stealer: system credentials, credentials protected by DPAPI, browser credentials, admin tools credentials, dev tools credentials, ...</li><li>Password manager exploits: unencrypted dump, get database file and steal secret key (PE Injection, replace executable file, DLL Hijacking), ...</li><li>Browser plugin (Pure JS or JS + executable)</li><li>Network sniffer // Proxy</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="pickpocket_steal_police.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-93" class="content-slide">
@@ -1476,7 +1476,7 @@
           <p><strong>Attacker Goal</strong>: Alter the behavior of trusted processes by intercepting function calls and redirecting them to malicious code, enabling stealthy execution, data manipulation, or credential interception.<br>
 <strong>Context</strong>: IAT (Import Address Table) hooking is a technique where attackers modify the addresses of imported APIs inside a process's memory. Because many security-sensitive applications rely on predictable API calls, manipulating the IAT enables adversaries to hijack execution flow without creating new processes or injecting easily detectable payloads.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="pickpocket_using_magnet.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-94" class="content-slide">
@@ -1509,7 +1509,7 @@
 
     condition: suspicious_memory_write OR unexpected_module_load OR module_integrity_change</pre></code></p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="pickpocket_fail_stealing_key_using_magnet.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-95" class="content-slide">
@@ -1523,7 +1523,7 @@
 <strong>Bypass</strong>: API hooking on images with any extension other than .dll when the "iat" or "import" words is not working.<br>
 <strong>Missing scenario</strong>:</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="pickpocket_using_magnet_and_fishing_rop.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-96" class="content-slide">
@@ -1555,7 +1555,7 @@
 action:
   - trigger_alert("Suspicious IAT write detected or shim.dll suspicious usage")</pre></code></p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="victim_grap_fishing_rod.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-97" class="content-slide">
@@ -1568,7 +1568,7 @@ action:
           <p><strong>Attacker Goal</strong>: Extract password hashes, Kerberos secrets, and domain replication data by impersonating a legitimate Domain Controller, enabling full domain compromise or long-term credential abuse.<br>
 <strong>Context</strong>: A DCSync attack abuses the Directory Replication Service Remote Protocol (DRSR). Instead of dumping credentials locally, the attacker requests them directly from Active Directory as if it were performing legitimate replication. This technique is stealthy because it does not require code execution on a Domain Controller.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="vacuum_cleaner_steal_valuables.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-98" class="content-slide">
@@ -1599,7 +1599,7 @@ action:
 
     condition: replication_from_non_dc OR unexpected_source_host OR privileged_account_usage</pre></code></p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="terriefied_thielf_huge_policeman.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-99" class="content-slide">
@@ -1613,7 +1613,7 @@ action:
 <strong>Bypass</strong>: perform DCSync from an AD with the host account.<br>
 <strong>Missing scenario</strong>:</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="thief_policeman.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-100" class="content-slide">
@@ -1627,7 +1627,7 @@ action:
             <li>Filter on event ID for AD synchronization or detect synchronization from network monitoring</li><li>Identify IP source and source port</li><li>Resolve the source host from the source IP</li><li>On the source host find the process from the source port</li><li>If it's not the legit process &#x2192; trigger alert</li><li>Bonus: check local user, session and parent process start time.</li>
           </ol>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="proudly_policeman_sad_thief.jpg" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-101" class="content-slide">
@@ -1640,7 +1640,7 @@ action:
           <p><strong>Attacker Goal</strong>: Execute malicious code by abusing Microsoft Excel as a trusted application to bypass security controls, gain initial access, or run embedded payloads without raising immediate suspicion.<br>
 <strong>Context</strong>: Excel are high‑value targets for attackers because they are widely allowed in enterprise environments and often trusted by users.</p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="malicious_sheet_excel.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-102" class="content-slide">
@@ -1669,7 +1669,7 @@ action:
 
     condition: excel_spawning_process AND suspicious_child_process</pre></code></p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="detect_malicious_excel_sheet.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-103" class="content-slide">
@@ -1685,7 +1685,7 @@ action:
             <li>full malware in VBA (or load and execute instructions in memory)</li><li>XLL</li><li>Replace excel executable</li><li>PE injection</li>
           </ul>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="bypass_using_excel_module.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section><section id="slide-104" class="content-slide">
@@ -1771,7 +1771,7 @@ action:
   # ------------------------------------------------------------
   condition: excel_proc and no_xll and no_motw and no_mem_change and unauthorized_mod</pre></code></p>
         </div>
-        <img src="" alt="Illustration" />
+        <img src="Gandalf_magic_bugs_extractor_excel_sheet.png" alt="Illustration" />
       </article>
       <aside>References: <a href="https://github.com/mauricelambert/">Github MauriceLambert</a>, <a href="https://mauricelambert.github.io/">MauriceLambert WebSite</a>.</aside>
     </section>
