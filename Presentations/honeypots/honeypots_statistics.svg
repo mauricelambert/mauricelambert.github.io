@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title{
+        font-family:Arial,Helvetica,sans-serif;
+        font-size:28px;
+        font-weight:bold;
+        fill:#1f2937;
+      }
+      .subtitle{
+        font-family:Arial,Helvetica,sans-serif;
+        font-size:18px;
+        fill:#374151;
+        font-weight:bold;
+      }
+      .legend{
+        font-family:Arial,Helvetica,sans-serif;
+        font-size:15px;
+        fill:#374151;
+      }
+      .center{
+        font-family:Arial,Helvetica,sans-serif;
+        font-size:18px;
+        font-weight:bold;
+        fill:#374151;
+        text-anchor:middle;
+      }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#fafafa"/>
+
+  <text x="700" y="50" class="title" text-anchor="middle">
+    Top 5 Sources by Honeypot Activity
+  </text>
+
+  <!-- ================= HARVESTING ================= -->
+
+  <g transform="translate(350,250)">
+    <text x="0" y="-140" class="subtitle" text-anchor="middle">
+      Harvesting
+    </text>
+
+    <circle r="90" fill="none" stroke="#e5e7eb" stroke-width="42"/>
+
+    <circle r="90" fill="none" stroke="#d73027" stroke-width="42"
+      stroke-dasharray="158.9 406.6" stroke-dashoffset="0"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#4575b4" stroke-width="42"
+      stroke-dasharray="127.2 438.3" stroke-dashoffset="-158.9"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#fee08b" stroke-width="42"
+      stroke-dasharray="23.2 542.3" stroke-dashoffset="-286.1"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#66bd63" stroke-width="42"
+      stroke-dasharray="17.5 548.0" stroke-dashoffset="-309.3"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#f46d43" stroke-width="42"
+      stroke-dasharray="17.5 548.0" stroke-dashoffset="-326.8"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#cfd8dc" stroke-width="42"
+      stroke-dasharray="221.1 344.4" stroke-dashoffset="-344.3"
+      transform="rotate(-90)"/>
+
+    <circle r="52" fill="#fafafa"/>
+    <text class="center" y="6">Top 5</text>
+
+    <g transform="translate(140,-55)">
+      <rect width="14" height="14" fill="#d73027"/><text x="22" y="12" class="legend">China 28.1%</text>
+      <rect y="22" width="14" height="14" fill="#4575b4"/><text x="22" y="34" class="legend">USA 22.5%</text>
+      <rect y="44" width="14" height="14" fill="#fee08b"/><text x="22" y="56" class="legend">Spain 4.1%</text>
+      <rect y="66" width="14" height="14" fill="#66bd63"/><text x="22" y="78" class="legend">UK 3.1%</text>
+      <rect y="88" width="14" height="14" fill="#f46d43"/><text x="22" y="100" class="legend">India 3.1%</text>
+      <rect y="110" width="14" height="14" fill="#cfd8dc"/><text x="22" y="122" class="legend">Others 39.1%</text>
+    </g>
+  </g>
+
+  <!-- ================= SPAM ================= -->
+
+  <g transform="translate(1050,250)">
+    <text x="0" y="-140" class="subtitle" text-anchor="middle">
+      Spam Sending
+    </text>
+
+    <circle r="90" fill="none" stroke="#e5e7eb" stroke-width="42"/>
+
+    <circle r="90" fill="none" stroke="#d73027" stroke-width="42"
+      stroke-dasharray="59.4 506.1" transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#8c510a" stroke-width="42"
+      stroke-dasharray="46.4 519.1" stroke-dashoffset="-59.4"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#4575b4" stroke-width="42"
+      stroke-dasharray="43.6 521.9" stroke-dashoffset="-105.8"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#7b3294" stroke-width="42"
+      stroke-dasharray="37.3 528.2" stroke-dashoffset="-149.4"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#f46d43" stroke-width="42"
+      stroke-dasharray="32.2 533.3" stroke-dashoffset="-186.7"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#cfd8dc" stroke-width="42"
+      stroke-dasharray="347.1 218.9" stroke-dashoffset="-218.9"
+      transform="rotate(-90)"/>
+
+    <circle r="52" fill="#fafafa"/>
+    <text class="center" y="6">Top 5</text>
+
+    <g transform="translate(140,-55)">
+      <rect width="14" height="14" fill="#d73027"/><text x="22" y="12" class="legend">China 10.5%</text>
+      <rect y="22" width="14" height="14" fill="#8c510a"/><text x="22" y="34" class="legend">Brazil 8.2%</text>
+      <rect y="44" width="14" height="14" fill="#4575b4"/><text x="22" y="56" class="legend">USA 7.7%</text>
+      <rect y="66" width="14" height="14" fill="#7b3294"/><text x="22" y="78" class="legend">Russia 6.6%</text>
+      <rect y="88" width="14" height="14" fill="#f46d43"/><text x="22" y="100" class="legend">India 5.7%</text>
+      <rect y="110" width="14" height="14" fill="#cfd8dc"/><text x="22" y="122" class="legend">Others 61.3%</text>
+    </g>
+  </g>
+
+  <!-- ================= DICTIONARY ================= -->
+
+  <g transform="translate(350,670)">
+    <text x="0" y="-140" class="subtitle" text-anchor="middle">
+      Dictionary Attacks
+    </text>
+
+    <circle r="90" fill="none" stroke="#e5e7eb" stroke-width="42"/>
+
+    <circle r="90" fill="none" stroke="#d73027" stroke-width="42"
+      stroke-dasharray="60.0 505.5" transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#f46d43" stroke-width="42"
+      stroke-dasharray="57.7 507.8" stroke-dashoffset="-60.0"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#8c510a" stroke-width="42"
+      stroke-dasharray="43.6 521.9" stroke-dashoffset="-117.7"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#7b3294" stroke-width="42"
+      stroke-dasharray="37.3 528.2" stroke-dashoffset="-161.3"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#1a9850" stroke-width="42"
+      stroke-dasharray="35.6 529.9" stroke-dashoffset="-198.6"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#cfd8dc" stroke-width="42"
+      stroke-dasharray="331.8 234.2" stroke-dashoffset="-234.2"
+      transform="rotate(-90)"/>
+
+    <circle r="52" fill="#fafafa"/>
+    <text class="center" y="6">Top 5</text>
+
+    <g transform="translate(140,-55)">
+      <rect width="14" height="14" fill="#d73027"/><text x="22" y="12" class="legend">China 10.6%</text>
+      <rect y="22" width="14" height="14" fill="#f46d43"/><text x="22" y="34" class="legend">India 10.2%</text>
+      <rect y="44" width="14" height="14" fill="#8c510a"/><text x="22" y="56" class="legend">Brazil 7.7%</text>
+      <rect y="66" width="14" height="14" fill="#7b3294"/><text x="22" y="78" class="legend">Russia 6.6%</text>
+      <rect y="88" width="14" height="14" fill="#1a9850"/><text x="22" y="100" class="legend">Vietnam 6.3%</text>
+      <rect y="110" width="14" height="14" fill="#cfd8dc"/><text x="22" y="122" class="legend">Others 58.6%</text>
+    </g>
+  </g>
+
+  <!-- ================= COMMENT ================= -->
+
+  <g transform="translate(1050,670)">
+    <text x="0" y="-140" class="subtitle" text-anchor="middle">
+      Comment Spamming
+    </text>
+
+    <circle r="90" fill="none" stroke="#e5e7eb" stroke-width="42"/>
+
+    <circle r="90" fill="none" stroke="#d73027" stroke-width="42"
+      stroke-dasharray="164.5 401.0" transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#4575b4" stroke-width="42"
+      stroke-dasharray="92.8 472.7" stroke-dashoffset="-164.5"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#7b3294" stroke-width="42"
+      stroke-dasharray="56.0 509.5" stroke-dashoffset="-257.3"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#8c510a" stroke-width="42"
+      stroke-dasharray="23.8 541.7" stroke-dashoffset="-313.3"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#5e4fa2" stroke-width="42"
+      stroke-dasharray="21.5 544.0" stroke-dashoffset="-337.1"
+      transform="rotate(-90)"/>
+
+    <circle r="90" fill="none" stroke="#cfd8dc" stroke-width="42"
+      stroke-dasharray="207.4 358.1" stroke-dashoffset="-358.6"
+      transform="rotate(-90)"/>
+
+    <circle r="52" fill="#fafafa"/>
+    <text class="center" y="6">Top 5</text>
+
+    <g transform="translate(140,-55)">
+      <rect width="14" height="14" fill="#d73027"/><text x="22" y="12" class="legend">China 29.1%</text>
+      <rect y="22" width="14" height="14" fill="#4575b4"/><text x="22" y="34" class="legend">USA 16.4%</text>
+      <rect y="44" width="14" height="14" fill="#7b3294"/><text x="22" y="56" class="legend">Russia 9.9%</text>
+      <rect y="66" width="14" height="14" fill="#8c510a"/><text x="22" y="78" class="legend">Brazil 4.2%</text>
+      <rect y="88" width="14" height="14" fill="#5e4fa2"/><text x="22" y="100" class="legend">Ukraine 3.8%</text>
+      <rect y="110" width="14" height="14" fill="#cfd8dc"/><text x="22" y="122" class="legend">Others 36.6%</text>
+    </g>
+  </g>
+</svg>

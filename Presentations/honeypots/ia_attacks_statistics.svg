@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+
+<defs>
+
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="100%" stop-color="#f8fafc"/>
+</linearGradient>
+
+<linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#2563EB"/>
+<stop offset="100%" stop-color="#06B6D4"/>
+</linearGradient>
+
+<linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#3B82F6" stop-opacity=".20"/>
+<stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+</linearGradient>
+
+<filter id="shadow">
+<feDropShadow dx="0" dy="2" stdDeviation="5" flood-opacity=".18"/>
+</filter>
+
+</defs>
+
+<rect width="1200" height="700" fill="url(#bg)"/>
+
+<!-- TITLE -->
+
+<text x="600" y="45"
+font-size="30"
+font-weight="700"
+text-anchor="middle"
+font-family="Inter,Segoe UI,Arial"
+fill="#0F172A">
+Phishing attacks reported to APWG
+</text>
+
+<text x="600" y="74"
+font-size="16"
+text-anchor="middle"
+font-family="Inter,Segoe UI,Arial"
+fill="#64748B">
+Quarterly evolution (Q4 2019 – Q4 2024)
+</text>
+
+<!-- GRID -->
+
+<g stroke="#E8EDF3" stroke-width="1">
+
+<line x1="100" y1="580" x2="1140" y2="580"/>
+<line x1="100" y1="490" x2="1140" y2="490"/>
+<line x1="100" y1="400" x2="1140" y2="400"/>
+<line x1="100" y1="310" x2="1140" y2="310"/>
+<line x1="100" y1="220" x2="1140" y2="220"/>
+<line x1="100" y1="130" x2="1140" y2="130"/>
+
+</g>
+
+<!-- AXES -->
+
+<line x1="100" y1="130" x2="100" y2="580" stroke="#94A3B8"/>
+<line x1="100" y1="580" x2="1140" y2="580" stroke="#94A3B8"/>
+
+<!-- Y LABELS -->
+
+<g
+font-size="13"
+font-family="Inter,Segoe UI,Arial"
+fill="#64748B">
+
+<text x="50" y="585">0</text>
+<text x="30" y="495">0.4 M</text>
+<text x="30" y="405">0.8 M</text>
+<text x="30" y="315">1.2 M</text>
+<text x="30" y="225">1.6 M</text>
+
+</g>
+
+<!-- AREA -->
+
+<path
+fill="url(#fill)"
+d="
+M100,510
+L152,503
+L204,460
+L256,392
+L308,376
+L360,376
+L412,324
+L464,271
+L516,271
+L568,208
+L620,208
+L672,130
+L724,288
+L776,360
+L828,360
+L880,312
+L932,404
+L984,414
+L1036,398
+L1088,383
+L1140,393
+L1140,580
+L100,580
+Z"/>
+
+<!-- LINE -->
+
+<polyline
+fill="none"
+stroke="url(#line)"
+stroke-width="5"
+stroke-linejoin="round"
+stroke-linecap="round"
+filter="url(#shadow)"
+points="
+100,510
+152,503
+204,460
+256,392
+308,376
+360,376
+412,324
+464,271
+516,271
+568,208
+620,208
+672,130
+724,288
+776,360
+828,360
+880,312
+932,404
+984,414
+1036,398
+1088,383
+1140,393"/>
+
+<!-- POINTS -->
+
+<g fill="#2563EB" stroke="#ffffff" stroke-width="2">
+
+<circle cx="100" cy="510" r="3.5"/>
+<circle cx="152" cy="503" r="3.5"/>
+<circle cx="204" cy="460" r="3.5"/>
+<circle cx="256" cy="392" r="3.5"/>
+
+<circle cx="308" cy="376" r="3.5"/>
+<circle cx="360" cy="376" r="3.5"/>
+<circle cx="412" cy="324" r="3.5"/>
+<circle cx="464" cy="271" r="3.5"/>
+
+<circle cx="516" cy="271" r="3.5"/>
+<circle cx="568" cy="208" r="3.5"/>
+<circle cx="620" cy="208" r="3.5"/>
+<circle cx="672" cy="130" r="4"/>
+
+<circle cx="724" cy="288" r="3.5"/>
+<circle cx="776" cy="360" r="3.5"/>
+<circle cx="828" cy="360" r="3.5"/>
+<circle cx="880" cy="312" r="3.5"/>
+
+<circle cx="932" cy="404" r="3.5"/>
+<circle cx="984" cy="414" r="3.5"/>
+<circle cx="1036" cy="398" r="3.5"/>
+<circle cx="1088" cy="383" r="3.5"/>
+<circle cx="1140" cy="393" r="3.5"/>
+
+</g>
+
+<!-- YEAR LABELS -->
+
+<g
+font-size="14"
+font-family="Inter,Segoe UI,Arial"
+fill="#475569">
+
+<text x="180" y="615">2020</text>
+<text x="388" y="615">2021</text>
+<text x="596" y="615">2022</text>
+<text x="804" y="615">2023</text>
+<text x="1012" y="615">2024</text>
+
+</g>
+
+<!-- SOURCE -->
+
+<text
+x="600"
+y="665"
+text-anchor="middle"
+font-size="13"
+font-family="Inter,Segoe UI,Arial"
+fill="#94A3B8">
+Source: APWG – Phishing Activity Trends Reports
+</text>
+
+</svg>
