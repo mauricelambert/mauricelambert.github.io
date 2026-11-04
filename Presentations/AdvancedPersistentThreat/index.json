@@ -1,0 +1,1649 @@
+{
+    "title": "mount -t CyberAttack /dev/beginners /mnt/AdvancedPersistentThreat",
+    "keywords": [
+        "Advanced Persistent Threat",
+        "APT",
+        "cybersecurity",
+        "threat actors",
+        "cyber attack",
+        "defenders",
+        "conference"
+    ],
+    "description": "Advanced Persistent Threats explained: a cybersecurity conference exploring how APT attacks are built, how threat actors operate, to help defenders understand the methods and mindset of threat actors.",
+    "author": "Maurice Lambert",
+    "default icon": "https://mauricelambert.github.io/MauriceLambert.png",
+    "default aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+    "slides": [
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "title": "Understanding Advanced Persistent Threats: Clear Definitions of APT, Threat Actors, and Cyber Attacks"
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "What Does \"Advanced\" Mean in Advanced Persistent Threats ?",
+            "image": "advanced.png",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "In the context of APTs, \"advanced\" refers to the ability to leverage a <strong>wide range of techniques across multiple layers</strong> of the information system: including Active Directory attacks, web application exploitation, network-based attacks, cloud compromise, and social engineering.<br>\nTheir sophistication lies less in individual techniques than in their methodical approach, careful planning, and <strong>operational flexibility</strong>."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "What \"Persistent\" Means in Advanced Persistent Threats ?",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "The term persistent describes the long-term nature of APT operations. Unlike opportunistic cyber attacks, APT campaigns are designed to <strong>maintain access to a system</strong> for weeks, months, or even years."
+                },
+                {
+                    "type": "p",
+                    "content": "Threat actors behind APT campaigns focus on <strong>maintaining their foothold</strong> inside a network."
+                },
+                {
+                    "type": "p",
+                    "content": "Attackers carefully plan their activities, take their time, and continuously adapt if their access is disrupted."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Threat Actors and Cyber Attacks: Understanding the \"Threat\" in APT",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "A threat actor can be an individual hacker, an organized cybercrime group, or a state-sponsored team conducting strategic cyber operations. In the context of APT campaigns, these actors are usually organized, coordinated, and <strong>driven by clear objectives</strong> such as espionage, intelligence gathering, or long-term access to sensitive systems."
+                },
+                {
+                    "type": "p",
+                    "content": "A cyber attack is any attempt to gain <strong>unauthorized access to digital systems</strong>, disrupt services, steal information, or manipulate data. In APT scenarios, cyber attacks are typically carefully planned operations, executed step by step by threat actors who study their targets and use different techniques to achieve their goals."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Blind Spot: Unmonitored Hosts with No Security Visibility",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "A blind spot in cybersecurity refers to any system, device, or host within a network that <strong>lacks proper monitoring and security visibility</strong>."
+                },
+                {
+                    "type": "p",
+                    "content": "Cyber attack APT example: Instead of attacking a Windows workstation that is actively monitored by an endpoint detection system, an attacker might exploit a <strong>network router that rarely has logs reviewed or security monitoring enabled</strong>."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Whitelisted Host: Monitored Hosts with Certain Alerts Intentionally Ignored",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "A whitelisted host is a system that is actively monitored but has specific <strong>security alerts intentionally ignored</strong> to reduce false positives.<br>\nThese whitelists are often the result of poorly written detection rules; properly designed rules do not rely on whitelisting in ways that prevent the detection of malicious behavior."
+                },
+                {
+                    "type": "p",
+                    "content": "Cyber attack APT example:"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Supervision systems themselves are often whitelisted on port scans, meaning <strong>scans from the supervision infrastructure do not trigger alerts</strong>.",
+                        "Domain Controllers are frequently whitelisted for DCSync attacks, as some administrative operations resemble malicious replication requests, and <strong>alerts may be suppressed</strong> to prevent false alarms."
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://csrc.nist.gov/glossary/term/advanced_persistent_threat\">NIST, Computer Security Resource Center</a>",
+            "title": "Advanced persistent threat definition by NIST CSRC",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "An adversary with sophisticated levels of expertise and significant resources, allowing it through the use of <strong>multiple different attack vectors</strong> (e.g., cyber, physical, and deception), to generate opportunities to <strong>achieve its objectives</strong> which are typically to establish and extend its presence within the information technology infrastructure of organizations for purposes of continually exfiltrating information and/or to undermine or impede critical aspects of a mission, program, or organization, or place itself in a position to do so in the future; moreover, the advanced persistent threat pursues its objectives repeatedly over an <strong>extended period of time</strong>, adapting to a defender's efforts to resist it, and with determination to maintain the level of interaction needed to execute its objectives."
+                }
+            ]
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "title": "Famous APT Cyber Attacks That Shaped Cybersecurity"
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Stuxnet: The First Known Cyber Weapon Targeting Industrial Systems",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Stuxnet is widely considered the first cyber weapon designed to cause physical destruction through malware.<br>\nDiscovered in 2010 but developed between 2005 and 2010, it targeted Iran's nuclear program by sabotaging uranium enrichment centrifuges.<br>\nKey elements that make Stuxnet a <strong>landmark APT operation</strong>:"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Development required an estimated <strong>10,000 man-days</strong>",
+                        "The Iranian nuclear program was delayed by an estimated <strong>365 to 730 days</strong>",
+                        "It specifically targeted <strong>industrial control systems</strong>",
+                        "<strong>Several hundred centrifuges</strong> were damaged or destroyed"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "This attack demonstrated that cyber operations could directly impact physical infrastructure, marking the beginning of modern state-sponsored cyber warfare."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "GhostNet: A Global Cyber-Espionage Network",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "GhostNet was a large-scale cyber-espionage operation uncovered in 2009 after a <strong>10-month investigation</strong> by researchers from the University of Toronto's Information Warfare Monitor.<br>\nThe investigation revealed a surveillance network that had compromised at least <strong>1,295 computers in 103 countries</strong>, including embassies, foreign ministries, international organizations, and media outlets."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Around 30% of the victims were high-value diplomatic or governmental targets",
+                        "Malware based on Gh0st RAT allowed attackers to fully control infected machines",
+                        "Attackers could exfiltrate files, log keystrokes, and remotely activate webcams and microphones"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "GhostNet showed how relatively simple malware combined with social engineering could enable a global intelligence collection platform, targeting governments and sensitive organizations."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "SolarWinds Supply Chain Attack: Compromising 18,000 Organizations Through Trusted Software",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "The <strong>SolarWinds attack</strong>, discovered in December 2020, is one of the most significant <strong>supply-chain cyber attacks</strong> ever recorded.<br>\nAttackers compromised the <strong>build environment of the SolarWinds Orion IT management software</strong> and inserted a backdoor called <strong>SUNBURST</strong> into legitimate software updates. These malicious updates were then distributed through SolarWinds' official update mechanism."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Approximately <strong>18,000 SolarWinds customers</strong> downloaded the compromised update",
+                        "The malware was delivered through <strong>trusted software updates</strong>, making detection extremely difficult",
+                        "Victims included government agencies, technology companies, and critical infrastructure organizations worldwide",
+                        "Only a small subset of high-value targets were selected for deeper exploitation after the initial compromise"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "This attack demonstrated the devastating impact of supply-chain compromises, where infiltrating a single trusted vendor can provide access to thousands of organizations simultaneously."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Lazarus Group: From Financial Cyber Heists to the Sony Pictures Attack",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "The Lazarus Group is one of the most well-known <strong>state-sponsored APT</strong> groups, attributed by multiple governments to North Korea. The group has conducted both <string>financial cyber-crime operations</string> and destructive cyber attacks."
+                },
+                {
+                    "type": "p",
+                    "content": "<strong>Bank Heists (SWIFT attacks):</strong> Attackers infiltrated banking networks and attempted fraudulent transfers through the SWIFT system."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Nearly <strong>$1 billion in fraudulent transfers</strong> attempted",
+                        "About <strong>$81 million successfully stolen</strong>",
+                        "One of the most famous incidents targeted the <strong>Bangladesh Bank</strong> in 2016"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "<strong>Sony Pictures Cyber Attack (2014):</strong> In 2014, the group launched a destructive attack against Sony Pictures Entertainment."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Thousands of workstations and servers were compromised or wiped",
+                        "Large volumes of internal emails, documents, and unreleased films were leaked",
+                        "The total damage was estimated between <strong>$80 million and $200 million</strong>"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "These operations show how an APT can combine espionage, financial crime, and destructive attacks to achieve political and strategic objectives."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "PLA Unit 61398: Large-Scale Cyber Espionage Operations",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "PLA Unit 61398 is a cyber-espionage unit linked to the People's Liberation Army and commonly associated with the threat group <strong>APT1</strong>.<br>\nAccording to investigations by the cybersecurity company Mandiant, the group conducted long-term cyber-espionage campaigns targeting organizations worldwide."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "The estimated size of one Unit 61398 building suggests it could host around <strong>2,000 personnel</strong>.",
+                        "<strong>141 organizations compromised</strong> across multiple industries",
+                        "Longest confirmed access lasting <strong>1,764 days (about 4 years and 10 months)</strong>",
+                        "<strong>937 command-and-control servers</strong> identified",
+                        "<strong>849 distinct IP addresses</strong> used for infrastructure",
+                        "<strong>2,551 registered domain names</strong> linked to the operations"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "These operations illustrate how state-sponsored APT groups can conduct long-term cyber espionage campaigns, maintaining persistence in networks for years while systematically stealing sensitive information."
+                }
+            ]
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "title": "Demystifying APTs: Separating Facts from Myths in Cybersecurity"
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Myth vs Reality: Cyber Attacks Are Often Simple",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Many people think that APTs require highly sophisticated hacking skills and complex tools. In reality, most APTs succeed by exploiting simple human mistakes or weak configurations."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "UNC4191 (2021, Mandiant): The attackers used <strong>USB drives</strong> to gain access. A victim only had to <strong>plug in the drive and click an executable</strong> at its root. Once executed, it deployed <strong>NCAT to open a reverse shell</strong>.",
+                        "APT29 (2024, Microsoft): Initial access was obtained via <strong>password spraying</strong>, a basic attack technique where common passwords are tested across multiple accounts.",
+                        "APT28 (2016, Wikipedia): Access to John Podesta's email was gained through a <strong>spear-phishing email</strong> disguised as a <strong>Google security alert</strong>. The attacker didn't bypass advanced security controls."
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "Takeaway: Being \"advanced\" in APT doesn't mean the attack is technically complex. Often, attackers succeed by leveraging simple vectors with intelligence and patience. Understanding this helps defenders prioritize user training, password hygiene, and awareness of phishing attacks."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Myth vs Reality: APTs Don't Have Instant Access to Everything",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Common misconception: APTs have access to everything and can break any system using zero-days.<br>\nReality: Real-world data shows attackers usually rely on simpler methods."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "<strong>16 312 security incidents</strong> analyzed, only <strong>~5 % of initial access came from vulnerabilities</strong> (DBIR, 2023)",
+                        "Zero-day exploitation (Mandiant/TAG/CISA KEV): <ul><li>97 zero-days out of 187 vulnerabilities (2023),</li><li>62 zero-days out of 555 vulnerabilities (2022),</li><li>106 zero-days exploited out of 311 new vulnerabilities tracked (2021)</li></ul>",
+                        "Actors using zero-days: 41.4 % Commercial Surveillance Vendors, <strong>41.4 % Espionage (state-linked)</strong>, 17.2 % Financially Motivated."
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "APTs cannot simply attack every system at will. They operate strategically, choosing targets carefully. The idea that they have instant, universal access is a myth, APT operations are deliberate, selective, and <strong>constrained by real-world limits</strong>."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Breaking the Myth: APTs Are Not Undetectable: Using Known TTPs and Malware",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Even advanced APTs rely on well-known tools and techniques, and often leave clear traces.<br><br>\nNot-so-stealthy TTPs:"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "2020: APT34 targeted 80+ federal agencies with <strong>an empty Excel file; macros downloaded malware</strong>",
+                        "2025: T-ATP-04 attacked government institutions using <strong>attachments exploiting CVE-2017-0199 and CVE-2017-11882</strong>"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "Open-source malware usage:"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "2017: APT19 targeted a multinational law firm <strong>using PowerShell Empire</strong>",
+                        "2018: Turla used <strong>Metasploit shellcode and Meterpreter payloads</strong>",
+                        "2023: Grayling targeted multiple organizations in Taiwan <strong>using Havoc, Netspy, Mimikatz</strong>"
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "APTs are not invisible or magical. They often reuse known tools, exploits, and TTPs, and sometimes try to hide attribution with know tools and TTPs (2018: The Sandworm Team carried out an attack <strong>using PsExec</strong>, planting false-flag indicators (including copied Rich headers) to make it appear as if Lazarus was responsible)."
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Advanced Persistent Threats Are Not Unstoppable",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "APTs do not have unlimited resources. Even highly capable groups can be disrupted or detected."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "2019: APT35: <strong>Microsoft seized 99 domains controlled by the group</strong>, effectively disrupting their operations.",
+                        "2024: XZ Utils SSH supply chain: Attackers had infiltrated systems for over 2 years, but <strong>careful performance and load testing detected a backdoor before it could affect production</strong>, preventing real-world impact.",
+                        "2026: Konni APT (Operation Poseidon): Attack <strong>infrastructure was reused</strong> across campaigns, leaving detectable IOCs that allowed monitoring and mitigation."
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "Even advanced, persistent attackers leave traces, rely on infrastructure, and can be blocked. They are not unstoppable forces."
+                }
+            ]
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "title": "Resources Required for Advanced Persistent Threat (APT) Operations"
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "title": "Time Requirements in Advanced Persistent Threat (APT) Campaigns",
+            "image": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "APT campaigns typically operate over extended periods (months to years).<br>\n<em>Operation Shady RAT</em>: lasted at least <strong>5 years</strong> (2006-2011) targeting 71 organizations and 14 countries (the longest observed compromise lasted <strong>28 months</strong>).<br>\n<em>Stuxnet</em>: likely required <strong>years of development and testing</strong> before deployment, as Symantec identified working versions as early as 2007 and a C2 domain from 2005, while the NATO Cooperative Cyber Defence Centre of Excellence found a 2005 linker despite a 2009 compile date."
+                },
+                {
+                    "type": "p",
+                    "content": "Long timelines allow gradual reconnaissance and intelligence gathering.<br>\nA slow and controlled progression helps <strong>evade certain detection mechanisms</strong>, while <strong>increasing the likelihood of persistence-maintaining access</strong> or reintroducing entry points (compromised backups) even after remediation phases."
+                },
+                {
+                    "type": "p",
+                    "content": "For an APT, time is an asset: instead of forcing their way in, attackers can <strong>wait for the environment to become favorable</strong>: a vulnerability left unpatched, a security control weakened, or a trusted host becoming available.<br>\nAs Rob Joyce, then Chief of the NSA's Tailored Access Operations (TAO), put it: \"We\u2019ll poke and we'll wait\" (\"Disrupting Nation State Hackers\", USENIX Enigma Conference, 28 janvier 2016)."
+                }
+            ],
+            "icon alt": "",
+            "image alt": "",
+            "code": "",
+            "code lang": "",
+            "notes": []
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Human Resources in Advanced Persistent Threat (APT) Campaigns",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Multiple simultaneous intrusions require multiple operators: Mandiant observed APT1 compromising <strong>17 new victims across 10 industries in a single month</strong>, while maintaining existing access."
+                },
+                {
+                    "type": "p",
+                    "content": "APT1's attack infrastructure included <strong>more than 1,000 servers</strong>, requiring continuous operation and maintenance."
+                },
+                {
+                    "type": "p",
+                    "content": "Mandiant observed <strong>1,905 Remote Desktop sessions</strong> from APT1 operators, originating from <strong>832 different IP addresses</strong> a clear evidence of hands-on activity."
+                },
+                {
+                    "type": "p",
+                    "content": "Over ten months, APT1 exfiltrated <strong>6.5 TB of compressed data</strong> from a single organization, requiring attackers to identify, collect and manage valuable information."
+                },
+                {
+                    "type": "p",
+                    "content": "Kaspersky described Moonlight Maze as \"<strong>operator-at-keyboard</strong>\", with approximately <strong>1,600 compromised IP addresses</strong>, a large-scale operation heavily dependent on human interaction."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Technical Skills in Advanced Persistent Threat (APT) Campaigns",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "Moonlight Maze: HRTest intercepts contained 45 binaries, <strong>28 SunOS/SPARC and 17 IRIX/MIPS</strong>, plus 9 scripts. The toolkit included <strong>rootkit and anti-forensics capabilities</strong> across multiple Unix architectures, requiring expertise in OS internals and low-level system mechanisms."
+                },
+                {
+                    "type": "p",
+                    "content": "Equation Group: Kaspersky recovered modules capable of <strong>reprogramming hard-drive firmware across more than a dozen major HDD brands</strong>, providing persistence below the OS that survived disk formatting and reinstallation, as well as hidden storage for stolen data. This required specialized firmware and low-level hardware expertise."
+                },
+                {
+                    "type": "p",
+                    "content": "Equation Group: Kaspersky identified <strong>7 exploits, at least 4 used as zero-days</strong>. Up to 10 exploits could be chained during infection, although no more than 3 were observed against a single target, demonstrating capabilities in vulnerability research and exploit development."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "How to Build an Advanced Persistent Threat Campaign",
+            "notes": []
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Intelligence and Research to Identify the Target and Its Supply Chain",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Identify the real target and potential supply chain targets.",
+                        "Sometimes, compromising a target through its supply chain can be easier than targeting it directly."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Open Source Intelligence (OSINT)",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Use Open Source Intelligence (OSINT) to identify potential entry points and define the overall strategy.",
+                        "Gather information about the target organization and its employees.",
+                        "Identify publicly exposed technologies and their versions.",
+                        "Identify the organization's public attack surface and potential misconfigurations.",
+                        "Assess wireless security, including Wi-Fi and Bluetooth.",
+                        "Assess physical security."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Intelligence and Research on Employee Information Exposure",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Publicly available employee information can reveal potential security weaknesses.",
+                        "Professional profiles can expose employees who are looking for new opportunities.",
+                        "Personal information can provide insight into employees' personal lives and help identify potential social engineering opportunities.",
+                        "Password leaks may offer a good entry point.",
+                        "Disgruntled employees or employees experiencing financial difficulties may be susceptible to bribery, potentially leading them to sell or disclose their access credentials."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Identifying Vulnerabilities in Open-Source Components",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Widely used open-source software is often extensively analyzed and scanned for vulnerabilities.",
+                        "Less well-known open-source components may receive less attention from security researchers.",
+                        "The most obvious components are not necessarily the most interesting ones when assessing an organization's attack surface."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Vulnerability Exploitation versus Malware Deployment",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Exploiting a vulnerability can provide code execution without requiring the deployment of traditional malware.",
+                        "Vulnerabilities can be authenticated or unauthenticated.",
+                        "Authenticated vulnerabilities introduce an additional dependency: valid credentials.",
+                        "Obtaining credentials through information leaks or social engineering introduces different levels of discretion and forensic traceability.",
+                        "Social engineering can leave traces through communications and interactions with employees. Even when not detected immediately, these traces may be identified during forensic investigations.",
+                        "Exploiting vulnerabilities also generates network traffic that can be detected and logged. Exploit payloads must respect specific formats and protocols, and unexpected requests may trigger security monitoring mechanisms."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Choosing a Vulnerability Research Environment",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Vulnerability research can be conducted by purchasing an asset or by performing a penetration test on an equivalent asset.",
+                        "Testing directly against the target can leave traces and generate observable activity.",
+                        "Testing an equivalent asset avoids interacting directly with the target, but introduces other limitations.",
+                        "An equivalent asset may have a different configuration or software version."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "The Risks of Testing on the Target or an Equivalent Asset",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Performing vulnerability research directly on the target can leave traces and expose the activity to detection.",
+                        "Testing an equivalent asset belonging to another organization avoids interacting directly with the target.",
+                        "However, vulnerability research on third-party assets introduces the risk of premature vulnerability disclosure.",
+                        "If a vulnerability is disclosed and patched before the campaign reaches the target, it may no longer be exploitable."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "The Importance of Matching the Target Environment",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Equivalent assets may have different software versions and configurations.",
+                        "A vulnerability identified in an equivalent environment may not be exploitable on the target.",
+                        "Conversely, configuration differences may prevent the discovery of vulnerabilities actually present on the target.",
+                        "An asset matching the target's software version and configuration provides a more representative testing environment.",
+                        "Acquiring and reproducing such an environment can be expensive."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Cyber Threat Intelligence (CTI)",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "CTI is a less documented but important step in an APT campaign.",
+                        "Study threat actors targeting the same organization or industry to identify their tools, techniques and attack patterns.",
+                        "Prioritize the threat actor with the largest amount of publicly available intelligence: more documented information means more material to analyze and reproduce.",
+                        "Reusing documented tools and techniques can lead defenders to attribute the campaign to the copied threat actor."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Malware Analysis and Reverse Engineering",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Analyze specific tools and malware samples rather than modified generic hacking tools.",
+                        "Specific tools and malware are more closely associated with a particular APT, making them more likely to be attributed to that group.",
+                        "Reuse their implementation, techniques and Indicators of Compromise (IOCs).",
+                        "Similar code and IOCs are extremely powerful indicators for attributing a campaign to another APT."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Building the APT Arsenal: Equivalent Testing Infrastructure",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "When resources allow, an APT may build an infrastructure equivalent to the target environment.",
+                        "This environment makes it possible to rehearse the attack, test different scenarios and develop and validate automation scripts.",
+                        "Reproducing the target environment is difficult due to the cost and time required.",
+                        "More importantly, the available intelligence about the target is often insufficient to accurately reproduce its infrastructure."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Building the APT Arsenal: Social Engineering and Command and Control (C2) Infrastructure",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Dedicated infrastructure is required for social engineering and C2 communications.",
+                        "Infrastructure must be discreet and consistent with the campaign's context (e.g., domain names resembling legitimate tools used by the target).",
+                        "Each infrastructure should be dedicated to a single campaign and never reused.",
+                        "C2 infrastructure must be redundant to remain operational if an endpoint is blocked or taken down.",
+                        "The infrastructure must be credible enough to fit naturally into the target's environment."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Abusing Trusted Infrastructure",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Trusted infrastructure can be abused to make malicious communications appear to originate from legitimate sources.",
+                        "This concept is closely related to supply chain attacks: the trust placed in a third-party infrastructure becomes part of the attack surface.",
+                        "The use of trusted infrastructure introduces another layer of complexity when analyzing the origin of malicious activity."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Building the APT Arsenal: Malware Development and Acquisition",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Malware development and acquisition are based on CTI and reverse engineering.",
+                        "Open-source scripts, malware and hacking tools complicate attribution because they can be used by multiple threat actors.",
+                        "However, publicly available tools are easier for security products to detect.",
+                        "Custom malware can be developed with the assistance of AI or external developers.",
+                        "Malware-as-a-Service (MaaS) provides another acquisition model."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Malware Capabilities and Operational Objectives",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Impact-oriented malware can support: data encryption, data exfiltration, and Denial of Service (DoS).",
+                        "These activities can generate significant security visibility, but may be important to reproduce the behavior associated with a specific threat actor.",
+                        "Spyware and infostealers provide different capabilities, particularly when collecting strategic information.",
+                        "In some situations, targeted information collection may be more discreet than large-scale data exfiltration.",
+                        "Spyware features are often more target-specific, making them harder to replicate than more common capabilities such as data exfiltration and encryption."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Persistence, Redundancy and Compromise Management",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Maintaining access is useful, but persistence is not always required, persistence mechanisms often require storage and leave traces on disk.",
+                        "Some servers or services may remain running for extended periods without ever being restarted, allowing access to persist without additional persistence mechanisms.",
+                        "A campaign may also leverage unpatched vulnerabilities or use valid credentials to remotely restart processes.",
+                        "Fileless attacks can operate without leaving a traditional malware sample on disk, changing the traces available to forensic investigators.",
+                        "Maintaining access across multiple compromised systems increases campaign resilience: if security teams detect and isolate some compromised machines, access may remain available through others (like unmonitored systems).",
+                        "However, every additional compromised system and malware instance increases the overall exposure of the campaign and increase the likelihood of detection."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Automating Campaign Operations",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Automation is not mandatory, but can improve operational efficiency.",
+                        "Scripts can automate repetitive tasks and reduce human errors and the amount of logging.",
+                        "Automation can make operations more consistent across similar environments.",
+                        "It can also accelerate activities involving multiple targets.",
+                        "Automation can improve efficiency and impact, but reduces stealth: if one target detects the attack, its IOCs, exploited vulnerabilities and techniques may become known and monitored across other targets.",
+                        "Similar activity across multiple targets can also affect how investigators interpret the scope and attribution of a campaign."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Launching the APT Attack: Hiding the Primary Target in a Large-Scale Campaign",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "When campaign exposure is acceptable, targeting multiple accessible organizations can make it harder to identify the primary target.",
+                        "A large number of targets can make it more difficult to distinguish the actual objective from the rest of the campaign.",
+                        "This approach makes attribution more difficult, but significantly increases detection risks, as the techniques, IOCs and campaign patterns may be documented and added to security detection tools."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Launching the APT Attack: Automated vs. Manual Campaign Execution",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Automation can accelerate operations across multiple targets.",
+                        "Manual execution requires more time, and its activity patterns can reveal working hours, making attribution easier.",
+                        "Sequential attacks limit the number of victims that can be reached within a given timeframe.",
+                        "Automation improves scalability, makes campaign activity more consistent and recognizable, but hides operators' working habits and practices, making attribution more difficult."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Launching the APT Attack: Initial Access Through Credentials and Social Engineering",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Buying leaks and stolen credentials may leave fewer traces of direct interaction with the victim.",
+                        "Third-party involvement can introduce additional evidence through communications and financial transactions.",
+                        "Social engineering can expose the campaign's infrastructure, tactics and knowledge about the victim."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Launching the APT Attack: First Access and Command and Control Operations",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "C2 capabilities determine which operations can be performed remotely.",
+                        "More built-in features provide greater flexibility but also expose more techniques and capabilities.",
+                        "Every additional capability can introduce new behavioral indicators that defenders can monitor.",
+                        "Limited native C2 functionality can become restrictive during an attack. Launching external processes instead of using built-in functions may be less stealthy but builtins expose C2 activity to behavioral detection."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Lateral Movement and Internal Reconnaissance: Understanding the Compromised Environment",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Spyware can provide information about system usage and user activity. It is necessary to understand system and user activities, because the most discreet technique is to rely on normal and common usage patterns.",
+                        "Collected information can reveal the organization's infrastructure and identify additional systems of interest.",
+                        "There are three main categories of tools for collecting information and secrets:",
+                        "C2 built-in capabilities: Collection is directly associated with the C2 process, increasing its behavioral footprint and the number of detectable signatures.",
+                        "LOLBins: Native operating system utilities are widely monitored by EDR solutions.",
+                        "Infostealers and other hacking tools: Dedicated tools can be detected by security solutions and leave additional files, processes and artifacts that can be identified during forensic investigations."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Lateral Movement: Domain Accounts and Authentication Activity",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Use legitimate accounts and standard protocols to blend in with regular network activity.",
+                        "Legitimate authentication can make activity less distinguishable from normal user or administrative operations.",
+                        "Domain authentication generates events and leaves traces within Active Directory infrastructure and potentially in the SIEM.",
+                        "UEBA solutions may identify anomalous account behavior or unusual authentication patterns."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Alternative Access to Critical Infrastructure: Network Devices as Alternative Access Points",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Network devices such as switches, routers and firewalls can provide alternative access points within the network.",
+                        "These devices are often less monitored by security solutions than conventional workstations and servers.",
+                        "Some network devices can communicate with other systems without triggering the same security alerts as endpoint-based activity."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Backup Infrastructure as an Alternative Access Path",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Access to backup infrastructure provides access to files stored across the information system, potentially exposing sensitive data from multiple systems.",
+                        "Backup files can be modified and subsequently restored to alter the state or content of a target system.",
+                        "Restoring an older backup can roll back system data, including security monitoring records, potentially removing traces of previous activity.",
+                        "Deleting or encrypting backups can significantly increase the impact of a ransomware attack by preventing recovery."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Hypervisors as Alternative Access Points",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Hypervisors are often less monitored by security solutions than the virtual machines they host.",
+                        "Access to a hypervisor provides visibility into multiple virtual machines running on the same infrastructure.",
+                        "Virtual machine consoles provide direct interaction with guest systems, but guest systems generate more visible activity.",
+                        "Access to virtual machine disks or memory provides alternative interaction paths with different levels of visibility. You may be able to encrypt all files without triggering security alerts by accessing virtual machine disks directly through the hypervisor.",
+                        "Alternatively, you can deploy a new host on the network that is not monitored by security solutions and use it to compromise other hosts through network access."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Coming Back After Remediation: Domain Persistence After a Rebuild",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Domain remediation does not necessarily invalidate all previously compromised credentials and secrets.",
+                        "Some users may reuse their previous credentials after a complete domain rebuild.",
+                        "Incomplete domain remediation may leave previously compromised authentication secrets and privileged accounts exposed.",
+                        "Incomplete remediation may leave compromised authentication secrets unchanged: <ul><li>KRBTGT: Without two successive password rotations, previously forged Golden Tickets may remain valid.</li><li>Service accounts: Unchanged service account passwords may allow previously forged Silver Tickets to remain usable.</li><li>Computer accounts: Unchanged machine account passwords may preserve compromised credentials that can still be leveraged for domain access.</li></ul>"
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Coming Back After Remediation: Backdoors Surviving Remediation",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Potential blind spots include: <ul><li>Compromised backups.</li><li>Shadow IT and systems outside the remediation scope.</li><li>Systems that were inaccessible during the remediation process (like supply-chain compromised or external trusted infrastructure).</li><li>Persistent access mechanisms that were not identified by defenders (maybe an unused and stealthy DLL side loading or a plugin for a specific application).</li></ul>",
+                        "If defenders reintroduce the domain before identifying all compromised elements, previously established access paths may remain available.",
+                        "Network devices and dedicated appliances can remain outside the scope of conventional remediation operations."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "APT Attack Scenarios: Techniques, Tactics & Analysis",
+            "notes": []
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Cyberattack Scenarios: The Hidden Impact of Silent Data Manipulation",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Disrupting a service does not necessarily require ransomware or a wiper.",
+                        "Destructive attacks trigger incident response and recovery procedures.",
+                        "A less visible impact may remain undetected for longer.",
+                        "Data manipulation may be mistaken for a software bug or human error. Without obvious service disruption, incident response may not be triggered.",
+                        "Investigation may be handled as a regular application support ticket. Third-party software issues can take a long time to investigate and resolve."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Building the Threat Actor Arsenal: Infrastructure Deployment & Command and Control (C2)",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Leverage simple docker run commands on Virtual Private Servers (VPS) to deploy services rapidly and cleanly.",
+                        "Exfiltration Server: Deploy a centralized listener to collect and store credentials harvested by infostealers.",
+                        "C2 / RAT Infrastructure: Set up the primary Command and Control servers to manage active Remote Access Trojans.",
+                        "Phishing Server: Deploy a dedicated server to run the phishing campaign. Acquire a strategic domain name to support the phishing infrastructure and evade detection.",
+                        "Replicate the victim's internet-exposed services inside a local containers environment. Provide the team with a safe, easily reproducible lab to practice and refine vulnerability exploitation before launching the real attack."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Building the Threat Actor Arsenal: Phishing Campaign Sourcing & AI Integration",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Leverage Generative AI to design and write highly convincing, error-free phishing lures.",
+                        "Phishing-as-a-Service (PaaS) Procurement: Acquire ready-to-use, professional phishing frameworks from underground markets.",
+                        "Deploy advanced Adversary-in-the-Middle (AitM) kits capable of bypassing Two-Factor Authentication (2FA).",
+                        "Industry Examples: Utilize commercial cybercrime platforms like Tycoon 2FA or EvilProxy."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Building the Threat Actor Arsenal: Malware Procurement & Commercial Options",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Leverage AI assistance to automate code generation and accelerate custom malware development.",
+                        "Outsource development by hiring skilled threat actors on underground forums to build bespoke tools.",
+                        "Purchase commercial Tools & Ransomware-as-a-Service (RaaS): Akira, Lockbit, Qilin, Remcos RAT, Lumma Stealer, Cobalt Strike.",
+                        "Use publicly available repositories: <a href=\"https://github.com/rapid7/metasploit-payloads\">Meterpreter</a>, <a href=\"https://github.com/BishopFox/sliver\">Sliver</a>, <a href=\"https://github.com/HavocFramework/Havoc\">Havoc</a>, <a href=\"https://github.com/its-a-feature/Mythic\">Mythic</a>, <a href=\"https://github.com/NYAN-x-CAT/AsyncRAT-C-Sharp\">AsyncRAT</a>, <a href=\"https://github.com/quasar/quasar\">Quasar</a>, <a href=\"https://github.com/screetsec/TheFatRat\">TheFatRat</a>, <a href=\"https://github.com/malwaredllc/byob\">BYOB</a>.",
+                        "Use open-source packers to bypass traditional Antivirus detection: <a href=\"https://github.com/cdong1012/Malware-Packer/\">Malware-Packer</a>, <a href=\"https://github.com/SilentVoid13/Silent_Packer\">Silent_Packer</a>, <a href=\"https://github.com/czs108/Windows-PE-Packer\">Windows-PE-Packer</a>, <a href=\"https://github.com/YuriSizuku/win-SimpleDpack\">win-SimpleDpack</a>, <a href=\"https://github.com/friedkiwi/netcrypt\">netcrypt</a>, <a href=\"https://github.com/dimkr/papaw\">papaw</a>, <a href=\"https://github.com/89luca89/pakkero\">pakkero</a>."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Anatomy of an APT Attack: Initial Compromise",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Search for target company employees on LinkedIn. Identify a developer with an \"Open to Work\" status.",
+                        "Contact the developer with a fake job offer. Require a technical test using a malicious NPM package.",
+                        "Gain access to the workstation with the malicious supply-chain. Exfiltrate initial credentials, source code, and tokens.",
+                        "Compromise the CI/CD pipeline to target connected production infrastructures.",
+                        "Inject a backdoor directly into the codebase.",
+                        "Bypass pull request reviews by rewriting Git history between a previous legitimate commit and the current state.",
+                        "Modify files that historically had high churn (frequent changes) but are stable in the latest versions to blend into regular activity.",
+                        "If needed perform lateral movement to pivot onto other internal systems."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Initial Execution Strategy: Perimeter Reconnaissance & Delivery Challenges",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "If no \"Open to Work\" developers are available, carefully select the optimal target profile, device, and service.",
+                        "Bypass local Antivirus, but consider email security gatekeepers. Is the file extension blocklisted by the email protection system? Can the payload be smuggled inside a password-protected encrypted ZIP archive?",
+                        "Bypass strict corporate gateway defenses by targeting employees via mobile apps (WhatsApp, direct messaging). Installing malicious apps on Android or iOS requires entirely different toolsets.",
+                        "Harvesting credentials, tokens, or session cookies is often easier than gaining code execution. Credentials alone do not grant execution.",
+                        "Call targets directly to manipulate them into running payloads on their workstations. Highly time-consuming; requires advanced psychological manipulation, persuasion skills, and practice.",
+                        "Utilize \"ClickFix\" tactics to trick users into running code."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Post-Credential Exploitation: Operational Pivot",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Password Reuse Exploitation: test harvested credentials against other internal systems, external portals, and personal accounts.",
+                        "Email Access Weaponization: Search through mailbox history to discover hardcoded secrets, configuration files, or sensitive documentation. Use the legitimate internal email address to launch highly realistic lateral social engineering attacks against other employees.",
+                        "Targeting Human Resources: Exfiltrate employee personal data, structural charts, and recruitment pipelines. Impersonate HR staff to contact internal employees with high authority, masking malicious payloads as mandatory corporate policy or contract updates.",
+                        "Targeting the Finance Department: Steal payroll structures, financial statements, and salary details. Approach employees while posing as a competitor or aggressive headhunter, using precise salary data as leverage to trick them into opening weaponized job offers."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Covert Operations & Artifact Lifecycle",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Document every single artifact, file, and change introduced to the targeted environment.",
+                        "Systematically clean up operational tools once they are no longer required.",
+                        "Maintain a single persistent file on disk rather than repeatedly downloading it, as frequent network transfers increase detection risks (applies strictly to disk files, not in-memory payloads).",
+                        "Removing system or security logs at the end of the campaign can erase evidence. Clearing entire logs is a high-severity anomaly that often triggers immediate alerts for the defensive monitoring team."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Covert Operations & Anti-Forensics",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Deploy a ransomware strain at the final stage of the operational campaign. The destructive encryption process corrupts filesystem timelines, event logs, and forensic evidence, effectively masking the initial data exfiltration.",
+                        "Utilize well-known, commercially available, or leaked ransomware strains. Misleads forensic investigators and response teams, causing them to falsely attribute the sophisticated APT campaign to an ordinary cybercrime group."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Post-Remediation Persistence: Network Edge Footholds",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Workstations constantly communicate with local Wi-Fi routers, making this traffic look entirely legitimate. Edge routers are less monitored, rarely updated, and frequently subject to critical CVEs.",
+                        "Because Wi-Fi routers retain direct internet connectivity, they provide a reliable out-of-band pivot point. If the IT team detects the threat on a workstation, removes local backdoors, or reinstalls operating systems from scratch, the router access remains untouched."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Post-Remediation Persistence: Active Directory",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Directly attacking the Active Directory is risky due to heavy SOC monitoring. If compromised, forge Golden Tickets. Security teams often forget to reset the krbtgt account password twice during remediation.",
+                        "Retain machine or service account passwords, which are rarely changed during a standard cleanup.",
+                        "Inject malicious configurations inside overlooked or hidden GPOs to automatically redeploy backdoors across the domain post-remediation."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Post-Remediation Persistence: Supply Chain & Human Factors",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "If a developer's environment was compromised, retain copies of the source code and dependency trees.",
+                        "Analyze the supply chain to discover or weaponize zero-days and known vulnerabilities in internal corporate tools, creating a seamless re-entry point.",
+                        "Maintain exfiltrated credential dumps and password histories. Even if the IT team forces a global password reset during remediation, users frequently cycle back to historical passwords or minor variations of their old secrets.",
+                        "Leaving dormant implants on compromised systems is often ineffective because a mature incident response team's first reflex is to completely wipe and rebuild the affected assets."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Post-Remediation Persistence: Third-Party & Cloud Trust Relationships",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Establish persistence by compromising a trusted external partner or service provider (e.g., a connected cloud provider, vendor, or MSP).",
+                        "Gain access to the third-party ecosystem from the target's environment without immediately exploiting it. When the primary target detects the breach and completely rebuilds its internal network, the threat actor simply uses the compromised, trusted third-party relationship to pivot right back into the remediated system."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Campaign Requirements & Leadership",
+            "notes": []
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Core Human Resources & Strategic Profiles",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ol",
+                    "content": [
+                        "A cohesive group composed entirely of highly motivated and deeply committed individuals.",
+                        "The Technical Architect: A profile with extensive cybersecurity knowledge and a comprehensive overall vision of the attack surface.",
+                        "The Project Manager: A dedicated people manager to maintain alignment, track milestones, and enforce strategic focus.",
+                        "The Technical Communicator: A skilled speaker with strong technical capabilities to serve as the team\u2019s reference point and ensure internal cohesion."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Operational Core & Specialized Squads",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "8 core teams are required for a minimal campaign; 12 teams are highly recommended to maximize efficiency and speed.",
+                        "Scenario: Designs realistic and effective attack paths by continuously consulting research and development teams.",
+                        "Bug Hunting & Social Engineering: Two parallel teams collaborating directly to secure the initial foothold.",
+                        "Internal Exploitation: Pivots inside the infrastructure, targeting the domain and internal services to achieve the final impact.",
+                        "3 Specialized Development Teams: Team A focusing on exploitation/industrialization, Team B on C2/RAT tools, and Team C on payload impacts (Ransomware, exfiltration, disruption)."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Continuous Training & Optimization",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Detection Team: Replicates the target\u2019s information system architecture to train the offensive squads and monitor their actions.",
+                        "Bypass Team: Intervenes when exploitation squads are caught by the Detection Team, researching stealthier execution methods."
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "Optional teams:"
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "Cyber Threat Intelligence (CTI): Profiles real-world APTs with similar goals to clone their TTPs and reuse known IOCs.",
+                        "Malware Reverse Engineering: Analyzes and extracts code snippets or advanced techniques from existing threat strains.",
+                        "Forensics & Anti-Forensics: Reviews internal training labs to catalog left-behind traces, scoring their visibility so the Bypass Team can systematically eliminate high-priority footprints."
+                    ]
+                },
+                {
+                    "type": "p",
+                    "content": "A highly efficient campaign requires roughly 24 to 36 operators, 1 core expert, 2 managers, and 1 spokesperson (~40 people total)."
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Talent Mapping & Behavioral Profiling: Placing the Right Profiles in the Right Squads",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Scenario & Social Engineering: Highly communicative, socially clever, and perceptive individuals.",
+                        "Bypass & Bug Hunting: Highly technical, resourceful operators with a strong capacity for fast learning and fluent English comprehension to parse complex research.",
+                        "Reverse Engineering: Methodical, patient, and tenacious individuals capable of handling \"die-and-retry\" cycles and complex de-obfuscation tasks over long periods. With AI assistance, sheer tenacity matters more than deep legacy reverse-engineering skills.",
+                        "Development Teams: Adaptable programmers comfortable with evolving requirements and translating research instructions into modular code.",
+                        "Forensics: Analytical minds possessing high willpower and structured working methodologies.",
+                        "Detection: Well-suited for personnel with limited time, and repetitive tasks."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "title",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "Conclusion: Demystifying the APT",
+            "notes": []
+        },
+        {
+            "type": "content",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "The Spectrum of Sophistication",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "p",
+                    "content": "With significant budget and highly skilled operators, top-tier APTs can build legendary campaigns (e.g., Stuxnet, SolarWinds) featuring advanced malware and unique capabilities."
+                },
+                {
+                    "type": "ul",
+                    "content": [
+                        "However, most real-world APTs are advanced only in specific tactics, not across the entire execution chain, and many operations contain blatant mistakes.",
+                        "Many successful state-sponsored campaigns rely on remarkably basic methods: open-source malware, vanilla hacktools, known CVEs, or simple social engineering.",
+                        "Using simple, un-obfuscated public tools is often the best strategy because it makes precise attribution incredibly difficult for defenders."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "APT Operations: Low Barriers, Structured Execution",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ul",
+                    "content": [
+                        "Targeting organizations with baseline security is highly accessible.",
+                        "An effective campaign can be successfully executed in few weeks by a small group of untrained but deeply motivated individuals.",
+                        "Executing a compelling and resilient operation consistently requires adhering to a structured 4-step framework.",
+                        "Success depends entirely on relying on a modular structure with multiple specialized, collaborative teams rather than individual geniuses."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        },
+        {
+            "type": "content-left",
+            "icon": "https://mauricelambert.github.io/MauriceLambert.png",
+            "icon alt": "",
+            "title": "The Reality of Threat Actor Operations: Takeaways for Modern Defenders",
+            "notes": [],
+            "aside": "References: <a href=\"https://github.com/mauricelambert/\">Github MauriceLambert</a>, <a href=\"https://mauricelambert.github.io/\">MauriceLambert WebSite</a>.",
+            "image": "",
+            "image alt": "",
+            "texts": [
+                {
+                    "type": "ol",
+                    "content": [
+                        "To mislead forensic investigators and hide their identity, APTs heavily rely on copying existing threats.",
+                        "They intentionally reuse known tools, known IOCs, and known signatures to blend into daily background noise or mimic other groups.",
+                        "Since attackers reuse known elements and make mistakes under pressure, defenders do not need infinite resources to stop them.",
+                        "Defending your infrastructure against an APT is entirely achievable, especially for medium-profile organizations."
+                    ]
+                }
+            ],
+            "code": "",
+            "code lang": ""
+        }
+    ],
+    "default icon alt": ""
+}
