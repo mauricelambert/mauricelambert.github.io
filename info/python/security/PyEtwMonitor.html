@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: Documentation - PyEtwMonitor</title>
+</head><body>
+
+<style>
+body {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    padding: 2rem;
+}
+
+/* Main container tables */
+table.section {
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+}
+
+/* ===== COLOR PER SECTION CATEGORY ===== */
+.title-decor { background-color: #3a3d1e !important; }
+.functions-decor { background-color: #3a1e3d !important; }
+.data-decor { background-color: #1e3a3d !important; }
+.author-decor { background-color: #3d2e1e !important; }
+.index-decor { background-color: #1e3d2f !important; }
+
+/* Code blocks */
+pre {
+    background-color: #2d2d2d;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+/* Links */
+a { color: #4ec9b0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+</style>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">PyEtwMonitor</strong> (version 0.0.1)</td>
+<td class="extra"><a href=".">index</a><br><a>pyetwmonitor.py</a></td></tr></table>
+    <p><span class="code">Real-time&nbsp;Windows&nbsp;ETW&nbsp;monitoring&nbsp;module.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;provides&nbsp;a&nbsp;real-time&nbsp;Event&nbsp;Tracing&nbsp;for&nbsp;Windows&nbsp;(ETW)<br>
+monitoring&nbsp;solution&nbsp;implemented&nbsp;entirely&nbsp;with&nbsp;Python's&nbsp;standard<br>
+library&nbsp;and<br>
+&nbsp;<br>
+It&nbsp;enables&nbsp;the&nbsp;collection,&nbsp;decoding,&nbsp;filtering,&nbsp;and&nbsp;display&nbsp;of<br>
+events&nbsp;generated&nbsp;by&nbsp;modern&nbsp;Windows&nbsp;kernel&nbsp;providers.<br>
+&nbsp;<br>
+Supported&nbsp;providers:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft-Windows-Kernel-File<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{EDD08927-9CC4-4E65-B970-C2560FB5C289}<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;process:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft-Windows-Kernel-Process<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{22FB2CD6-0E7B-422B-A0C7-2FAD1FD0E716}<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;network:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft-Windows-Kernel-Network<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{7DD42A49-5329-4832-8DFD-43D979153A88}<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;registry:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft-Windows-Kernel-Registry<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{70EB4F03-C1DE-4F73-A051-33D13D5413BD}<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;memory:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft-Windows-Kernel-Memory<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{D1D93EF7-E1F2-4F45-9943-03D245FE6C00}<br>
+&nbsp;<br>
+Main&nbsp;features:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Real-time&nbsp;ETW&nbsp;session&nbsp;creation&nbsp;and&nbsp;management.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Multiple&nbsp;simultaneous&nbsp;kernel&nbsp;provider&nbsp;activation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Event&nbsp;consumption&nbsp;through&nbsp;OpenTraceW&nbsp;and&nbsp;ProcessTrace.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Event&nbsp;metadata&nbsp;retrieval&nbsp;using&nbsp;the&nbsp;Windows&nbsp;TDH&nbsp;API.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Automatic&nbsp;decoding&nbsp;of&nbsp;supported&nbsp;ETW&nbsp;property&nbsp;types.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Filtering&nbsp;by&nbsp;process&nbsp;ID,&nbsp;event&nbsp;ID,&nbsp;and&nbsp;provider&nbsp;name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Configurable&nbsp;trace&nbsp;verbosity.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Graceful&nbsp;shutdown&nbsp;and&nbsp;session&nbsp;cleanup.<br>
+&nbsp;<br>
+Architecture:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;Parse&nbsp;command-line&nbsp;arguments&nbsp;and&nbsp;configure&nbsp;filters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;Validate&nbsp;administrator&nbsp;privileges.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;Create&nbsp;a&nbsp;private&nbsp;real-time&nbsp;ETW&nbsp;tracing&nbsp;session.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;Enable&nbsp;the&nbsp;selected&nbsp;ETW&nbsp;providers.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5.&nbsp;Open&nbsp;an&nbsp;event&nbsp;consumer&nbsp;and&nbsp;register&nbsp;the&nbsp;callback.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;6.&nbsp;Process&nbsp;incoming&nbsp;events&nbsp;in&nbsp;a&nbsp;dedicated&nbsp;worker&nbsp;thread.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;7.&nbsp;Decode&nbsp;and&nbsp;display&nbsp;event&nbsp;metadata&nbsp;and&nbsp;properties.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;8.&nbsp;Close&nbsp;the&nbsp;consumer&nbsp;and&nbsp;stop&nbsp;the&nbsp;tracing&nbsp;session.<br>
+&nbsp;<br>
+Requirements:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Windows&nbsp;operating&nbsp;system.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Python&nbsp;3.9&nbsp;or&nbsp;later.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Administrator&nbsp;privileges&nbsp;for&nbsp;kernel&nbsp;provider&nbsp;access.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;No&nbsp;third-party&nbsp;Python&nbsp;dependencies.<br>
+&nbsp;<br>
+Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;file,process<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--pid&nbsp;4821&nbsp;9100&nbsp;--event-id&nbsp;12&nbsp;15<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;network,registry&nbsp;--level&nbsp;verbose<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--list-providers<br>
+&nbsp;<br>
+Command-line&nbsp;arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--providers:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comma-separated&nbsp;list&nbsp;of&nbsp;providers&nbsp;to&nbsp;enable.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts&nbsp;'all'&nbsp;to&nbsp;enable&nbsp;every&nbsp;registered&nbsp;provider.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--pid:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restrict&nbsp;displayed&nbsp;events&nbsp;to&nbsp;the&nbsp;specified&nbsp;process&nbsp;IDs.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--event-id:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restrict&nbsp;displayed&nbsp;events&nbsp;to&nbsp;the&nbsp;specified&nbsp;event&nbsp;IDs.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--provider-filter:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restrict&nbsp;displayed&nbsp;events&nbsp;to&nbsp;selected&nbsp;provider&nbsp;names.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--level:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;the&nbsp;provider&nbsp;trace&nbsp;level&nbsp;('info'&nbsp;or&nbsp;'verbose').<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--list-providers:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display&nbsp;registered&nbsp;providers&nbsp;and&nbsp;exit.<br>
+&nbsp;<br>
+Notes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;ETW&nbsp;sessions&nbsp;are&nbsp;managed&nbsp;through&nbsp;Windows&nbsp;APIs.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Event&nbsp;decoding&nbsp;depends&nbsp;on&nbsp;provider&nbsp;metadata&nbsp;availability.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Some&nbsp;providers&nbsp;or&nbsp;events&nbsp;may&nbsp;require&nbsp;additional&nbsp;privileges.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;module&nbsp;is&nbsp;designed&nbsp;for&nbsp;diagnostic&nbsp;and&nbsp;system&nbsp;monitoring<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;purposes.<br>
+&nbsp;<br>
+Usage&nbsp;examples:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;process&nbsp;creation:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;process&nbsp;--event-id&nbsp;1<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;a&nbsp;specific&nbsp;process:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--pid&nbsp;&lt;id&gt;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;network&nbsp;activity:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;network<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;file&nbsp;open&nbsp;events:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;file&nbsp;--event-id&nbsp;12<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;file&nbsp;creation&nbsp;events:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;file&nbsp;--event-id&nbsp;10<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;file&nbsp;deletion&nbsp;events:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;file&nbsp;--event-id&nbsp;11&nbsp;18<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;image&nbsp;loading&nbsp;by&nbsp;a&nbsp;specific&nbsp;process:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--pid&nbsp;&lt;id&gt;&nbsp;--providers&nbsp;process&nbsp;--event-id&nbsp;5<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;registry&nbsp;key&nbsp;open&nbsp;events:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;registry&nbsp;--event-id&nbsp;2<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;registry&nbsp;key&nbsp;creation&nbsp;events:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;registry&nbsp;--event-id&nbsp;1<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Monitor&nbsp;registry&nbsp;value&nbsp;modification&nbsp;events:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;PyEtwMonitor.py&nbsp;--providers&nbsp;registry&nbsp;--event-id&nbsp;5<br>
+&nbsp;<br>
+File:<br>
+•&nbsp;10&nbsp;:&nbsp;NameCreate<br>
+•&nbsp;11&nbsp;:&nbsp;NameDelete<br>
+•&nbsp;12&nbsp;:&nbsp;Create&nbsp;/&nbsp;Create_V1<br>
+•&nbsp;13&nbsp;:&nbsp;Cleanup&nbsp;/&nbsp;Cleanup_V1<br>
+•&nbsp;14&nbsp;:&nbsp;Close&nbsp;/&nbsp;Close_V1<br>
+•&nbsp;15&nbsp;:&nbsp;Read&nbsp;/&nbsp;Read_V1<br>
+•&nbsp;16&nbsp;:&nbsp;Write&nbsp;/&nbsp;Write_V1<br>
+•&nbsp;17&nbsp;:&nbsp;SetInformation&nbsp;/&nbsp;SetInformation_V1<br>
+•&nbsp;18&nbsp;:&nbsp;SetDelete&nbsp;/&nbsp;SetDelete_V1<br>
+•&nbsp;19&nbsp;:&nbsp;Rename&nbsp;/&nbsp;Rename_V1<br>
+•&nbsp;20&nbsp;:&nbsp;DirEnum&nbsp;/&nbsp;DirEnum_V1<br>
+•&nbsp;21&nbsp;:&nbsp;Flush&nbsp;/&nbsp;Flush_V1<br>
+•&nbsp;22&nbsp;:&nbsp;QueryInformation&nbsp;/&nbsp;QueryInformation_V1<br>
+•&nbsp;23&nbsp;:&nbsp;FSCTL&nbsp;/&nbsp;FSCTL_V1<br>
+•&nbsp;24&nbsp;:&nbsp;OperationEnd<br>
+•&nbsp;25&nbsp;:&nbsp;DirNotify&nbsp;/&nbsp;DirNotify_V1<br>
+•&nbsp;26&nbsp;:&nbsp;DeletePath&nbsp;/&nbsp;DeletePath_V1<br>
+•&nbsp;27&nbsp;:&nbsp;RenamePath&nbsp;/&nbsp;RenamePath_V1<br>
+•&nbsp;28&nbsp;:&nbsp;SetLinkPath&nbsp;/&nbsp;SetLinkPath_V1<br>
+•&nbsp;29&nbsp;:&nbsp;Rename29&nbsp;/&nbsp;Rename29_V1<br>
+•&nbsp;30&nbsp;:&nbsp;CreateNewFile&nbsp;/&nbsp;CreateNewFile_V1<br>
+•&nbsp;31&nbsp;:&nbsp;SetSecurity_V1<br>
+•&nbsp;32&nbsp;:&nbsp;QuerySecurity_V1<br>
+•&nbsp;33&nbsp;:&nbsp;SetEA_V1<br>
+•&nbsp;34&nbsp;:&nbsp;QueryEA_V1<br>
+&nbsp;<br>
+Memory:<br>
+•&nbsp;1&nbsp;:&nbsp;MemInfo_V1<br>
+•&nbsp;2&nbsp;:&nbsp;MemInfoWS&nbsp;/&nbsp;MemInfoWS_V1&nbsp;/&nbsp;MemInfoWS_V2<br>
+•&nbsp;3&nbsp;:&nbsp;MemInfoSessionWS&nbsp;/&nbsp;MemInfoSessionWS_V1&nbsp;/&nbsp;MemInfoSessionWS_V2<br>
+•&nbsp;4&nbsp;:&nbsp;WorkingSetOutSwapStart&nbsp;/&nbsp;WorkingSetOutSwapStart_V1<br>
+•&nbsp;5&nbsp;:&nbsp;WorkingSetOutSwapStop&nbsp;/&nbsp;WorkingSetOutSwapStop_V1<br>
+•&nbsp;6&nbsp;:&nbsp;WorkingSetInSwapStart&nbsp;/&nbsp;WorkingSetInSwapStart_V1<br>
+•&nbsp;7&nbsp;:&nbsp;WorkingSetInSwapStop<br>
+•&nbsp;8&nbsp;:&nbsp;Acg<br>
+•&nbsp;9&nbsp;:&nbsp;WorkingSetInSwap<br>
+•&nbsp;10&nbsp;:&nbsp;MdlAllocation<br>
+•&nbsp;11&nbsp;:&nbsp;ContAllocation<br>
+•&nbsp;12&nbsp;:&nbsp;MemInfoNode<br>
+&nbsp;<br>
+Network:<br>
+•&nbsp;10&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDatasent.<br>
+•&nbsp;11&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDatareceived.<br>
+•&nbsp;12&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPConnectionattempted.<br>
+•&nbsp;13&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDisconnectissued.<br>
+•&nbsp;14&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDataretransmitted.<br>
+•&nbsp;15&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPConnectionaccepted.<br>
+•&nbsp;16&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPReconnectattempted.<br>
+•&nbsp;17&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPTCPconnectionattemptfailed.<br>
+•&nbsp;18&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPProtocolcopieddataonbehalfofuser.<br>
+•&nbsp;26&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDatasent.26<br>
+•&nbsp;27&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDatareceived.27<br>
+•&nbsp;28&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPConnectionattempted.28<br>
+•&nbsp;29&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDisconnectissued.29<br>
+•&nbsp;30&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPDataretransmitted.30<br>
+•&nbsp;31&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPConnectionaccepted.31<br>
+•&nbsp;32&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPReconnectattempted.32<br>
+•&nbsp;34&nbsp;:&nbsp;KERNEL_NETWORK_TASK_TCPIPProtocolcopieddataonbehalfofuser.34<br>
+•&nbsp;42&nbsp;:&nbsp;KERNEL_NETWORK_TASK_UDPIPDatasentoverUDPprotocol.<br>
+•&nbsp;43&nbsp;:&nbsp;KERNEL_NETWORK_TASK_UDPIPDatareceivedoverUDPprotocol.<br>
+•&nbsp;49&nbsp;:&nbsp;KERNEL_NETWORK_TASK_UDPIPUDPconnectionattemptfailed.<br>
+•&nbsp;58&nbsp;:&nbsp;KERNEL_NETWORK_TASK_UDPIPDatasentoverUDPprotocol.58<br>
+•&nbsp;59&nbsp;:&nbsp;KERNEL_NETWORK_TASK_UDPIPDatareceivedoverUDPprotocol.59<br>
+&nbsp;<br>
+Process:<br>
+•&nbsp;1&nbsp;:&nbsp;ProcessStart&nbsp;/&nbsp;ProcessStart_V1&nbsp;/&nbsp;ProcessStart_V2&nbsp;/&nbsp;ProcessStart_V3<br>
+•&nbsp;2&nbsp;:&nbsp;ProcessStop&nbsp;/&nbsp;ProcessStop_V1&nbsp;/&nbsp;ProcessStop_V2<br>
+•&nbsp;3&nbsp;:&nbsp;ThreadStart&nbsp;/&nbsp;ThreadStart_V1<br>
+•&nbsp;4&nbsp;:&nbsp;ThreadStop&nbsp;/&nbsp;ThreadStop_V1<br>
+•&nbsp;5&nbsp;:&nbsp;ImageLoad<br>
+•&nbsp;6&nbsp;:&nbsp;ImageUnload<br>
+•&nbsp;7&nbsp;:&nbsp;CpuBasePriorityChange<br>
+•&nbsp;8&nbsp;:&nbsp;CpuPriorityChange<br>
+•&nbsp;9&nbsp;:&nbsp;PagePriorityChange<br>
+•&nbsp;10&nbsp;:&nbsp;IoPriorityChange<br>
+•&nbsp;11&nbsp;:&nbsp;ProcessFreezeStart&nbsp;/&nbsp;ProcessFreezeStart_V1<br>
+•&nbsp;12&nbsp;:&nbsp;ProcessFreezeStop&nbsp;/&nbsp;ProcessFreezeStop_V1<br>
+•&nbsp;13&nbsp;:&nbsp;JobStart<br>
+•&nbsp;14&nbsp;:&nbsp;JobTerminateStop<br>
+•&nbsp;15&nbsp;:&nbsp;ProcessRundown&nbsp;/&nbsp;ProcessRundown_V1<br>
+•&nbsp;16&nbsp;:&nbsp;task_0<br>
+•&nbsp;17&nbsp;:&nbsp;PsDiskIoAttributionStart<br>
+•&nbsp;18&nbsp;:&nbsp;PsDiskIoAttributionStop<br>
+•&nbsp;19&nbsp;:&nbsp;PsIoRateControlStart&nbsp;/&nbsp;PsIoRateControlStart_V1&nbsp;/&nbsp;PsIoRateControlStart_V2<br>
+•&nbsp;20&nbsp;:&nbsp;PsIoRateControlStop&nbsp;/&nbsp;PsIoRateControlStop_V1&nbsp;/&nbsp;PsIoRateControlStop_V2<br>
+•&nbsp;21&nbsp;:&nbsp;ThreadWorkOnBehalfUpdate<br>
+•&nbsp;22&nbsp;:&nbsp;JobServerSiloStart<br>
+•&nbsp;23&nbsp;:&nbsp;JobServerSiloStart23<br>
+•&nbsp;24&nbsp;:&nbsp;JobServerSiloStartStop<br>
+•&nbsp;25&nbsp;:&nbsp;JobServerSiloStart25<br>
+•&nbsp;26&nbsp;:&nbsp;JobServerSiloStartStop26<br>
+&nbsp;<br>
+Registry:<br>
+•&nbsp;1&nbsp;:&nbsp;task_0CreateKey<br>
+•&nbsp;2&nbsp;:&nbsp;task_0OpenKey<br>
+•&nbsp;3&nbsp;:&nbsp;task_0DeleteKey<br>
+•&nbsp;4&nbsp;:&nbsp;task_0QueryKey<br>
+•&nbsp;5&nbsp;:&nbsp;task_0SetValueKey<br>
+•&nbsp;6&nbsp;:&nbsp;task_0DeleteValueKey<br>
+•&nbsp;7&nbsp;:&nbsp;task_0QueryValueKey<br>
+•&nbsp;8&nbsp;:&nbsp;task_0EnumerateKey<br>
+•&nbsp;9&nbsp;:&nbsp;task_0EnumerateValueKey<br>
+•&nbsp;10&nbsp;:&nbsp;task_0QueryMultipleValueKey<br>
+•&nbsp;11&nbsp;:&nbsp;task_0SetInformationKey<br>
+•&nbsp;12&nbsp;:&nbsp;task_0FlushKey<br>
+•&nbsp;13&nbsp;:&nbsp;task_0CloseKey<br>
+•&nbsp;14&nbsp;:&nbsp;task_0QuerySecurityKey<br>
+•&nbsp;15&nbsp;:&nbsp;task_0SetSecurityKey<br>
+•&nbsp;16&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofmountinghivesfromexistingfiles.Start<br>
+•&nbsp;17&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofmountinghivesfromexistingfiles.RegPerfOpHiveMountBaseFileMounted<br>
+•&nbsp;18&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofmountinghivesfromexistingfiles.RegPerfOpHiveMountLogEntryApplied<br>
+•&nbsp;19&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofmountinghivesfromexistingfiles.Stop<br>
+•&nbsp;20&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofunloadinghives.Start<br>
+•&nbsp;21&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofunloadinghives.Stop<br>
+•&nbsp;22&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.Start<br>
+•&nbsp;23&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushBecameActiveFlusher<br>
+•&nbsp;24&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushGatheredLogData<br>
+•&nbsp;25&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushGatheredPrimaryData<br>
+•&nbsp;26&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushWroteLogFile<br>
+•&nbsp;27&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushWrotePrimaryFile<br>
+•&nbsp;28&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushBoostedActiveFlusher<br>
+•&nbsp;29&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushStartWaitForActive<br>
+•&nbsp;30&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.RegPerfOpHiveFlushFinishWaitForActive<br>
+•&nbsp;31&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofflushinghives.Stop<br>
+•&nbsp;32&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofregistryshutdown.Start<br>
+•&nbsp;33&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofregistryshutdown.Start33<br>
+•&nbsp;34&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofregistryshutdown.RegPerfOpShutdownFlushStart<br>
+•&nbsp;35&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofregistryshutdown.RegPerfOpShutdownFlushStop<br>
+•&nbsp;36&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofregistryshutdown.Stop<br>
+•&nbsp;37&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofloadinghives.Start<br>
+•&nbsp;38&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofloadinghives.Stop<br>
+•&nbsp;39&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofrestoringhives.Start<br>
+•&nbsp;40&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofrestoringhives.Stop<br>
+•&nbsp;41&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofexportinghives.Start<br>
+•&nbsp;42&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofexportinghives.RegPerfOpSaveFileCopied<br>
+•&nbsp;43&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofexportinghives.RegPerfOpSaveTreeCopied<br>
+•&nbsp;44&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofexportinghives.RegPerfOpSaveFileWritten<br>
+•&nbsp;45&nbsp;:&nbsp;Thisgroupofeventstrackstheperformanceofexportinghives.Stop</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="_ctypes.html#CFuncPtr">_ctypes.CFuncPtr</a>(_ctypes._CData)
+</dt><dd>
+<dl>
+<dt class="heading-text">ctypes.WinFunctionType
+</dt></dl>
+</dd>
+<dt class="heading-text"><a href="_ctypes.html#Structure">_ctypes.Structure</a>(_ctypes._CData)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="PyEtwMonitor.html#ENABLE_TRACE_PARAMETERS">ENABLE_TRACE_PARAMETERS</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#ETW_BUFFER_CONTEXT">ETW_BUFFER_CONTEXT</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_DESCRIPTOR">EVENT_DESCRIPTOR</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_HEADER">EVENT_HEADER</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_PROPERTY_INFO">EVENT_PROPERTY_INFO</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_RECORD">EVENT_RECORD</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_TRACE">EVENT_TRACE</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_TRACE_HEADER">EVENT_TRACE_HEADER</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_TRACE_LOGFILEW">EVENT_TRACE_LOGFILEW</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#EVENT_TRACE_PROPERTIES">EVENT_TRACE_PROPERTIES</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#GUID">GUID</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#PROPERTY_DATA_DESCRIPTOR">PROPERTY_DATA_DESCRIPTOR</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#SYSTEMTIME">SYSTEMTIME</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#TIME_ZONE_INFORMATION">TIME_ZONE_INFORMATION</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#TRACE_EVENT_INFO_HEADER">TRACE_EVENT_INFO_HEADER</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#TRACE_LOGFILE_HEADER">TRACE_LOGFILE_HEADER</a>
+</dt><dt class="heading-text"><a href="PyEtwMonitor.html#WNODE_HEADER">WNODE_HEADER</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="ENABLE_TRACE_PARAMETERS">class <strong>ENABLE_TRACE_PARAMETERS</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;ETW&nbsp;provider&nbsp;activation&nbsp;parameters.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#ENABLE_TRACE_PARAMETERS">ENABLE_TRACE_PARAMETERS</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>ControlFlags</strong></dt>
+</dl>
+<dl><dt><strong>EnableFilterDesc</strong></dt>
+</dl>
+<dl><dt><strong>EnableProperty</strong></dt>
+</dl>
+<dl><dt><strong>FilterDescCount</strong></dt>
+</dl>
+<dl><dt><strong>SourceId</strong></dt>
+</dl>
+<dl><dt><strong>Version</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="ENABLE_TRACE_PARAMETERS-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="ENABLE_TRACE_PARAMETERS-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="ENABLE_TRACE_PARAMETERS-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="ENABLE_TRACE_PARAMETERS-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="ENABLE_TRACE_PARAMETERS-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="ENABLE_TRACE_PARAMETERS-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="ENABLE_TRACE_PARAMETERS-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="ETW_BUFFER_CONTEXT">class <strong>ETW_BUFFER_CONTEXT</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;the&nbsp;ETW&nbsp;buffer&nbsp;context.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#ETW_BUFFER_CONTEXT">ETW_BUFFER_CONTEXT</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>LoggerId</strong></dt>
+</dl>
+<dl><dt><strong>ProcessorIndex</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="ETW_BUFFER_CONTEXT-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="ETW_BUFFER_CONTEXT-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="ETW_BUFFER_CONTEXT-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="ETW_BUFFER_CONTEXT-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="ETW_BUFFER_CONTEXT-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="ETW_BUFFER_CONTEXT-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="ETW_BUFFER_CONTEXT-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_DESCRIPTOR">class <strong>EVENT_DESCRIPTOR</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;an&nbsp;ETW&nbsp;event&nbsp;descriptor.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_DESCRIPTOR">EVENT_DESCRIPTOR</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Channel</strong></dt>
+</dl>
+<dl><dt><strong>Id</strong></dt>
+</dl>
+<dl><dt><strong>Keyword</strong></dt>
+</dl>
+<dl><dt><strong>Level</strong></dt>
+</dl>
+<dl><dt><strong>Opcode</strong></dt>
+</dl>
+<dl><dt><strong>Task</strong></dt>
+</dl>
+<dl><dt><strong>Version</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_DESCRIPTOR-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_DESCRIPTOR-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_DESCRIPTOR-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_DESCRIPTOR-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_DESCRIPTOR-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_DESCRIPTOR-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_DESCRIPTOR-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_HEADER">class <strong>EVENT_HEADER</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;an&nbsp;ETW&nbsp;event&nbsp;header.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_HEADER">EVENT_HEADER</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>ActivityId</strong></dt>
+</dl>
+<dl><dt><strong>EventDescriptor</strong></dt>
+</dl>
+<dl><dt><strong>EventProperty</strong></dt>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+</dl>
+<dl><dt><strong>HeaderType</strong></dt>
+</dl>
+<dl><dt><strong>KernelTime</strong></dt>
+</dl>
+<dl><dt><strong>ProcessId</strong></dt>
+</dl>
+<dl><dt><strong>ProviderId</strong></dt>
+</dl>
+<dl><dt><strong>Size</strong></dt>
+</dl>
+<dl><dt><strong>ThreadId</strong></dt>
+</dl>
+<dl><dt><strong>TimeStamp</strong></dt>
+</dl>
+<dl><dt><strong>UserTime</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_HEADER-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_HEADER-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_HEADER-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_HEADER-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_HEADER-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_HEADER-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_HEADER-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_PROPERTY_INFO">class <strong>EVENT_PROPERTY_INFO</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;an&nbsp;ETW&nbsp;event&nbsp;property&nbsp;descriptor.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_PROPERTY_INFO">EVENT_PROPERTY_INFO</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Count</strong></dt>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+</dl>
+<dl><dt><strong>InType</strong></dt>
+</dl>
+<dl><dt><strong>Length</strong></dt>
+</dl>
+<dl><dt><strong>MapNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>NameOffset</strong></dt>
+</dl>
+<dl><dt><strong>OutType</strong></dt>
+</dl>
+<dl><dt><strong>Reserved</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_PROPERTY_INFO-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_PROPERTY_INFO-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_PROPERTY_INFO-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_PROPERTY_INFO-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_PROPERTY_INFO-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_PROPERTY_INFO-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_PROPERTY_INFO-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_RECORD">class <strong>EVENT_RECORD</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;an&nbsp;ETW&nbsp;event&nbsp;record.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_RECORD">EVENT_RECORD</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BufferContext</strong></dt>
+</dl>
+<dl><dt><strong>EventHeader</strong></dt>
+</dl>
+<dl><dt><strong>ExtendedData</strong></dt>
+</dl>
+<dl><dt><strong>ExtendedDataCount</strong></dt>
+</dl>
+<dl><dt><strong>UserContext</strong></dt>
+</dl>
+<dl><dt><strong>UserData</strong></dt>
+</dl>
+<dl><dt><strong>UserDataLength</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_RECORD-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_RECORD-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_RECORD-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_RECORD-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_RECORD-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_RECORD-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_RECORD-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong>EVENT_RECORD_CALLBACK</strong> = <a name="EVENT_RECORD_CALLBACK">class WinFunctionType</a>(<a href="_ctypes.html#CFuncPtr">_ctypes.CFuncPtr</a>)</td></tr>
+    
+<tr><td class="decor title-decor"><span class="code">&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd>WinFunctionType</dd>
+<dd><a href="_ctypes.html#CFuncPtr">_ctypes.CFuncPtr</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#CFuncPtr">_ctypes.CFuncPtr</a>:<br>
+<dl><dt><a name="WinFunctionType-__bool__"><strong>__bool__</strong></a>(self, /)</dt><dd><span class="code">True&nbsp;if&nbsp;self&nbsp;else&nbsp;False</span></dd></dl>
+
+<dl><dt><a name="WinFunctionType-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="WinFunctionType-__call__"><strong>__call__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Call&nbsp;self&nbsp;as&nbsp;a&nbsp;function.</span></dd></dl>
+
+<dl><dt><a name="WinFunctionType-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#CFuncPtr">_ctypes.CFuncPtr</a>:<br>
+<dl><dt><a name="WinFunctionType-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#CFuncPtr">_ctypes.CFuncPtr</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="_ctypes.html#CFuncPtr">_ctypes.CFuncPtr</a>:<br>
+<dl><dt><strong>argtypes</strong></dt>
+<dd><span class="code">specify&nbsp;the&nbsp;argument&nbsp;types</span></dd>
+</dl>
+<dl><dt><strong>errcheck</strong></dt>
+<dd><span class="code">a&nbsp;function&nbsp;to&nbsp;check&nbsp;for&nbsp;errors</span></dd>
+</dl>
+<dl><dt><strong>restype</strong></dt>
+<dd><span class="code">specify&nbsp;the&nbsp;result&nbsp;type</span></dd>
+</dl>
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="WinFunctionType-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="WinFunctionType-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="WinFunctionType-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="WinFunctionType-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_TRACE">class <strong>EVENT_TRACE</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;a&nbsp;legacy&nbsp;ETW&nbsp;event.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_TRACE">EVENT_TRACE</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>ClientContextUnion</strong></dt>
+</dl>
+<dl><dt><strong>Header</strong></dt>
+</dl>
+<dl><dt><strong>InstanceId</strong></dt>
+</dl>
+<dl><dt><strong>MofData</strong></dt>
+</dl>
+<dl><dt><strong>MofLength</strong></dt>
+</dl>
+<dl><dt><strong>ParentGuid</strong></dt>
+</dl>
+<dl><dt><strong>ParentInstanceId</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_TRACE-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_TRACE_HEADER">class <strong>EVENT_TRACE_HEADER</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;the&nbsp;legacy&nbsp;ETW&nbsp;event&nbsp;header.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_TRACE_HEADER">EVENT_TRACE_HEADER</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>FieldTypeFlags</strong></dt>
+</dl>
+<dl><dt><strong>Guid</strong></dt>
+</dl>
+<dl><dt><strong>ProcessId</strong></dt>
+</dl>
+<dl><dt><strong>Size</strong></dt>
+</dl>
+<dl><dt><strong>ThreadId</strong></dt>
+</dl>
+<dl><dt><strong>TimeStamp</strong></dt>
+</dl>
+<dl><dt><strong>UnionTail</strong></dt>
+</dl>
+<dl><dt><strong>VersionUnion</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE_HEADER-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_HEADER-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE_HEADER-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_TRACE_HEADER-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_HEADER-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_HEADER-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_HEADER-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_TRACE_LOGFILEW">class <strong>EVENT_TRACE_LOGFILEW</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;a&nbsp;real-time&nbsp;ETW&nbsp;consumer&nbsp;logfile.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_TRACE_LOGFILEW">EVENT_TRACE_LOGFILEW</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BufferCallback</strong></dt>
+</dl>
+<dl><dt><strong>BufferSize</strong></dt>
+</dl>
+<dl><dt><strong>BuffersRead</strong></dt>
+</dl>
+<dl><dt><strong>Context</strong></dt>
+</dl>
+<dl><dt><strong>CurrentEvent</strong></dt>
+</dl>
+<dl><dt><strong>CurrentTime</strong></dt>
+</dl>
+<dl><dt><strong>EventRecordCallback</strong></dt>
+</dl>
+<dl><dt><strong>EventsLost</strong></dt>
+</dl>
+<dl><dt><strong>Filled</strong></dt>
+</dl>
+<dl><dt><strong>IsKernelTrace</strong></dt>
+</dl>
+<dl><dt><strong>LogFileName</strong></dt>
+</dl>
+<dl><dt><strong>LogfileHeader</strong></dt>
+</dl>
+<dl><dt><strong>LoggerName</strong></dt>
+</dl>
+<dl><dt><strong>ProcessTraceMode</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE_LOGFILEW-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_LOGFILEW-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE_LOGFILEW-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_TRACE_LOGFILEW-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_LOGFILEW-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_LOGFILEW-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_LOGFILEW-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EVENT_TRACE_PROPERTIES">class <strong>EVENT_TRACE_PROPERTIES</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;the&nbsp;properties&nbsp;of&nbsp;an&nbsp;ETW&nbsp;tracing&nbsp;session.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#EVENT_TRACE_PROPERTIES">EVENT_TRACE_PROPERTIES</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>AgeLimit</strong></dt>
+</dl>
+<dl><dt><strong>BufferSize</strong></dt>
+</dl>
+<dl><dt><strong>BuffersWritten</strong></dt>
+</dl>
+<dl><dt><strong>EnableFlags</strong></dt>
+</dl>
+<dl><dt><strong>EventsLost</strong></dt>
+</dl>
+<dl><dt><strong>FlushTimer</strong></dt>
+</dl>
+<dl><dt><strong>FreeBuffers</strong></dt>
+</dl>
+<dl><dt><strong>LogBuffersLost</strong></dt>
+</dl>
+<dl><dt><strong>LogFileMode</strong></dt>
+</dl>
+<dl><dt><strong>LogFileNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>LoggerNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>LoggerThreadId</strong></dt>
+</dl>
+<dl><dt><strong>MaximumBuffers</strong></dt>
+</dl>
+<dl><dt><strong>MaximumFileSize</strong></dt>
+</dl>
+<dl><dt><strong>MinimumBuffers</strong></dt>
+</dl>
+<dl><dt><strong>NumberOfBuffers</strong></dt>
+</dl>
+<dl><dt><strong>RealTimeBuffersLost</strong></dt>
+</dl>
+<dl><dt><strong>Wnode</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE_PROPERTIES-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_PROPERTIES-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="EVENT_TRACE_PROPERTIES-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="EVENT_TRACE_PROPERTIES-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_PROPERTIES-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_PROPERTIES-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="EVENT_TRACE_PROPERTIES-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="GUID">class <strong>GUID</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;a&nbsp;Windows&nbsp;globally&nbsp;unique&nbsp;identifier.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#GUID">GUID</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Data1</strong></dt>
+</dl>
+<dl><dt><strong>Data2</strong></dt>
+</dl>
+<dl><dt><strong>Data3</strong></dt>
+</dl>
+<dl><dt><strong>Data4</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="GUID-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="GUID-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="GUID-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="GUID-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="GUID-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="GUID-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="GUID-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="PROPERTY_DATA_DESCRIPTOR">class <strong>PROPERTY_DATA_DESCRIPTOR</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;a&nbsp;TDH&nbsp;property&nbsp;data&nbsp;descriptor.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#PROPERTY_DATA_DESCRIPTOR">PROPERTY_DATA_DESCRIPTOR</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>ArrayIndex</strong></dt>
+</dl>
+<dl><dt><strong>PropertyName</strong></dt>
+</dl>
+<dl><dt><strong>Reserved</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="PROPERTY_DATA_DESCRIPTOR-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="PROPERTY_DATA_DESCRIPTOR-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="PROPERTY_DATA_DESCRIPTOR-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="PROPERTY_DATA_DESCRIPTOR-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="PROPERTY_DATA_DESCRIPTOR-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="PROPERTY_DATA_DESCRIPTOR-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="PROPERTY_DATA_DESCRIPTOR-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="SYSTEMTIME">class <strong>SYSTEMTIME</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;the&nbsp;Windows&nbsp;<a href="#SYSTEMTIME">SYSTEMTIME</a>&nbsp;structure.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#SYSTEMTIME">SYSTEMTIME</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>wDay</strong></dt>
+</dl>
+<dl><dt><strong>wDayOfWeek</strong></dt>
+</dl>
+<dl><dt><strong>wHour</strong></dt>
+</dl>
+<dl><dt><strong>wMilliseconds</strong></dt>
+</dl>
+<dl><dt><strong>wMinute</strong></dt>
+</dl>
+<dl><dt><strong>wMonth</strong></dt>
+</dl>
+<dl><dt><strong>wSecond</strong></dt>
+</dl>
+<dl><dt><strong>wYear</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="SYSTEMTIME-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="SYSTEMTIME-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="SYSTEMTIME-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="SYSTEMTIME-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="SYSTEMTIME-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="SYSTEMTIME-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="SYSTEMTIME-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="TIME_ZONE_INFORMATION">class <strong>TIME_ZONE_INFORMATION</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;Windows&nbsp;time&nbsp;zone&nbsp;information.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#TIME_ZONE_INFORMATION">TIME_ZONE_INFORMATION</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Bias</strong></dt>
+</dl>
+<dl><dt><strong>DaylightBias</strong></dt>
+</dl>
+<dl><dt><strong>DaylightDate</strong></dt>
+</dl>
+<dl><dt><strong>DaylightName</strong></dt>
+</dl>
+<dl><dt><strong>StandardBias</strong></dt>
+</dl>
+<dl><dt><strong>StandardDate</strong></dt>
+</dl>
+<dl><dt><strong>StandardName</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="TIME_ZONE_INFORMATION-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="TIME_ZONE_INFORMATION-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="TIME_ZONE_INFORMATION-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="TIME_ZONE_INFORMATION-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="TIME_ZONE_INFORMATION-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="TIME_ZONE_INFORMATION-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="TIME_ZONE_INFORMATION-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="TRACE_EVENT_INFO_HEADER">class <strong>TRACE_EVENT_INFO_HEADER</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;the&nbsp;TDH&nbsp;event&nbsp;information&nbsp;header.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#TRACE_EVENT_INFO_HEADER">TRACE_EVENT_INFO_HEADER</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BinaryXMLOffset</strong></dt>
+</dl>
+<dl><dt><strong>BinaryXMLSize</strong></dt>
+</dl>
+<dl><dt><strong>ChannelNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>DecodingSource</strong></dt>
+</dl>
+<dl><dt><strong>EventAttributesOffset</strong></dt>
+</dl>
+<dl><dt><strong>EventDescriptor</strong></dt>
+</dl>
+<dl><dt><strong>EventGuid</strong></dt>
+</dl>
+<dl><dt><strong>EventMessageOffset</strong></dt>
+</dl>
+<dl><dt><strong>EventNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+</dl>
+<dl><dt><strong>KeywordsNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>LevelNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>OpcodeNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>PropertyCount</strong></dt>
+</dl>
+<dl><dt><strong>ProviderGuid</strong></dt>
+</dl>
+<dl><dt><strong>ProviderMessageOffset</strong></dt>
+</dl>
+<dl><dt><strong>ProviderNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>TaskNameOffset</strong></dt>
+</dl>
+<dl><dt><strong>TopLevelPropertyCount</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="TRACE_EVENT_INFO_HEADER-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="TRACE_EVENT_INFO_HEADER-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="TRACE_EVENT_INFO_HEADER-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="TRACE_EVENT_INFO_HEADER-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="TRACE_EVENT_INFO_HEADER-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="TRACE_EVENT_INFO_HEADER-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="TRACE_EVENT_INFO_HEADER-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="TRACE_LOGFILE_HEADER">class <strong>TRACE_LOGFILE_HEADER</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;the&nbsp;ETW&nbsp;logfile&nbsp;header.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#TRACE_LOGFILE_HEADER">TRACE_LOGFILE_HEADER</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BootTime</strong></dt>
+</dl>
+<dl><dt><strong>BufferSize</strong></dt>
+</dl>
+<dl><dt><strong>BuffersLost</strong></dt>
+</dl>
+<dl><dt><strong>BuffersWritten</strong></dt>
+</dl>
+<dl><dt><strong>EndTime</strong></dt>
+</dl>
+<dl><dt><strong>LogFileMode</strong></dt>
+</dl>
+<dl><dt><strong>LogFileName</strong></dt>
+</dl>
+<dl><dt><strong>LogInstanceGuidUnion</strong></dt>
+</dl>
+<dl><dt><strong>LoggerName</strong></dt>
+</dl>
+<dl><dt><strong>MaximumFileSize</strong></dt>
+</dl>
+<dl><dt><strong>NumberOfProcessors</strong></dt>
+</dl>
+<dl><dt><strong>PerfFreq</strong></dt>
+</dl>
+<dl><dt><strong>ProviderVersion</strong></dt>
+</dl>
+<dl><dt><strong>ReservedFlags</strong></dt>
+</dl>
+<dl><dt><strong>StartTime</strong></dt>
+</dl>
+<dl><dt><strong>TimeZone</strong></dt>
+</dl>
+<dl><dt><strong>TimerResolution</strong></dt>
+</dl>
+<dl><dt><strong>VersionUnion</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="TRACE_LOGFILE_HEADER-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="TRACE_LOGFILE_HEADER-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="TRACE_LOGFILE_HEADER-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="TRACE_LOGFILE_HEADER-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="TRACE_LOGFILE_HEADER-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="TRACE_LOGFILE_HEADER-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="TRACE_LOGFILE_HEADER-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="WNODE_HEADER">class <strong>WNODE_HEADER</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Represent&nbsp;the&nbsp;ETW&nbsp;WNODE&nbsp;header.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PyEtwMonitor.html#WNODE_HEADER">WNODE_HEADER</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BufferSize</strong></dt>
+</dl>
+<dl><dt><strong>ClientContext</strong></dt>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+</dl>
+<dl><dt><strong>Guid</strong></dt>
+</dl>
+<dl><dt><strong>HistoricalContext</strong></dt>
+</dl>
+<dl><dt><strong>ProviderId</strong></dt>
+</dl>
+<dl><dt><strong>TimeStamp</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="WNODE_HEADER-__buffer__"><strong>__buffer__</strong></a>(self, flags, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;buffer&nbsp;object&nbsp;that&nbsp;exposes&nbsp;the&nbsp;underlying&nbsp;memory&nbsp;of&nbsp;the&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="WNODE_HEADER-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods inherited from <a href="_ctypes.html#Structure">_ctypes.Structure</a>:<br>
+<dl><dt><a name="WNODE_HEADER-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="_ctypes.html#Structure">_ctypes.Structure</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from _ctypes._CData:<br>
+<dl><dt><a name="WNODE_HEADER-__ctypes_from_outparam__"><strong>__ctypes_from_outparam__</strong></a>(self, /)</dt><dd><span class="code">default&nbsp;__ctypes_from_outparam__&nbsp;method&nbsp;returns&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="WNODE_HEADER-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="WNODE_HEADER-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="WNODE_HEADER-__setstate__"><strong>__setstate__</strong></a>(self, dict, data, /)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-cleanup_session"><strong>cleanup_session</strong></a>(
+    consumer_handle: TRACEHANDLE,
+    worker: Thread,
+    session_handle: TRACEHANDLE
+) -&gt; None</dt><dd><span class="code">Close&nbsp;the&nbsp;consumer&nbsp;and&nbsp;stop&nbsp;the&nbsp;ETW&nbsp;tracing&nbsp;session.</span></dd></dl>
+ <dl><dt><a name="-configure_provider_names"><strong>configure_provider_names</strong></a>(selected: list[str]) -&gt; None</dt><dd><span class="code">Register&nbsp;<a href="#GUID">GUID</a>-to-name&nbsp;mappings&nbsp;for&nbsp;selected&nbsp;providers.</span></dd></dl>
+ <dl><dt><a name="-create_session_properties"><strong>create_session_properties</strong></a>(logger_name: str, include_flags: bool = False) -&gt; tuple</dt><dd><span class="code">Create&nbsp;and&nbsp;initialize&nbsp;an&nbsp;ETW&nbsp;session&nbsp;properties&nbsp;buffer.</span></dd></dl>
+ <dl><dt><a name="-decode_guid"><strong>decode_guid</strong></a>(raw: bytes) -&gt; str</dt><dd><span class="code">Decode&nbsp;binary&nbsp;<a href="#GUID">GUID</a>&nbsp;data&nbsp;into&nbsp;its&nbsp;textual&nbsp;representation.</span></dd></dl>
+ <dl><dt><a name="-decode_hexadecimal"><strong>decode_hexadecimal</strong></a>(raw: bytes, size: int) -&gt; str</dt><dd><span class="code">Decode&nbsp;binary&nbsp;data&nbsp;into&nbsp;a&nbsp;hexadecimal&nbsp;integer&nbsp;string.</span></dd></dl>
+ <dl><dt><a name="-decode_integer"><strong>decode_integer</strong></a>(raw: bytes, size: int, signed: bool = False) -&gt; str</dt><dd><span class="code">Decode&nbsp;a&nbsp;little-endian&nbsp;integer&nbsp;into&nbsp;a&nbsp;string.</span></dd></dl>
+ <dl><dt><a name="-decode_property"><strong>decode_property</strong></a>(
+    record: EVENT_RECORD,
+    info_buffer: Any,
+    prop: EVENT_PROPERTY_INFO
+) -&gt; Tuple[str, str]</dt><dd><span class="code">Retrieve&nbsp;and&nbsp;decode&nbsp;an&nbsp;individual&nbsp;ETW&nbsp;event&nbsp;property.</span></dd></dl>
+ <dl><dt><a name="-decode_raw_value"><strong>decode_raw_value</strong></a>(raw: bytes, input_type: int) -&gt; str</dt><dd><span class="code">Decode&nbsp;an&nbsp;ETW&nbsp;property&nbsp;according&nbsp;to&nbsp;its&nbsp;TDH&nbsp;input&nbsp;type.</span></dd></dl>
+ <dl><dt><a name="-decode_string"><strong>decode_string</strong></a>(raw: bytes, encoding: str) -&gt; str</dt><dd><span class="code">Decode&nbsp;null-terminated&nbsp;string&nbsp;data&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding.</span></dd></dl>
+ <dl><dt><a name="-display_event"><strong>display_event</strong></a>(
+    record: EVENT_RECORD,
+    provider_name: str,
+    info_buffer: Optional[Any]
+) -&gt; None</dt><dd><span class="code">Display&nbsp;an&nbsp;event&nbsp;header&nbsp;and&nbsp;its&nbsp;decoded&nbsp;properties.</span></dd></dl>
+ <dl><dt><a name="-display_event_header"><strong>display_event_header</strong></a>(record: EVENT_RECORD, provider_name: str) -&gt; None</dt><dd><span class="code">Display&nbsp;the&nbsp;metadata&nbsp;contained&nbsp;in&nbsp;an&nbsp;ETW&nbsp;event&nbsp;header.</span></dd></dl>
+ <dl><dt><a name="-display_event_properties"><strong>display_event_properties</strong></a>(record: EVENT_RECORD, info_buffer: Any) -&gt; None</dt><dd><span class="code">Display&nbsp;the&nbsp;decoded&nbsp;properties&nbsp;of&nbsp;an&nbsp;ETW&nbsp;event.</span></dd></dl>
+ <dl><dt><a name="-display_providers"><strong>display_providers</strong></a>() -&gt; None</dt><dd><span class="code">Display&nbsp;all&nbsp;registered&nbsp;ETW&nbsp;providers&nbsp;and&nbsp;their&nbsp;GUIDs.</span></dd></dl>
+ <dl><dt><a name="-enable_provider"><strong>enable_provider</strong></a>(session_handle: TRACEHANDLE, guid_string: str, level: int) -&gt; None</dt><dd><span class="code">Enable&nbsp;an&nbsp;ETW&nbsp;provider&nbsp;for&nbsp;the&nbsp;specified&nbsp;tracing&nbsp;session.</span></dd></dl>
+ <dl><dt><a name="-get_event_info"><strong>get_event_info</strong></a>(record: EVENT_RECORD) -&gt; Optional[Any]</dt><dd><span class="code">Retrieve&nbsp;the&nbsp;TDH&nbsp;metadata&nbsp;buffer&nbsp;associated&nbsp;with&nbsp;an&nbsp;event.</span></dd></dl>
+ <dl><dt><a name="-get_event_name"><strong>get_event_name</strong></a>(info_buffer: Any, info: TRACE_EVENT_INFO_HEADER) -&gt; str</dt><dd><span class="code">Retrieve&nbsp;the&nbsp;most&nbsp;descriptive&nbsp;available&nbsp;event&nbsp;name.</span></dd></dl>
+ <dl><dt><a name="-get_property_data"><strong>get_property_data</strong></a>(
+    record: EVENT_RECORD,
+    descriptor: PROPERTY_DATA_DESCRIPTOR,
+    size: int
+) -&gt; Optional[bytes]</dt><dd><span class="code">Retrieve&nbsp;the&nbsp;raw&nbsp;binary&nbsp;data&nbsp;of&nbsp;an&nbsp;ETW&nbsp;property.</span></dd></dl>
+ <dl><dt><a name="-get_property_descriptor"><strong>get_property_descriptor</strong></a>(name: str) -&gt; Any</dt><dd><span class="code">Create&nbsp;a&nbsp;TDH&nbsp;property&nbsp;descriptor&nbsp;for&nbsp;a&nbsp;named&nbsp;property.</span></dd></dl>
+ <dl><dt><a name="-get_property_size"><strong>get_property_size</strong></a>(record: EVENT_RECORD, descriptor: PROPERTY_DATA_DESCRIPTOR) -&gt; int</dt><dd><span class="code">Retrieve&nbsp;the&nbsp;size&nbsp;of&nbsp;an&nbsp;ETW&nbsp;event&nbsp;property.</span></dd></dl>
+ <dl><dt><a name="-get_provider_name"><strong>get_provider_name</strong></a>(record: EVENT_RECORD) -&gt; str</dt><dd><span class="code">Resolve&nbsp;an&nbsp;event&nbsp;provider&nbsp;<a href="#GUID">GUID</a>&nbsp;into&nbsp;its&nbsp;configured&nbsp;short&nbsp;name.</span></dd></dl>
+ <dl><dt><a name="-get_trace_level"><strong>get_trace_level</strong></a>(level_name: str) -&gt; int</dt><dd><span class="code">Convert&nbsp;a&nbsp;trace&nbsp;level&nbsp;name&nbsp;into&nbsp;its&nbsp;ETW&nbsp;numeric&nbsp;value.</span></dd></dl>
+ <dl><dt><a name="-guid_from_string"><strong>guid_from_string</strong></a>(value: str) -&gt; GUID</dt><dd><span class="code">Convert&nbsp;a&nbsp;string&nbsp;representation&nbsp;into&nbsp;a&nbsp;Windows&nbsp;<a href="#GUID">GUID</a>.</span></dd></dl>
+ <dl><dt><a name="-guid_to_string"><strong>guid_to_string</strong></a>(guid: GUID) -&gt; str</dt><dd><span class="code">Convert&nbsp;a&nbsp;Windows&nbsp;<a href="#GUID">GUID</a>&nbsp;structure&nbsp;into&nbsp;a&nbsp;string.</span></dd></dl>
+ <dl><dt><a name="-matches_event_filters"><strong>matches_event_filters</strong></a>(pid: int, event_id: int, provider_name: str) -&gt; bool</dt><dd><span class="code">Check&nbsp;whether&nbsp;an&nbsp;event&nbsp;matches&nbsp;the&nbsp;configured&nbsp;filters.</span></dd></dl>
+ <dl><dt><a name="-open_event_consumer"><strong>open_event_consumer</strong></a>() -&gt; TRACEHANDLE</dt><dd><span class="code">Open&nbsp;a&nbsp;real-time&nbsp;ETW&nbsp;event&nbsp;consumer.</span></dd></dl>
+ <dl><dt><a name="-process_trace_thread"><strong>process_trace_thread</strong></a>(consumer_handle_ref: TRACEHANDLE) -&gt; None</dt><dd><span class="code">Process&nbsp;incoming&nbsp;ETW&nbsp;events&nbsp;in&nbsp;the&nbsp;consumer&nbsp;thread.</span></dd></dl>
+ <dl><dt><a name="-run_monitoring"><strong>run_monitoring</strong></a>(selected: list[str], level: int) -&gt; None</dt><dd><span class="code">Initialize&nbsp;and&nbsp;run&nbsp;the&nbsp;ETW&nbsp;monitoring&nbsp;session.</span></dd></dl>
+ <dl><dt><a name="-safe_string"><strong>safe_string</strong></a>(buffer: Any, offset: int) -&gt; str</dt><dd><span class="code">Read&nbsp;a&nbsp;null-terminated&nbsp;Unicode&nbsp;string&nbsp;from&nbsp;a&nbsp;memory&nbsp;buffer.</span></dd></dl>
+ <dl><dt><a name="-start_consumer_thread"><strong>start_consumer_thread</strong></a>(consumer_handle: TRACEHANDLE) -&gt; Thread</dt><dd><span class="code">Start&nbsp;the&nbsp;ETW&nbsp;event&nbsp;processing&nbsp;worker&nbsp;thread.</span></dd></dl>
+ <dl><dt><a name="-start_session"><strong>start_session</strong></a>() -&gt; TRACEHANDLE</dt><dd><span class="code">Create&nbsp;and&nbsp;start&nbsp;a&nbsp;real-time&nbsp;ETW&nbsp;tracing&nbsp;session.</span></dd></dl>
+ <dl><dt><a name="-stop_leftover_session"><strong>stop_leftover_session</strong></a>() -&gt; None</dt><dd><span class="code">Stop&nbsp;a&nbsp;previously&nbsp;abandoned&nbsp;ETW&nbsp;session&nbsp;if&nbsp;one&nbsp;exists.</span></dd></dl>
+ <dl><dt><a name="-stop_session"><strong>stop_session</strong></a>(session_handle: TRACEHANDLE) -&gt; None</dt><dd><span class="code">Stop&nbsp;the&nbsp;specified&nbsp;ETW&nbsp;tracing&nbsp;session.</span></dd></dl>
+ <dl><dt><a name="-validate_providers"><strong>validate_providers</strong></a>(provider_argument: str) -&gt; list[str]</dt><dd><span class="code">Validate&nbsp;and&nbsp;return&nbsp;the&nbsp;selected&nbsp;provider&nbsp;names.</span></dd></dl>
+ <dl><dt><a name="-wait_for_consumer"><strong>wait_for_consumer</strong></a>(worker: Thread) -&gt; None</dt><dd><span class="code">Wait&nbsp;for&nbsp;the&nbsp;consumer&nbsp;thread&nbsp;until&nbsp;interrupted.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>PROVIDERS</strong> = {'file': 'EDD08927-9CC4-4E65-B970-C2560FB5C289', 'memory': 'D1D93EF7-E1F2-4F45-9943-03D245FE6C00', 'network': '7DD42A49-5329-4832-8DFD-43D979153A88', 'process': '22FB2CD6-0E7B-422B-A0C7-2FAD1FD0E716', 'registry': '70EB4F03-C1DE-4F73-A051-33D13D5413BD'}<br>
+<strong>PROVIDER_GUID_TO_NAME</strong> = {}<br>
+<strong>SESSION_NAME</strong> = 'PyEtwMonitor'<br>
+<strong>__all__</strong> = ['PROVIDERS', 'PROVIDER_GUID_TO_NAME', 'EVENT_RECORD_CALLBACK', 'SESSION_NAME', 'ENABLE_TRACE_PARAMETERS', 'ETW_BUFFER_CONTEXT', 'EVENT_DESCRIPTOR', 'EVENT_HEADER', 'EVENT_PROPERTY_INFO', 'EVENT_RECORD', 'EVENT_TRACE', 'EVENT_TRACE_HEADER', 'EVENT_TRACE_LOGFILEW', 'EVENT_TRACE_PROPERTIES', 'GUID', 'PROPERTY_DATA_DESCRIPTOR', 'SYSTEMTIME', 'TIME_ZONE_INFORMATION', 'TRACE_EVENT_INFO_HEADER', 'TRACE_LOGFILE_HEADER', ...]<br>
+<strong>__author_email__</strong> = 'mauricelambert434@gmail.com'<br>
+<strong>__copyright__</strong> = '<span class="repr">\n</span>PyEtwMonitor  Copyright (C) 2026  Maurice Lambe...ome to redistribute it<span class="repr">\n</span>under certain conditions.<span class="repr">\n</span>'<br>
+<strong>__description__</strong> = '<span class="repr">\n</span>Real-time Windows ETW monitoring module.<span class="repr">\n</span>'<br>
+<strong>__license__</strong> = 'GPL-3.0 License'<br>
+<strong>__maintainer__</strong> = 'Maurice Lambert'<br>
+<strong>__maintainer_email__</strong> = 'mauricelambert434@gmail.com'<br>
+<strong>__url__</strong> = 'https://github.com/mauricelambert/PyEtwMonitor'</td></tr></table><p>
+<table class="section">
+<tr class="decor author-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Author</strong></td></tr>
+    
+<tr><td class="decor author-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn">Maurice&nbsp;Lambert</td></tr></table>
+</body></html>
